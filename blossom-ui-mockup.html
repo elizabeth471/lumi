@@ -15,18 +15,20 @@
       overflow: hidden;
     }
 
-    /* ── SIDEBAR ── */
+    /* ══════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════ */
     .sidebar {
       width: 260px;
       background: #2a2018;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 20px;
-      gap: 24px;
+      padding: 28px 20px;
+      gap: 20px;
       flex-shrink: 0;
+      overflow-y: auto;
     }
-
     .logo {
       font-size: 13px;
       letter-spacing: 3px;
@@ -34,746 +36,730 @@
       color: #c4a96a;
       font-family: 'Helvetica Neue', sans-serif;
     }
-
-    /* ── BLOSSOM CHARACTER — CACTUS ── */
     .character-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+    }
+    .character-name { font-size: 18px; color: #e8d4a8; letter-spacing: 1px; }
+    .character-role {
+      font-size: 10px; color: #9a7a4a; letter-spacing: 2px;
+      text-transform: uppercase; font-family: 'Helvetica Neue', sans-serif;
     }
 
-    .character {
-      width: 110px;
-      height: 120px;
+    /* ══════════════════════════════════
+       BLOSSOM — MAIN CACTUS CHARACTER
+    ══════════════════════════════════ */
+    .blossom-stage {
+      width: 110px; height: 130px;
       position: relative;
-      animation: breathe 3.5s ease-in-out infinite;
     }
-    @keyframes breathe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+
+    /* idle bob */
+    .blossom-body-group {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 130px;
+      animation: bob 3s ease-in-out infinite;
+      transform-origin: bottom center;
     }
-    .character.thinking { animation: wobble 0.5s ease-in-out infinite alternate; }
-    @keyframes wobble {
-      from { transform: rotate(-2deg); }
-      to   { transform: rotate(2deg); }
+    @keyframes bob {
+      0%,100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+      25%      { transform: translateX(-50%) translateY(-3px) rotate(.5deg); }
+      75%      { transform: translateX(-50%) translateY(-2px) rotate(-.5deg); }
+    }
+
+    /* thinking: full-body wiggle */
+    .blossom-stage.thinking .blossom-body-group {
+      animation: wiggle .45s ease-in-out infinite alternate;
+    }
+    @keyframes wiggle {
+      from { transform: translateX(-50%) rotate(-3deg); }
+      to   { transform: translateX(-50%) rotate(3deg); }
     }
 
     /* pot */
-    .pot {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 44px;
-      height: 28px;
-      background: #c4714a;
-      border-radius: 2px 2px 8px 8px;
+    .b-pot {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 44px; height: 28px;
+      background: #c4714a; border-radius: 2px 2px 8px 8px;
     }
-    .pot::before {
-      content: '';
-      position: absolute;
-      top: -6px;
-      left: -4px;
-      right: -4px;
-      height: 10px;
-      background: #d4845a;
-      border-radius: 3px;
+    .b-pot::before {
+      content:''; position:absolute; top:-6px; left:-4px; right:-4px; height:10px;
+      background:#d4845a; border-radius:3px;
     }
-    /* dirt */
-    .pot::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 4px;
-      right: 4px;
-      height: 6px;
-      background: #5a3a20;
-      border-radius: 2px;
+    .b-pot::after {
+      content:''; position:absolute; top:0; left:4px; right:4px; height:6px;
+      background:#5a3a20; border-radius:2px;
     }
 
-    /* main cactus body */
-    .body {
-      position: absolute;
-      bottom: 26px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 34px;
-      height: 58px;
-      background: #5a8a50;
-      border-radius: 17px 17px 8px 8px;
+    /* trunk */
+    .b-trunk {
+      position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+      width: 34px; height: 58px;
+      background: #5a8a50; border-radius: 17px 17px 8px 8px;
     }
-    /* body sheen */
-    .body::after {
-      content: '';
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 8px;
-      height: 30px;
-      background: rgba(255,255,255,0.12);
-      border-radius: 4px;
+    .b-trunk::after {
+      content:''; position:absolute; top:6px; left:6px; width:8px; height:30px;
+      background:rgba(255,255,255,.12); border-radius:4px;
     }
 
-    /* spines on body */
-    .spine {
-      position: absolute;
-      width: 1.5px;
-      height: 7px;
-      background: #e8dcc8;
-      border-radius: 1px;
+    /* spines */
+    .sp {
+      position:absolute; width:1.5px; height:7px;
+      background:#e8dcc8; border-radius:1px;
     }
-    .s1 { top: 14px; left: -3px; transform: rotate(-20deg); }
-    .s2 { top: 26px; left: -3px; transform: rotate(-15deg); }
-    .s3 { top: 38px; left: -3px; transform: rotate(-20deg); }
-    .s4 { top: 14px; right: -3px; transform: rotate(20deg); }
-    .s5 { top: 26px; right: -3px; transform: rotate(15deg); }
-    .s6 { top: 38px; right: -3px; transform: rotate(20deg); }
+    .sp1{top:14px;left:-3px;transform:rotate(-20deg)}
+    .sp2{top:26px;left:-3px;transform:rotate(-15deg)}
+    .sp3{top:38px;left:-3px;transform:rotate(-20deg)}
+    .sp4{top:14px;right:-3px;transform:rotate(20deg)}
+    .sp5{top:26px;right:-3px;transform:rotate(15deg)}
+    .sp6{top:38px;right:-3px;transform:rotate(20deg)}
 
-    /* arms */
-    .arm {
+    /* left arm — waves on hover / idle */
+    .b-arm {
       position: absolute;
-      width: 20px;
-      height: 32px;
-      background: #5a8a50;
-      border-radius: 10px;
+      width: 20px; height: 32px;
+      background: #5a8a50; border-radius: 10px;
     }
-    .arm-l {
-      bottom: 52px;
-      left: 12px;
+    .b-arm-l {
+      bottom: 56px; left: 11px;
       transform-origin: bottom right;
-      transform: rotate(-30deg);
       border-radius: 10px 10px 4px 10px;
+      animation: armWaveL 4s ease-in-out infinite;
     }
-    .arm-r {
-      bottom: 52px;
-      right: 12px;
+    @keyframes armWaveL {
+      0%,60%,100% { transform: rotate(-30deg); }
+      70%          { transform: rotate(-55deg); }
+      80%          { transform: rotate(-25deg); }
+      90%          { transform: rotate(-50deg); }
+    }
+    .b-arm-r {
+      bottom: 56px; right: 11px;
       transform-origin: bottom left;
-      transform: rotate(30deg);
       border-radius: 10px 10px 10px 4px;
+      animation: armIdleR 4s ease-in-out infinite;
     }
-    /* arm spines */
-    .arm-spine {
-      position: absolute;
-      width: 1.5px;
-      height: 6px;
-      background: #e8dcc8;
-      border-radius: 1px;
+    @keyframes armIdleR {
+      0%,100% { transform: rotate(30deg); }
+      50%     { transform: rotate(22deg); }
     }
-    .as1 { top: 8px; left: -2px; transform: rotate(-20deg); }
-    .as2 { top: 18px; left: -2px; transform: rotate(-20deg); }
-    .as3 { top: 8px; right: -2px; transform: rotate(20deg); }
-    .as4 { top: 18px; right: -2px; transform: rotate(20deg); }
 
-    /* face on body */
-    .face {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 26px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      z-index: 2;
+    /* arm spines */
+    .asp { position:absolute; width:1.5px; height:6px; background:#e8dcc8; border-radius:1px; }
+    .asp1{top:8px;left:-2px;transform:rotate(-20deg)}
+    .asp2{top:18px;left:-2px;transform:rotate(-20deg)}
+    .asp3{top:8px;right:-2px;transform:rotate(20deg)}
+    .asp4{top:18px;right:-2px;transform:rotate(20deg)}
+
+    /* face */
+    .b-face {
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      width:26px; display:flex; flex-direction:column; align-items:center; gap:5px; z-index:2;
     }
-    .eyes {
-      display: flex;
-      gap: 8px;
-    }
-    .eye {
-      width: 5px;
-      height: 5px;
-      background: #1a1208;
-      border-radius: 50%;
+    .b-eyes { display:flex; gap:8px; }
+    .b-eye {
+      width:5px; height:5px; background:#1a1208; border-radius:50%;
       animation: blink 4s infinite;
+      transition: transform .1s;
     }
     @keyframes blink {
-      0%, 94%, 100% { transform: scaleY(1); }
-      96% { transform: scaleY(0.1); }
+      0%,93%,100%{transform:scaleY(1)} 95%{transform:scaleY(0.1)}
     }
-    .blush-wrap {
-      display: flex;
-      gap: 12px;
-      margin-top: -2px;
+    .b-blush-wrap { display:flex; gap:12px; margin-top:-2px; }
+    .b-blush { width:7px; height:4px; background:rgba(220,100,80,.35); border-radius:50%; }
+
+    /* bloom */
+    .b-bloom {
+      position:absolute; top:-20px; left:50%; transform:translateX(-50%);
+      width:38px; height:38px;
+      animation: bloomSpin 12s linear infinite;
     }
-    .blush {
-      width: 7px;
-      height: 4px;
-      background: rgba(220, 100, 80, 0.35);
-      border-radius: 50%;
+    @keyframes bloomSpin {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to   { transform: translateX(-50%) rotate(360deg); }
+    }
+    .blossom-stage.thinking .b-bloom {
+      animation: bloomSpinFast .8s linear infinite;
+    }
+    @keyframes bloomSpinFast {
+      from { transform: translateX(-50%) rotate(0deg); }
+      to   { transform: translateX(-50%) rotate(360deg); }
+    }
+    .b-petal {
+      position:absolute; width:11px; height:16px;
+      background:#e8607a;
+      border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+      top:50%; left:50%; transform-origin:bottom center; opacity:.92;
+    }
+    .b-petal:nth-child(1){transform:translate(-50%,-100%) rotate(0deg)}
+    .b-petal:nth-child(2){transform:translate(-50%,-100%) rotate(51deg)}
+    .b-petal:nth-child(3){transform:translate(-50%,-100%) rotate(102deg)}
+    .b-petal:nth-child(4){transform:translate(-50%,-100%) rotate(153deg)}
+    .b-petal:nth-child(5){transform:translate(-50%,-100%) rotate(204deg)}
+    .b-petal:nth-child(6){transform:translate(-50%,-100%) rotate(255deg)}
+    .b-petal:nth-child(7){transform:translate(-50%,-100%) rotate(306deg)}
+    .b-bloom-center {
+      position:absolute; width:14px; height:14px; background:#f5d060;
+      border-radius:50%; top:50%; left:50%; transform:translate(-50%,-50%); z-index:2;
     }
 
-    /* bloom flower on top */
-    .bloom {
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 36px;
-      height: 36px;
-    }
-    .petal {
-      position: absolute;
-      width: 10px;
-      height: 15px;
-      background: #e8607a;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      top: 50%;
-      left: 50%;
-      transform-origin: bottom center;
-      opacity: 0.92;
-    }
-    .petal:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
-    .petal:nth-child(2) { transform: translate(-50%, -100%) rotate(51deg); }
-    .petal:nth-child(3) { transform: translate(-50%, -100%) rotate(102deg); }
-    .petal:nth-child(4) { transform: translate(-50%, -100%) rotate(153deg); }
-    .petal:nth-child(5) { transform: translate(-50%, -100%) rotate(204deg); }
-    .petal:nth-child(6) { transform: translate(-50%, -100%) rotate(255deg); }
-    .petal:nth-child(7) { transform: translate(-50%, -100%) rotate(306deg); }
-    .bloom-center {
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      background: #f5d060;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-    /* thinking: petals pulse */
-    .character.thinking .petal {
-      animation: petalPulse 0.5s ease-in-out infinite alternate;
-    }
-    @keyframes petalPulse {
-      from { opacity: 0.6; transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(0.9); }
-      to   { opacity: 1;   transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(1.1); }
-    }
-
-    .character-name {
-      font-size: 18px;
-      color: #e8d4a8;
-      letter-spacing: 1px;
-    }
-    .character-role {
-      font-size: 11px;
-      color: #9a7a4a;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-
-    /* ── STATUS PILL ── */
+    /* ══════════════════════════════════
+       STATUS + NAV
+    ══════════════════════════════════ */
     .status-pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #1a1208;
-      border-radius: 20px;
-      padding: 6px 14px;
-      font-size: 11px;
-      color: #c4a96a;
-      font-family: 'Helvetica Neue', sans-serif;
-      letter-spacing: 1px;
+      display:flex; align-items:center; gap:6px;
+      background:#1a1208; border-radius:20px; padding:6px 14px;
+      font-size:11px; color:#c4a96a; font-family:'Helvetica Neue',sans-serif; letter-spacing:1px;
     }
     .status-dot {
-      width: 7px; height: 7px;
-      background: #7adf7a;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
+      width:7px; height:7px; background:#7adf7a; border-radius:50%;
+      animation:pulse 2s infinite;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    /* ── SIDEBAR NAV ── */
-    .nav {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-top: 8px;
-    }
+    .nav { width:100%; display:flex; flex-direction:column; gap:4px; }
     .nav-item {
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #9a7a4a;
-      font-family: 'Helvetica Neue', sans-serif;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background 0.15s;
-      letter-spacing: 0.5px;
+      padding:9px 14px; border-radius:8px; font-size:12px; color:#9a7a4a;
+      font-family:'Helvetica Neue',sans-serif; cursor:pointer;
+      display:flex; align-items:center; gap:10px;
+      transition:background .15s; letter-spacing:.5px;
     }
-    .nav-item:hover { background: #1a1208; }
-    .nav-item.active { background: #4a3018; color: #e8d4a8; }
-    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
-
+    .nav-item:hover{background:#1a1208}
+    .nav-item.active{background:#4a3018;color:#e8d4a8}
+    .nav-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
     .sidebar-footer {
-      margin-top: auto;
-      font-size: 10px;
-      color: #5a4028;
-      letter-spacing: 1px;
-      font-family: 'Helvetica Neue', sans-serif;
-      text-align: center;
-      line-height: 1.8;
+      margin-top:auto; font-size:10px; color:#5a4028; letter-spacing:1px;
+      font-family:'Helvetica Neue',sans-serif; text-align:center; line-height:1.8;
     }
 
-    /* ── MAIN CHAT AREA ── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background: #fdf8f0;
-      min-width: 0;
-    }
-
+    /* ══════════════════════════════════
+       MAIN CHAT
+    ══════════════════════════════════ */
+    .main { flex:1; display:flex; flex-direction:column; background:#fdf8f0; min-width:0; }
     .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 28px;
-      border-bottom: 1px solid #ede0cc;
-      background: #fdf8f0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 28px; border-bottom:1px solid #ede0cc; background:#fdf8f0;
     }
-    .topbar-title {
-      font-size: 13px;
-      color: #9a7a5a;
-      font-family: 'Helvetica Neue', sans-serif;
-      letter-spacing: 1px;
-    }
-    .topbar-date {
-      font-size: 11px;
-      color: #c0a080;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
+    .topbar-title{font-size:13px;color:#9a7a5a;font-family:'Helvetica Neue',sans-serif;letter-spacing:1px}
+    .topbar-date{font-size:11px;color:#c0a080;font-family:'Helvetica Neue',sans-serif}
 
-    /* ── MORNING BRIEF CARD ── */
     .brief-card {
-      margin: 20px 28px 0;
-      background: #fff4e0;
-      border: 1px solid #e8c878;
-      border-radius: 12px;
-      padding: 16px 20px;
+      margin:20px 28px 0; background:#fff4e0; border:1px solid #e8c878;
+      border-radius:12px; padding:16px 20px;
     }
-    .brief-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #c4943a;
-      font-family: 'Helvetica Neue', sans-serif;
-      margin-bottom: 8px;
-    }
-    .brief-text {
-      font-size: 13px;
-      color: #3a2a18;
-      line-height: 1.7;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-    .brief-questions {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .brief-q {
-      font-size: 12px;
-      color: #8a5a28;
-      font-family: 'Helvetica Neue', sans-serif;
-      display: flex;
-      gap: 8px;
-    }
-    .brief-q::before { content: "→"; color: #c4943a; flex-shrink: 0; }
+    .brief-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#c4943a;font-family:'Helvetica Neue',sans-serif;margin-bottom:8px}
+    .brief-text{font-size:13px;color:#3a2a18;line-height:1.7;font-family:'Helvetica Neue',sans-serif}
+    .brief-questions{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+    .brief-q{font-size:12px;color:#8a5a28;font-family:'Helvetica Neue',sans-serif;display:flex;gap:8px}
+    .brief-q::before{content:"→";color:#c4943a;flex-shrink:0}
 
-    /* ── MESSAGES ── */
-    .messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 20px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .messages{flex:1;overflow-y:auto;padding:20px 28px;display:flex;flex-direction:column;gap:16px}
+    .msg{display:flex;gap:12px;align-items:flex-start;max-width:680px}
+    .msg.user{align-self:flex-end;flex-direction:row-reverse}
+    .msg-avatar{
+      width:32px;height:32px;border-radius:50%;background:#3a2a18;
+      flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;
     }
+    .msg.user .msg-avatar{background:#e8c878}
+    .msg-bubble{
+      background:white;border:1px solid #ede0cc;
+      border-radius:12px 12px 12px 2px;padding:12px 16px;
+      font-size:13px;color:#3a2a18;line-height:1.65;
+      font-family:'Helvetica Neue',sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.05);
+    }
+    .msg.user .msg-bubble{
+      background:#3a2a18;border-color:#3a2a18;color:#e8d4a8;
+      border-radius:12px 12px 2px 12px;
+    }
+    .msg-meta{font-size:10px;color:#c0a080;font-family:'Helvetica Neue',sans-serif;margin-top:4px;letter-spacing:.5px}
+    .msg.user .msg-meta{text-align:right}
 
-    .msg { display: flex; gap: 12px; align-items: flex-start; max-width: 680px; }
-    .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+    .thinking-bubble{
+      background:white;border:1px solid #ede0cc;
+      border-radius:12px 12px 12px 2px;padding:12px 16px;
+      display:flex;gap:5px;align-items:center;
+    }
+    .dot{width:6px;height:6px;background:#c4943a;border-radius:50%;animation:dotBounce 1.2s infinite}
+    .dot:nth-child(2){animation-delay:.2s}
+    .dot:nth-child(3){animation-delay:.4s}
+    @keyframes dotBounce{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
 
-    .msg-avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: #3a2a18;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
+    .input-bar{
+      padding:16px 28px 20px;border-top:1px solid #ede0cc;background:#fdf8f0;
+      display:flex;gap:10px;align-items:flex-end;
     }
-    .msg.user .msg-avatar { background: #e8c878; }
+    .input-field{
+      flex:1;border:1px solid #ddd0b8;border-radius:10px;padding:12px 16px;
+      font-size:13px;font-family:'Helvetica Neue',sans-serif;color:#3a2a18;
+      background:white;resize:none;outline:none;
+      min-height:44px;max-height:120px;transition:border-color .15s;
+    }
+    .input-field:focus{border-color:#c4943a}
+    .input-field::placeholder{color:#c0a880}
+    .send-btn{
+      width:44px;height:44px;border-radius:10px;background:#3a2a18;
+      border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+      transition:background .15s;flex-shrink:0;
+    }
+    .send-btn:hover{background:#5a4a30}
+    .send-btn svg{fill:#c4943a}
 
-    .msg-bubble {
-      background: white;
-      border: 1px solid #ede0cc;
-      border-radius: 12px 12px 12px 2px;
-      padding: 12px 16px;
-      font-size: 13px;
-      color: #3a2a18;
-      line-height: 1.65;
-      font-family: 'Helvetica Neue', sans-serif;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .msg.user .msg-bubble {
-      background: #3a2a18;
-      border-color: #3a2a18;
-      color: #e8d4a8;
-      border-radius: 12px 12px 2px 12px;
-    }
-
-    .msg-meta {
-      font-size: 10px;
-      color: #c0a080;
-      font-family: 'Helvetica Neue', sans-serif;
-      margin-top: 4px;
-      letter-spacing: 0.5px;
-    }
-    .msg.user .msg-meta { text-align: right; }
-
-    .thinking-bubble {
-      background: white;
-      border: 1px solid #ede0cc;
-      border-radius: 12px 12px 12px 2px;
-      padding: 12px 16px;
-      display: flex;
-      gap: 5px;
-      align-items: center;
-    }
-    .dot {
-      width: 6px; height: 6px;
-      background: #c4943a;
-      border-radius: 50%;
-      animation: dotBounce 1.2s infinite;
-    }
-    .dot:nth-child(2) { animation-delay: 0.2s; }
-    .dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    /* ── INPUT BAR ── */
-    .input-bar {
-      padding: 16px 28px 20px;
-      border-top: 1px solid #ede0cc;
-      background: #fdf8f0;
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
-    .input-field {
-      flex: 1;
-      border: 1px solid #ddd0b8;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-size: 13px;
-      font-family: 'Helvetica Neue', sans-serif;
-      color: #3a2a18;
-      background: white;
-      resize: none;
-      outline: none;
-      min-height: 44px;
-      max-height: 120px;
-      transition: border-color 0.15s;
-    }
-    .input-field:focus { border-color: #c4943a; }
-    .input-field::placeholder { color: #c0a880; }
-
-    .send-btn {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: #3a2a18;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s;
-      flex-shrink: 0;
-    }
-    .send-btn:hover { background: #5a4a30; }
-    .send-btn svg { fill: #c4943a; }
-
-    /* ── AGENTS PANEL ── */
+    /* ══════════════════════════════════
+       AGENTS PANEL
+    ══════════════════════════════════ */
     .agents-panel {
-      width: 200px;
+      width: 220px;
       background: #f5ede0;
       border-left: 1px solid #e8d8c0;
-      padding: 20px 16px;
+      padding: 18px 14px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 12px;
       flex-shrink: 0;
+      overflow-y: auto;
     }
-    .panel-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #9a7a5a;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-    .agent-row { display: flex; align-items: center; gap: 8px; }
-    .agent-icon {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-    .agent-info { flex: 1; min-width: 0; }
-    .agent-name { font-size: 12px; color: #3a2a18; font-family: 'Helvetica Neue', sans-serif; font-weight: 500; }
-    .agent-status { font-size: 10px; color: #9a7a5a; font-family: 'Helvetica Neue', sans-serif; }
-    .agent-indicator { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    .ind-active { background: #7adf7a; animation: pulse 2s infinite; }
-    .ind-idle { background: #c8c0b0; }
-    .ind-dormant { background: #e8d8c0; }
+    .panel-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9a7a5a;font-family:'Helvetica Neue',sans-serif}
+    .phase-tag{font-size:10px;color:#9a7a5a;font-family:'Helvetica Neue',sans-serif;letter-spacing:.5px;text-transform:uppercase}
+    .divider{height:1px;background:#e8d8c0}
 
-    .divider { height: 1px; background: #e8d8c0; }
-    .phase-tag { font-size: 10px; color: #9a7a5a; font-family: 'Helvetica Neue', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
+    .agent-row {
+      display:flex; align-items:center; gap:10px;
+      padding:5px 4px; border-radius:8px;
+      cursor:pointer; transition:background .15s;
+    }
+    .agent-row:hover { background: rgba(0,0,0,.04); }
+    .agent-info{flex:1;min-width:0}
+    .agent-name{font-size:12px;color:#3a2a18;font-family:'Helvetica Neue',sans-serif;font-weight:500}
+    .agent-status{font-size:10px;color:#9a7a5a;font-family:'Helvetica Neue',sans-serif}
+    .agent-indicator{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+    .ind-active{background:#7adf7a;animation:pulse 2s infinite}
+    .ind-idle{background:#c8c0b0}
+    .ind-dormant{background:#e0d0b8}
+
+    /* ──────────────────────────────────
+       MINI AGENT CHARACTERS  (32×32 SVG-in-CSS)
+    ────────────────────────────────── */
+    .mini {
+      width: 32px; height: 32px;
+      position: relative; flex-shrink: 0;
+      animation: miniFloat 3s ease-in-out infinite;
+    }
+    /* stagger floats so they don't all move together */
+    .mini.s1{animation-delay:0s}
+    .mini.s2{animation-delay:.4s}
+    .mini.s3{animation-delay:.8s}
+    .mini.s4{animation-delay:1.2s}
+    .mini.s5{animation-delay:1.6s}
+    .mini.s6{animation-delay:2.0s}
+    .mini.s7{animation-delay:2.4s}
+    .mini.s8{animation-delay:2.8s}
+    .mini.s9{animation-delay:.2s}
+    @keyframes miniFloat{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-2px)}
+    }
+    /* dormant agents barely move */
+    .ind-dormant ~ .agent-info,
+    .agent-row.dormant-row .mini { animation-duration: 8s; opacity:.65; }
+
+    /* Sage — sprig of sage leaves */
+    .sage-mini { background: #d4e8c0; border-radius: 50%; }
+    .sage-mini svg { width:100%; height:100%; }
+
+    /* Reed — tall grass blades */
+    .reed-mini { background: #e0ead0; border-radius: 50%; }
+
+    /* Moss — fluffy moss circle */
+    .moss-mini { background: #c8d8b0; border-radius: 50%; }
+
+    /* Willow — drooping fronds */
+    .willow-mini { background: #d8e8d0; border-radius: 50%; }
+
+    /* Grove — little tree */
+    .grove-mini { background: #c8dcc0; border-radius: 50%; }
+
+    /* Meadow — daisy */
+    .meadow-mini { background: #f0e8d0; border-radius: 50%; }
+
+    /* Clover — 3-leaf clover */
+    .clover-mini { background: #d0e0c8; border-radius: 50%; }
+
+    /* Fern — fern frond */
+    .fern-mini { background: #c8d8b8; border-radius: 50%; }
+
+    /* Briar — rose with thorns */
+    .briar-mini { background: #e8d0d0; border-radius: 50%; }
+
+    /* Thistle */
+    .thistle-mini { background: #d8d0e8; border-radius: 50%; }
+
+    /* shared mini SVG wrapper */
+    .mini svg { width: 32px; height: 32px; }
   </style>
 </head>
 <body>
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="logo">Lumi</div>
+<!-- ═══════════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════════ -->
+<div class="sidebar">
+  <div class="logo">Lumi</div>
 
-    <div class="character-wrap">
-      <div class="character" id="blossom">
+  <div class="character-wrap">
 
-        <!-- bloom on top -->
-        <div class="bloom">
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="bloom-center"></div>
+    <div class="blossom-stage" id="blossom">
+      <div class="blossom-body-group">
+
+        <!-- Bloom (slowly rotates) -->
+        <div class="b-bloom">
+          <div class="b-petal"></div><div class="b-petal"></div><div class="b-petal"></div>
+          <div class="b-petal"></div><div class="b-petal"></div><div class="b-petal"></div>
+          <div class="b-petal"></div>
+          <div class="b-bloom-center"></div>
         </div>
 
-        <!-- arms -->
-        <div class="arm arm-l">
-          <div class="arm-spine as1"></div>
-          <div class="arm-spine as2"></div>
-        </div>
-        <div class="arm arm-r">
-          <div class="arm-spine as3"></div>
-          <div class="arm-spine as4"></div>
+        <!-- Left arm (waves) -->
+        <div class="b-arm b-arm-l">
+          <div class="asp asp1"></div><div class="asp asp2"></div>
         </div>
 
-        <!-- main body with face -->
-        <div class="body">
-          <div class="spine s1"></div>
-          <div class="spine s2"></div>
-          <div class="spine s3"></div>
-          <div class="spine s4"></div>
-          <div class="spine s5"></div>
-          <div class="spine s6"></div>
-          <div class="face">
-            <div class="eyes">
-              <div class="eye"></div>
-              <div class="eye"></div>
+        <!-- Right arm (idle sway) -->
+        <div class="b-arm b-arm-r">
+          <div class="asp asp3"></div><div class="asp asp4"></div>
+        </div>
+
+        <!-- Trunk + face -->
+        <div class="b-trunk">
+          <div class="sp sp1"></div><div class="sp sp2"></div><div class="sp sp3"></div>
+          <div class="sp sp4"></div><div class="sp sp5"></div><div class="sp sp6"></div>
+          <div class="b-face">
+            <div class="b-eyes">
+              <div class="b-eye" id="eyeL"></div>
+              <div class="b-eye" id="eyeR"></div>
             </div>
-            <div class="blush-wrap">
-              <div class="blush"></div>
-              <div class="blush"></div>
+            <div class="b-blush-wrap">
+              <div class="b-blush"></div><div class="b-blush"></div>
             </div>
           </div>
         </div>
 
-        <!-- pot -->
-        <div class="pot"></div>
-
+        <div class="b-pot"></div>
       </div>
-      <div class="character-name">Blossom</div>
-      <div class="character-role">Admin Orchestrator</div>
     </div>
 
-    <div class="status-pill">
-      <div class="status-dot"></div>
-      Active
-    </div>
+    <div class="character-name">Blossom</div>
+    <div class="character-role">Admin Orchestrator</div>
+  </div>
 
-    <nav class="nav">
-      <div class="nav-item active"><div class="nav-dot"></div> Today</div>
-      <div class="nav-item"><div class="nav-dot"></div> Threads</div>
-      <div class="nav-item"><div class="nav-dot"></div> Decisions</div>
-      <div class="nav-item"><div class="nav-dot"></div> Agents</div>
-      <div class="nav-item"><div class="nav-dot"></div> Files</div>
-    </nav>
+  <div class="status-pill">
+    <div class="status-dot"></div>Active
+  </div>
 
-    <div class="sidebar-footer">
-      Phase 0 · Idea Validation<br>
-      for every bloom.
+  <nav class="nav">
+    <div class="nav-item active"><div class="nav-dot"></div> Today</div>
+    <div class="nav-item"><div class="nav-dot"></div> Threads</div>
+    <div class="nav-item"><div class="nav-dot"></div> Decisions</div>
+    <div class="nav-item"><div class="nav-dot"></div> Agents</div>
+    <div class="nav-item"><div class="nav-dot"></div> Files</div>
+  </nav>
+
+  <div class="sidebar-footer">Phase 0 · Idea Validation<br>for every bloom.</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MAIN CHAT
+═══════════════════════════════════════ -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">BLOSSOM · LUMI ADMIN</div>
+    <div class="topbar-date">Thursday, June 5</div>
+  </div>
+
+  <div class="brief-card">
+    <div class="brief-label">Morning Brief</div>
+    <div class="brief-text">Two threads active from last session. Naming (Jelex cleanest candidate) and James/Alexander advisory structure both ready to continue.</div>
+    <div class="brief-questions">
+      <div class="brief-q">New Mac arriving today — setup checklist is ready.</div>
+      <div class="brief-q">Continue Jelex trademark check, or hold naming?</div>
     </div>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
-    <div class="topbar">
-      <div class="topbar-title">BLOSSOM · LUMI ADMIN</div>
-      <div class="topbar-date">Thursday, June 5</div>
-    </div>
-
-    <div class="brief-card">
-      <div class="brief-label">Morning Brief</div>
-      <div class="brief-text">Two threads active from last session. Naming search (Jelex is cleanest current candidate) and James/Alexander advisory structure are both ready to continue.</div>
-      <div class="brief-questions">
-        <div class="brief-q">New device arriving today — ready to run setup when you are.</div>
-        <div class="brief-q">Do you want to continue the Jelex trademark check, or hold naming until the business rationale is clearer?</div>
+  <div class="messages" id="messages">
+    <div class="msg">
+      <div class="msg-avatar">🌵</div>
+      <div>
+        <div class="msg-bubble">Domain check on Jelex: App Store and Google Play clean. No trademark in Classes 9 or 41. Strongest remaining risk is phonetic — "Jelex" may read as three syllables in Spanish. Worth a pronunciation test before committing.</div>
+        <div class="msg-meta">Blossom · 9:14 am</div>
       </div>
     </div>
-
-    <div class="messages" id="messages">
-
-      <div class="msg">
-        <div class="msg-avatar">🌵</div>
-        <div>
-          <div class="msg-bubble">Domain check complete on Jelex. Both App Store and Google Play are clean — no children's app using that name. No trademark found in Classes 9 or 41. Strongest remaining risk is phonetic: "Jelex" reads as two syllables in English but could be three in Spanish. Worth a pronunciation test before committing.</div>
-          <div class="msg-meta">Blossom · 9:14 am</div>
-        </div>
+    <div class="msg user">
+      <div class="msg-avatar">👤</div>
+      <div>
+        <div class="msg-bubble">she's looking great! make sure she's animated and can she give the other agents a look too?</div>
+        <div class="msg-meta">Just now</div>
       </div>
-
-      <div class="msg user">
-        <div class="msg-avatar">👤</div>
-        <div>
-          <div class="msg-bubble">can you make her a desert flower or cactus?</div>
-          <div class="msg-meta">Just now</div>
-        </div>
-      </div>
-
-      <div class="msg" id="thinking-msg">
-        <div class="msg-avatar">🌵</div>
-        <div class="thinking-bubble">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
-      </div>
-
     </div>
-
-    <div class="input-bar">
-      <textarea class="input-field" placeholder="Talk to Blossom…" rows="1" id="input" onkeydown="handleKey(event)"></textarea>
-      <button class="send-btn" onclick="sendMsg()">
-        <svg width="16" height="16" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-      </button>
+    <div class="msg" id="thinking-msg">
+      <div class="msg-avatar">🌵</div>
+      <div class="thinking-bubble">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
     </div>
   </div>
 
-  <!-- AGENTS PANEL -->
-  <div class="agents-panel">
-    <div class="panel-label">Agent Roster</div>
+  <div class="input-bar">
+    <textarea class="input-field" placeholder="Talk to Blossom…" rows="1" id="input" onkeydown="handleKey(event)"></textarea>
+    <button class="send-btn" onclick="sendMsg()">
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
 
-    <div class="phase-tag">Phase 0 · Always Active</div>
+<!-- ═══════════════════════════════════════
+     AGENTS PANEL
+═══════════════════════════════════════ -->
+<div class="agents-panel">
+  <div class="panel-label">Agent Roster</div>
+  <div class="phase-tag">Phase 0 · Active</div>
 
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0d8">🌿</div>
-      <div class="agent-info"><div class="agent-name">Sage</div><div class="agent-status">Research & Strategy</div></div>
-      <div class="agent-indicator ind-active"></div>
+  <!-- SAGE — sprig with oval leaves -->
+  <div class="agent-row">
+    <div class="mini s1 sage-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="28" x2="16" y2="8" stroke="#5a8040" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="12" cy="18" rx="5" ry="3" fill="#7ab85a" transform="rotate(-30 12 18)"/>
+        <ellipse cx="20" cy="14" rx="5" ry="3" fill="#8ac86a" transform="rotate(30 20 14)"/>
+        <ellipse cx="13" cy="11" rx="4" ry="2.5" fill="#7ab85a" transform="rotate(-20 13 11)"/>
+        <circle cx="16" cy="8" r="2.5" fill="#6aa84a"/>
+      </svg>
     </div>
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0d8">🪶</div>
-      <div class="agent-info"><div class="agent-name">Reed</div><div class="agent-status">Writing & Comms</div></div>
-      <div class="agent-indicator ind-active"></div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0d8">🪨</div>
-      <div class="agent-info"><div class="agent-name">Moss</div><div class="agent-status">Finance & Modeling</div></div>
-      <div class="agent-indicator ind-active"></div>
-    </div>
-
-    <div class="divider"></div>
-    <div class="phase-tag">Phase 1 · On-demand</div>
-
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#f5ede0">🌾</div>
-      <div class="agent-info"><div class="agent-name">Willow</div><div class="agent-status">Child Safety / COPPA</div></div>
-      <div class="agent-indicator ind-idle"></div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#f5ede0">🌳</div>
-      <div class="agent-info"><div class="agent-name">Grove</div><div class="agent-status">Visual Development</div></div>
-      <div class="agent-indicator ind-idle"></div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#f5ede0">🌼</div>
-      <div class="agent-info"><div class="agent-name">Meadow</div><div class="agent-status">Customer Voice</div></div>
-      <div class="agent-indicator ind-idle"></div>
-    </div>
-
-    <div class="divider"></div>
-    <div class="phase-tag">Phase 2 · Dormant</div>
-
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#f5ede0">🍀</div>
-      <div class="agent-info"><div class="agent-name">Clover</div><div class="agent-status">Child Development</div></div>
-      <div class="agent-indicator ind-dormant"></div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-icon" style="background:#f5ede0">🌿</div>
-      <div class="agent-info"><div class="agent-name">Fern</div><div class="agent-status">Accessibility</div></div>
-      <div class="agent-indicator ind-dormant"></div>
-    </div>
-
+    <div class="agent-info"><div class="agent-name">Sage</div><div class="agent-status">Research & Strategy</div></div>
+    <div class="agent-indicator ind-active"></div>
   </div>
 
-  <script>
-    function handleKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
-    }
-    function sendMsg() {
-      const input = document.getElementById('input');
-      const text = input.value.trim();
-      if (!text) return;
-      const messages = document.getElementById('messages');
-      const thinkingMsg = document.getElementById('thinking-msg');
-      const userMsg = document.createElement('div');
-      userMsg.className = 'msg user';
-      userMsg.innerHTML = `
-        <div class="msg-avatar">👤</div>
-        <div>
-          <div class="msg-bubble">${text}</div>
-          <div class="msg-meta">Just now</div>
-        </div>`;
-      messages.insertBefore(userMsg, thinkingMsg);
-      input.value = '';
-      messages.appendChild(thinkingMsg);
-      thinkingMsg.style.display = 'flex';
-      document.getElementById('blossom').classList.add('thinking');
+  <!-- REED — three tall reeds -->
+  <div class="agent-row">
+    <div class="mini s2 reed-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="11" y1="28" x2="11" y2="10" stroke="#8aaa60" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="11" cy="8" rx="2.5" ry="5" fill="#a0c070"/>
+        <line x1="16" y1="28" x2="16" y2="7" stroke="#7a9a50" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="16" cy="5" rx="2.5" ry="5" fill="#90b060"/>
+        <line x1="21" y1="28" x2="21" y2="11" stroke="#8aaa60" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="21" cy="9" rx="2.5" ry="5" fill="#a0c070"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Reed</div><div class="agent-status">Writing & Comms</div></div>
+    <div class="agent-indicator ind-active"></div>
+  </div>
+
+  <!-- MOSS — fluffy bumpy moss mound -->
+  <div class="agent-row">
+    <div class="mini s3 moss-mini">
+      <svg viewBox="0 0 32 32">
+        <ellipse cx="16" cy="22" rx="13" ry="6" fill="#7a9850"/>
+        <circle cx="10" cy="19" r="4.5" fill="#8aaa58"/>
+        <circle cx="16" cy="17" r="5" fill="#9aba60"/>
+        <circle cx="22" cy="19" r="4" fill="#8aaa58"/>
+        <circle cx="13" cy="15" r="3.5" fill="#a0c068"/>
+        <circle cx="20" cy="16" r="3" fill="#98b860"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Moss</div><div class="agent-status">Finance & Modeling</div></div>
+    <div class="agent-indicator ind-active"></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="phase-tag">Phase 1 · On-demand</div>
+
+  <!-- WILLOW — drooping fronds from arc -->
+  <div class="agent-row">
+    <div class="mini s4 willow-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="28" x2="16" y2="10" stroke="#6a9048" stroke-width="2" stroke-linecap="round"/>
+        <path d="M7 10 Q16 4 25 10" fill="none" stroke="#6a9048" stroke-width="1.5"/>
+        <path d="M8 11 Q7 18 9 24" fill="none" stroke="#8ab060" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M12 10 Q10 17 11 23" fill="none" stroke="#7aa050" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M20 10 Q22 17 21 23" fill="none" stroke="#8ab060" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M24 11 Q25 18 23 24" fill="none" stroke="#7aa050" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Willow</div><div class="agent-status">Child Safety / COPPA</div></div>
+    <div class="agent-indicator ind-idle"></div>
+  </div>
+
+  <!-- GROVE — round-top little tree -->
+  <div class="agent-row">
+    <div class="mini s5 grove-mini">
+      <svg viewBox="0 0 32 32">
+        <rect x="14" y="22" width="4" height="7" rx="1" fill="#8a6040"/>
+        <circle cx="16" cy="15" r="9" fill="#5a8840"/>
+        <circle cx="11" cy="17" r="6" fill="#6a9848"/>
+        <circle cx="21" cy="17" r="6" fill="#6a9848"/>
+        <circle cx="16" cy="12" r="7" fill="#7aaa50"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Grove</div><div class="agent-status">Visual Development</div></div>
+    <div class="agent-indicator ind-idle"></div>
+  </div>
+
+  <!-- MEADOW — daisy flower -->
+  <div class="agent-row">
+    <div class="mini s6 meadow-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="29" x2="16" y2="20" stroke="#6a9040" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="12" cy="25" rx="4" ry="2" fill="#7aaa48" transform="rotate(-30 12 25)"/>
+        <!-- petals -->
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" stroke="#e0d0c0" stroke-width=".5"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(45 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(90 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(135 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(180 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(225 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(270 16 16)"/>
+        <ellipse cx="16" cy="11" rx="2.5" ry="5" fill="white" transform="rotate(315 16 16)"/>
+        <circle cx="16" cy="16" r="5" fill="#f0c840"/>
+        <circle cx="16" cy="16" r="3" fill="#e0a820"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Meadow</div><div class="agent-status">Customer Voice</div></div>
+    <div class="agent-indicator ind-idle"></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="phase-tag">Phase 2 · Dormant</div>
+
+  <!-- CLOVER — 3-leaf clover -->
+  <div class="agent-row dormant-row">
+    <div class="mini s7 clover-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="29" x2="16" y2="18" stroke="#6a9040" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="16" cy="14" r="5" fill="#78b050" opacity=".7"/>
+        <circle cx="11" cy="17" r="5" fill="#70a848" opacity=".7"/>
+        <circle cx="21" cy="17" r="5" fill="#78b050" opacity=".7"/>
+        <line x1="14" y1="16" x2="16" y2="18" stroke="#5a8838" stroke-width="1"/>
+        <line x1="18" y1="16" x2="16" y2="18" stroke="#5a8838" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Clover</div><div class="agent-status">Child Development</div></div>
+    <div class="agent-indicator ind-dormant"></div>
+  </div>
+
+  <!-- FERN — arching fern frond -->
+  <div class="agent-row dormant-row">
+    <div class="mini s8 fern-mini">
+      <svg viewBox="0 0 32 32">
+        <path d="M16 28 Q18 20 22 12" fill="none" stroke="#6a9040" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="20" cy="15" rx="4" ry="2" fill="#80a848" transform="rotate(-50 20 15)" opacity=".8"/>
+        <ellipse cx="22" cy="19" rx="4" ry="2" fill="#78a040" transform="rotate(-40 22 19)" opacity=".8"/>
+        <ellipse cx="19" cy="12" rx="3.5" ry="2" fill="#88b050" transform="rotate(-60 19 12)" opacity=".8"/>
+        <ellipse cx="18" cy="23" rx="4" ry="2" fill="#78a040" transform="rotate(-25 18 23)" opacity=".8"/>
+        <path d="M16 28 Q14 20 10 12" fill="none" stroke="#6a9040" stroke-width="1.5" stroke-linecap="round"/>
+        <ellipse cx="12" cy="15" rx="3.5" ry="1.8" fill="#80a848" transform="rotate(50 12 15)" opacity=".7"/>
+        <ellipse cx="11" cy="19" rx="3.5" ry="1.8" fill="#78a040" transform="rotate(40 11 19)" opacity=".7"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Fern</div><div class="agent-status">Accessibility</div></div>
+    <div class="agent-indicator ind-dormant"></div>
+  </div>
+
+  <!-- BRIAR — thorny rose -->
+  <div class="agent-row dormant-row">
+    <div class="mini s9 briar-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="29" x2="16" y2="14" stroke="#7a6040" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="13" y1="23" x2="10" y2="21" stroke="#7a6040" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="19" y1="20" x2="22" y2="18" stroke="#7a6040" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- rose petals -->
+        <circle cx="16" cy="12" r="6" fill="#d06870" opacity=".8"/>
+        <circle cx="13" cy="11" r="4" fill="#e07880" opacity=".8"/>
+        <circle cx="19" cy="11" r="4" fill="#e07880" opacity=".8"/>
+        <circle cx="16" cy="9"  r="4" fill="#e88890" opacity=".9"/>
+        <circle cx="16" cy="12" r="3" fill="#f09098"/>
+        <circle cx="16" cy="12" r="1.5" fill="#c85868"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Briar</div><div class="agent-status">SEL & Emotional Safety</div></div>
+    <div class="agent-indicator ind-dormant"></div>
+  </div>
+
+  <!-- THISTLE — purple spiky thistle -->
+  <div class="agent-row dormant-row">
+    <div class="mini s4 thistle-mini">
+      <svg viewBox="0 0 32 32">
+        <line x1="16" y1="29" x2="16" y2="16" stroke="#6a7a40" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="11" cy="22" rx="4" ry="2" fill="#7a9048" transform="rotate(-30 11 22)" opacity=".7"/>
+        <ellipse cx="21" cy="22" rx="4" ry="2" fill="#7a9048" transform="rotate(30 21 22)" opacity=".7"/>
+        <!-- spiky head -->
+        <circle cx="16" cy="12" r="7" fill="#9080b8" opacity=".3"/>
+        <circle cx="16" cy="12" r="5" fill="#a890c8" opacity=".5"/>
+        <line x1="16" y1="5"  x2="16" y2="9"  stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="21" y1="7"  x2="19" y2="10" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="23" y1="12" x2="20" y2="12" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="21" y1="17" x2="19" y2="14" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="11" y1="7"  x2="13" y2="10" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="9"  y1="12" x2="12" y2="12" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="11" y1="17" x2="13" y2="14" stroke="#8070a8" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="16" cy="12" r="3.5" fill="#b8a0d8"/>
+      </svg>
+    </div>
+    <div class="agent-info"><div class="agent-name">Thistle</div><div class="agent-status">Bilingual & Cultural</div></div>
+    <div class="agent-indicator ind-dormant"></div>
+  </div>
+
+</div><!-- /agents-panel -->
+
+<script>
+  /* ── THINKING STATE ── */
+  function handleKey(e) {
+    if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+  }
+  function sendMsg() {
+    const input = document.getElementById('input');
+    const text = input.value.trim();
+    if (!text) return;
+    const messages = document.getElementById('messages');
+    const thinkingMsg = document.getElementById('thinking-msg');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.innerHTML = `<div class="msg-avatar">👤</div><div><div class="msg-bubble">${text}</div><div class="msg-meta">Just now</div></div>`;
+    messages.insertBefore(userMsg, thinkingMsg);
+    input.value = '';
+    messages.appendChild(thinkingMsg);
+    thinkingMsg.style.display = 'flex';
+
+    const b = document.getElementById('blossom');
+    b.classList.add('thinking');
+    messages.scrollTop = messages.scrollHeight;
+
+    setTimeout(() => {
+      thinkingMsg.style.display = 'none';
+      b.classList.remove('thinking');
+      const reply = document.createElement('div');
+      reply.className = 'msg';
+      reply.innerHTML = `<div class="msg-avatar">🌵</div><div><div class="msg-bubble">Logged. On it.</div><div class="msg-meta">Blossom · Just now</div></div>`;
+      messages.appendChild(reply);
       messages.scrollTop = messages.scrollHeight;
-      setTimeout(() => {
-        thinkingMsg.style.display = 'none';
-        document.getElementById('blossom').classList.remove('thinking');
-        const reply = document.createElement('div');
-        reply.className = 'msg';
-        reply.innerHTML = `
-          <div class="msg-avatar">🌵</div>
-          <div>
-            <div class="msg-bubble">Logged. Give me a moment.</div>
-            <div class="msg-meta">Blossom · Just now</div>
-          </div>`;
-        messages.appendChild(reply);
-        messages.scrollTop = messages.scrollHeight;
-      }, 1800);
-    }
-  </script>
+    }, 1800);
+  }
 
+  /* ── EYES LOOSELY FOLLOW MOUSE ── */
+  document.addEventListener('mousemove', e => {
+    const eyeL = document.getElementById('eyeL');
+    const eyeR = document.getElementById('eyeR');
+    if (!eyeL || !eyeR) return;
+    const rect = document.getElementById('blossom').getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height * .38;
+    const dx = (e.clientX - cx) / window.innerWidth;
+    const dy = (e.clientY - cy) / window.innerHeight;
+    const mx = Math.max(-1.2, Math.min(1.2, dx * 3));
+    const my = Math.max(-1, Math.min(1, dy * 2));
+    eyeL.style.transform = `translate(${mx}px, ${my}px)`;
+    eyeR.style.transform = `translate(${mx}px, ${my}px)`;
+  });
+</script>
 </body>
 </html>
