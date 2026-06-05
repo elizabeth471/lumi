@@ -9,7 +9,7 @@
 
     body {
       font-family: 'Georgia', serif;
-      background: #f5f0eb;
+      background: #f7f1e8;
       display: flex;
       height: 100vh;
       overflow: hidden;
@@ -18,7 +18,7 @@
     /* ── SIDEBAR ── */
     .sidebar {
       width: 260px;
-      background: #2c3e2d;
+      background: #2a2018;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -31,11 +31,11 @@
       font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #8fad7c;
+      color: #c4a96a;
       font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* ── BLOSSOM CHARACTER ── */
+    /* ── BLOSSOM CHARACTER — CACTUS ── */
     .character-wrap {
       display: flex;
       flex-direction: column;
@@ -45,132 +45,221 @@
 
     .character {
       width: 110px;
-      height: 110px;
+      height: 120px;
       position: relative;
-    }
-
-    /* stem */
-    .stem {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 50px;
-      background: #5a7a4a;
-      border-radius: 3px;
-    }
-
-    /* leaves */
-    .leaf {
-      position: absolute;
-      width: 22px;
-      height: 12px;
-      background: #6d9e56;
-      border-radius: 50% 0 50% 0;
-    }
-    .leaf-l {
-      bottom: 26px;
-      left: 24px;
-      transform: rotate(-30deg);
-    }
-    .leaf-r {
-      bottom: 26px;
-      right: 24px;
-      transform: rotate(30deg) scaleX(-1);
-    }
-
-    /* face / bloom */
-    .bloom {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 70px;
-      height: 70px;
-    }
-
-    /* petals */
-    .petal {
-      position: absolute;
-      width: 22px;
-      height: 30px;
-      background: #c8e6b0;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      top: 50%;
-      left: 50%;
-      transform-origin: bottom center;
-      opacity: 0.9;
-    }
-    .petal:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
-    .petal:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
-    .petal:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
-    .petal:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
-    .petal:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
-    .petal:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
-    .petal:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
-    .petal:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
-
-    /* center */
-    .bloom-center {
-      position: absolute;
-      width: 34px;
-      height: 34px;
-      background: #e8d5a3;
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2;
-    }
-
-    /* eyes */
-    .eyes {
-      display: flex;
-      gap: 7px;
-      margin-top: 2px;
-    }
-    .eye {
-      width: 5px;
-      height: 5px;
-      background: #3a3028;
-      border-radius: 50%;
-      animation: blink 4s infinite;
-    }
-    @keyframes blink {
-      0%, 95%, 100% { transform: scaleY(1); }
-      97% { transform: scaleY(0.1); }
-    }
-
-    /* idle breathing animation */
-    .character {
       animation: breathe 3.5s ease-in-out infinite;
     }
     @keyframes breathe {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-4px); }
     }
+    .character.thinking { animation: wobble 0.5s ease-in-out infinite alternate; }
+    @keyframes wobble {
+      from { transform: rotate(-2deg); }
+      to   { transform: rotate(2deg); }
+    }
 
-    /* thinking animation — applied via JS */
+    /* pot */
+    .pot {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 28px;
+      background: #c4714a;
+      border-radius: 2px 2px 8px 8px;
+    }
+    .pot::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -4px;
+      right: -4px;
+      height: 10px;
+      background: #d4845a;
+      border-radius: 3px;
+    }
+    /* dirt */
+    .pot::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 4px;
+      right: 4px;
+      height: 6px;
+      background: #5a3a20;
+      border-radius: 2px;
+    }
+
+    /* main cactus body */
+    .body {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34px;
+      height: 58px;
+      background: #5a8a50;
+      border-radius: 17px 17px 8px 8px;
+    }
+    /* body sheen */
+    .body::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 8px;
+      height: 30px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 4px;
+    }
+
+    /* spines on body */
+    .spine {
+      position: absolute;
+      width: 1.5px;
+      height: 7px;
+      background: #e8dcc8;
+      border-radius: 1px;
+    }
+    .s1 { top: 14px; left: -3px; transform: rotate(-20deg); }
+    .s2 { top: 26px; left: -3px; transform: rotate(-15deg); }
+    .s3 { top: 38px; left: -3px; transform: rotate(-20deg); }
+    .s4 { top: 14px; right: -3px; transform: rotate(20deg); }
+    .s5 { top: 26px; right: -3px; transform: rotate(15deg); }
+    .s6 { top: 38px; right: -3px; transform: rotate(20deg); }
+
+    /* arms */
+    .arm {
+      position: absolute;
+      width: 20px;
+      height: 32px;
+      background: #5a8a50;
+      border-radius: 10px;
+    }
+    .arm-l {
+      bottom: 52px;
+      left: 12px;
+      transform-origin: bottom right;
+      transform: rotate(-30deg);
+      border-radius: 10px 10px 4px 10px;
+    }
+    .arm-r {
+      bottom: 52px;
+      right: 12px;
+      transform-origin: bottom left;
+      transform: rotate(30deg);
+      border-radius: 10px 10px 10px 4px;
+    }
+    /* arm spines */
+    .arm-spine {
+      position: absolute;
+      width: 1.5px;
+      height: 6px;
+      background: #e8dcc8;
+      border-radius: 1px;
+    }
+    .as1 { top: 8px; left: -2px; transform: rotate(-20deg); }
+    .as2 { top: 18px; left: -2px; transform: rotate(-20deg); }
+    .as3 { top: 8px; right: -2px; transform: rotate(20deg); }
+    .as4 { top: 18px; right: -2px; transform: rotate(20deg); }
+
+    /* face on body */
+    .face {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+    }
+    .eyes {
+      display: flex;
+      gap: 8px;
+    }
+    .eye {
+      width: 5px;
+      height: 5px;
+      background: #1a1208;
+      border-radius: 50%;
+      animation: blink 4s infinite;
+    }
+    @keyframes blink {
+      0%, 94%, 100% { transform: scaleY(1); }
+      96% { transform: scaleY(0.1); }
+    }
+    .blush-wrap {
+      display: flex;
+      gap: 12px;
+      margin-top: -2px;
+    }
+    .blush {
+      width: 7px;
+      height: 4px;
+      background: rgba(220, 100, 80, 0.35);
+      border-radius: 50%;
+    }
+
+    /* bloom flower on top */
+    .bloom {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 36px;
+    }
+    .petal {
+      position: absolute;
+      width: 10px;
+      height: 15px;
+      background: #e8607a;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      top: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      opacity: 0.92;
+    }
+    .petal:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+    .petal:nth-child(2) { transform: translate(-50%, -100%) rotate(51deg); }
+    .petal:nth-child(3) { transform: translate(-50%, -100%) rotate(102deg); }
+    .petal:nth-child(4) { transform: translate(-50%, -100%) rotate(153deg); }
+    .petal:nth-child(5) { transform: translate(-50%, -100%) rotate(204deg); }
+    .petal:nth-child(6) { transform: translate(-50%, -100%) rotate(255deg); }
+    .petal:nth-child(7) { transform: translate(-50%, -100%) rotate(306deg); }
+    .bloom-center {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #f5d060;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    /* thinking: petals pulse */
     .character.thinking .petal {
-      animation: petalPulse 0.6s ease-in-out infinite alternate;
+      animation: petalPulse 0.5s ease-in-out infinite alternate;
     }
     @keyframes petalPulse {
-      from { opacity: 0.7; }
-      to { opacity: 1; }
+      from { opacity: 0.6; transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(0.9); }
+      to   { opacity: 1;   transform: translate(-50%, -100%) rotate(var(--r, 0deg)) scale(1.1); }
     }
 
     .character-name {
       font-size: 18px;
-      color: #d4e8c2;
+      color: #e8d4a8;
       letter-spacing: 1px;
     }
     .character-role {
       font-size: 11px;
-      color: #7a9e6a;
+      color: #9a7a4a;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-family: 'Helvetica Neue', sans-serif;
@@ -181,18 +270,17 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #1e2e1f;
+      background: #1a1208;
       border-radius: 20px;
       padding: 6px 14px;
       font-size: 11px;
-      color: #8fad7c;
+      color: #c4a96a;
       font-family: 'Helvetica Neue', sans-serif;
       letter-spacing: 1px;
     }
     .status-dot {
-      width: 7px;
-      height: 7px;
-      background: #6fcf6f;
+      width: 7px; height: 7px;
+      background: #7adf7a;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -213,7 +301,7 @@
       padding: 9px 14px;
       border-radius: 8px;
       font-size: 12px;
-      color: #8fad7c;
+      color: #9a7a4a;
       font-family: 'Helvetica Neue', sans-serif;
       cursor: pointer;
       display: flex;
@@ -222,20 +310,14 @@
       transition: background 0.15s;
       letter-spacing: 0.5px;
     }
-    .nav-item:hover { background: #1e2e1f; }
-    .nav-item.active { background: #3a5c3a; color: #d4e8c2; }
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-    }
+    .nav-item:hover { background: #1a1208; }
+    .nav-item.active { background: #4a3018; color: #e8d4a8; }
+    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
     .sidebar-footer {
       margin-top: auto;
       font-size: 10px;
-      color: #4a6a4a;
+      color: #5a4028;
       letter-spacing: 1px;
       font-family: 'Helvetica Neue', sans-serif;
       text-align: center;
@@ -247,7 +329,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      background: #faf7f3;
+      background: #fdf8f0;
       min-width: 0;
     }
 
@@ -256,26 +338,26 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 28px;
-      border-bottom: 1px solid #e8e0d6;
-      background: #faf7f3;
+      border-bottom: 1px solid #ede0cc;
+      background: #fdf8f0;
     }
     .topbar-title {
       font-size: 13px;
-      color: #8a7a6a;
+      color: #9a7a5a;
       font-family: 'Helvetica Neue', sans-serif;
       letter-spacing: 1px;
     }
     .topbar-date {
       font-size: 11px;
-      color: #b0a090;
+      color: #c0a080;
       font-family: 'Helvetica Neue', sans-serif;
     }
 
     /* ── MORNING BRIEF CARD ── */
     .brief-card {
       margin: 20px 28px 0;
-      background: #eef5e8;
-      border: 1px solid #c8ddb8;
+      background: #fff4e0;
+      border: 1px solid #e8c878;
       border-radius: 12px;
       padding: 16px 20px;
     }
@@ -283,13 +365,13 @@
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #7a9e6a;
+      color: #c4943a;
       font-family: 'Helvetica Neue', sans-serif;
       margin-bottom: 8px;
     }
     .brief-text {
       font-size: 13px;
-      color: #3a4a36;
+      color: #3a2a18;
       line-height: 1.7;
       font-family: 'Helvetica Neue', sans-serif;
     }
@@ -301,16 +383,12 @@
     }
     .brief-q {
       font-size: 12px;
-      color: #5a7a4a;
+      color: #8a5a28;
       font-family: 'Helvetica Neue', sans-serif;
       display: flex;
       gap: 8px;
     }
-    .brief-q::before {
-      content: "→";
-      color: #8fad7c;
-      flex-shrink: 0;
-    }
+    .brief-q::before { content: "→"; color: #c4943a; flex-shrink: 0; }
 
     /* ── MESSAGES ── */
     .messages {
@@ -322,60 +400,51 @@
       gap: 16px;
     }
 
-    .msg {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      max-width: 680px;
-    }
+    .msg { display: flex; gap: 12px; align-items: flex-start; max-width: 680px; }
     .msg.user { align-self: flex-end; flex-direction: row-reverse; }
 
     .msg-avatar {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: #2c3e2d;
+      background: #3a2a18;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
     }
-    .msg.user .msg-avatar {
-      background: #d4c4b0;
-    }
+    .msg.user .msg-avatar { background: #e8c878; }
 
     .msg-bubble {
       background: white;
-      border: 1px solid #e8e0d6;
+      border: 1px solid #ede0cc;
       border-radius: 12px 12px 12px 2px;
       padding: 12px 16px;
       font-size: 13px;
-      color: #3a3028;
+      color: #3a2a18;
       line-height: 1.65;
       font-family: 'Helvetica Neue', sans-serif;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .msg.user .msg-bubble {
-      background: #2c3e2d;
-      border-color: #2c3e2d;
-      color: #d4e8c2;
+      background: #3a2a18;
+      border-color: #3a2a18;
+      color: #e8d4a8;
       border-radius: 12px 12px 2px 12px;
     }
 
     .msg-meta {
       font-size: 10px;
-      color: #b0a090;
+      color: #c0a080;
       font-family: 'Helvetica Neue', sans-serif;
       margin-top: 4px;
       letter-spacing: 0.5px;
     }
     .msg.user .msg-meta { text-align: right; }
 
-    /* thinking indicator */
     .thinking-bubble {
       background: white;
-      border: 1px solid #e8e0d6;
+      border: 1px solid #ede0cc;
       border-radius: 12px 12px 12px 2px;
       padding: 12px 16px;
       display: flex;
@@ -384,7 +453,7 @@
     }
     .dot {
       width: 6px; height: 6px;
-      background: #8fad7c;
+      background: #c4943a;
       border-radius: 50%;
       animation: dotBounce 1.2s infinite;
     }
@@ -398,20 +467,20 @@
     /* ── INPUT BAR ── */
     .input-bar {
       padding: 16px 28px 20px;
-      border-top: 1px solid #e8e0d6;
-      background: #faf7f3;
+      border-top: 1px solid #ede0cc;
+      background: #fdf8f0;
       display: flex;
       gap: 10px;
       align-items: flex-end;
     }
     .input-field {
       flex: 1;
-      border: 1px solid #d8d0c6;
+      border: 1px solid #ddd0b8;
       border-radius: 10px;
       padding: 12px 16px;
       font-size: 13px;
       font-family: 'Helvetica Neue', sans-serif;
-      color: #3a3028;
+      color: #3a2a18;
       background: white;
       resize: none;
       outline: none;
@@ -419,14 +488,13 @@
       max-height: 120px;
       transition: border-color 0.15s;
     }
-    .input-field:focus { border-color: #8fad7c; }
-    .input-field::placeholder { color: #c0b0a0; }
+    .input-field:focus { border-color: #c4943a; }
+    .input-field::placeholder { color: #c0a880; }
 
     .send-btn {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 10px;
-      background: #2c3e2d;
+      background: #3a2a18;
       border: none;
       cursor: pointer;
       display: flex;
@@ -435,14 +503,14 @@
       transition: background 0.15s;
       flex-shrink: 0;
     }
-    .send-btn:hover { background: #3a5c3a; }
-    .send-btn svg { fill: #8fad7c; }
+    .send-btn:hover { background: #5a4a30; }
+    .send-btn svg { fill: #c4943a; }
 
-    /* ── AGENT STATUS PANEL (right side) ── */
+    /* ── AGENTS PANEL ── */
     .agents-panel {
       width: 200px;
-      background: #f0ebe4;
-      border-left: 1px solid #e0d8ce;
+      background: #f5ede0;
+      border-left: 1px solid #e8d8c0;
       padding: 20px 16px;
       display: flex;
       flex-direction: column;
@@ -453,17 +521,12 @@
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #9a8a7a;
+      color: #9a7a5a;
       font-family: 'Helvetica Neue', sans-serif;
     }
-    .agent-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .agent-row { display: flex; align-items: center; gap: 8px; }
     .agent-icon {
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -472,39 +535,15 @@
       flex-shrink: 0;
     }
     .agent-info { flex: 1; min-width: 0; }
-    .agent-name {
-      font-size: 12px;
-      color: #3a3028;
-      font-family: 'Helvetica Neue', sans-serif;
-      font-weight: 500;
-    }
-    .agent-status {
-      font-size: 10px;
-      color: #9a8a7a;
-      font-family: 'Helvetica Neue', sans-serif;
-    }
-    .agent-indicator {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .ind-active { background: #6fcf6f; animation: pulse 2s infinite; }
-    .ind-idle { background: #c8c0b8; }
-    .ind-dormant { background: #e0d8ce; }
+    .agent-name { font-size: 12px; color: #3a2a18; font-family: 'Helvetica Neue', sans-serif; font-weight: 500; }
+    .agent-status { font-size: 10px; color: #9a7a5a; font-family: 'Helvetica Neue', sans-serif; }
+    .agent-indicator { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .ind-active { background: #7adf7a; animation: pulse 2s infinite; }
+    .ind-idle { background: #c8c0b0; }
+    .ind-dormant { background: #e8d8c0; }
 
-    .divider {
-      height: 1px;
-      background: #e0d8ce;
-    }
-
-    .phase-tag {
-      font-size: 10px;
-      color: #9a8a7a;
-      font-family: 'Helvetica Neue', sans-serif;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
+    .divider { height: 1px; background: #e8d8c0; }
+    .phase-tag { font-size: 10px; color: #9a7a5a; font-family: 'Helvetica Neue', sans-serif; letter-spacing: 0.5px; text-transform: uppercase; }
   </style>
 </head>
 <body>
@@ -515,6 +554,8 @@
 
     <div class="character-wrap">
       <div class="character" id="blossom">
+
+        <!-- bloom on top -->
         <div class="bloom">
           <div class="petal"></div>
           <div class="petal"></div>
@@ -523,17 +564,42 @@
           <div class="petal"></div>
           <div class="petal"></div>
           <div class="petal"></div>
-          <div class="petal"></div>
-          <div class="bloom-center">
+          <div class="bloom-center"></div>
+        </div>
+
+        <!-- arms -->
+        <div class="arm arm-l">
+          <div class="arm-spine as1"></div>
+          <div class="arm-spine as2"></div>
+        </div>
+        <div class="arm arm-r">
+          <div class="arm-spine as3"></div>
+          <div class="arm-spine as4"></div>
+        </div>
+
+        <!-- main body with face -->
+        <div class="body">
+          <div class="spine s1"></div>
+          <div class="spine s2"></div>
+          <div class="spine s3"></div>
+          <div class="spine s4"></div>
+          <div class="spine s5"></div>
+          <div class="spine s6"></div>
+          <div class="face">
             <div class="eyes">
               <div class="eye"></div>
               <div class="eye"></div>
             </div>
+            <div class="blush-wrap">
+              <div class="blush"></div>
+              <div class="blush"></div>
+            </div>
           </div>
         </div>
-        <div class="leaf leaf-l"></div>
-        <div class="leaf leaf-r"></div>
-        <div class="stem"></div>
+
+        <!-- pot -->
+        <div class="pot"></div>
+
       </div>
       <div class="character-name">Blossom</div>
       <div class="character-role">Admin Orchestrator</div>
@@ -565,7 +631,6 @@
       <div class="topbar-date">Thursday, June 5</div>
     </div>
 
-    <!-- Morning Brief -->
     <div class="brief-card">
       <div class="brief-label">Morning Brief</div>
       <div class="brief-text">Two threads active from last session. Naming search (Jelex is cleanest current candidate) and James/Alexander advisory structure are both ready to continue.</div>
@@ -575,13 +640,12 @@
       </div>
     </div>
 
-    <!-- Messages -->
     <div class="messages" id="messages">
 
       <div class="msg">
-        <div class="msg-avatar">🌸</div>
+        <div class="msg-avatar">🌵</div>
         <div>
-          <div class="msg-bubble">Domain check complete on Jelex. Both App Store and Google Play are clean — no children's app using that name. No trademark found in Classes 9 or 41. The strongest remaining risk is phonetic: "Jelex" reads as two syllables in English but could be read as three in Spanish (Je-le-x). Worth a pronunciation test before committing.</div>
+          <div class="msg-bubble">Domain check complete on Jelex. Both App Store and Google Play are clean — no children's app using that name. No trademark found in Classes 9 or 41. Strongest remaining risk is phonetic: "Jelex" reads as two syllables in English but could be three in Spanish. Worth a pronunciation test before committing.</div>
           <div class="msg-meta">Blossom · 9:14 am</div>
         </div>
       </div>
@@ -589,13 +653,13 @@
       <div class="msg user">
         <div class="msg-avatar">👤</div>
         <div>
-          <div class="msg-bubble">can blossom have a visual? like a little animation?</div>
+          <div class="msg-bubble">can you make her a desert flower or cactus?</div>
           <div class="msg-meta">Just now</div>
         </div>
       </div>
 
       <div class="msg" id="thinking-msg">
-        <div class="msg-avatar">🌸</div>
+        <div class="msg-avatar">🌵</div>
         <div class="thinking-bubble">
           <div class="dot"></div>
           <div class="dot"></div>
@@ -605,7 +669,6 @@
 
     </div>
 
-    <!-- Input -->
     <div class="input-bar">
       <textarea class="input-field" placeholder="Talk to Blossom…" rows="1" id="input" onkeydown="handleKey(event)"></textarea>
       <button class="send-btn" onclick="sendMsg()">
@@ -621,29 +684,18 @@
     <div class="phase-tag">Phase 0 · Always Active</div>
 
     <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0e0">🌿</div>
-      <div class="agent-info">
-        <div class="agent-name">Sage</div>
-        <div class="agent-status">Research & Strategy</div>
-      </div>
+      <div class="agent-icon" style="background:#e8f0d8">🌿</div>
+      <div class="agent-info"><div class="agent-name">Sage</div><div class="agent-status">Research & Strategy</div></div>
       <div class="agent-indicator ind-active"></div>
     </div>
-
     <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0e0">🪶</div>
-      <div class="agent-info">
-        <div class="agent-name">Reed</div>
-        <div class="agent-status">Writing & Comms</div>
-      </div>
+      <div class="agent-icon" style="background:#e8f0d8">🪶</div>
+      <div class="agent-info"><div class="agent-name">Reed</div><div class="agent-status">Writing & Comms</div></div>
       <div class="agent-indicator ind-active"></div>
     </div>
-
     <div class="agent-row">
-      <div class="agent-icon" style="background:#e8f0e0">🪨</div>
-      <div class="agent-info">
-        <div class="agent-name">Moss</div>
-        <div class="agent-status">Finance & Modeling</div>
-      </div>
+      <div class="agent-icon" style="background:#e8f0d8">🪨</div>
+      <div class="agent-info"><div class="agent-name">Moss</div><div class="agent-status">Finance & Modeling</div></div>
       <div class="agent-indicator ind-active"></div>
     </div>
 
@@ -651,29 +703,18 @@
     <div class="phase-tag">Phase 1 · On-demand</div>
 
     <div class="agent-row">
-      <div class="agent-icon" style="background:#f0ede8">🌾</div>
-      <div class="agent-info">
-        <div class="agent-name">Willow</div>
-        <div class="agent-status">Child Safety / COPPA</div>
-      </div>
+      <div class="agent-icon" style="background:#f5ede0">🌾</div>
+      <div class="agent-info"><div class="agent-name">Willow</div><div class="agent-status">Child Safety / COPPA</div></div>
       <div class="agent-indicator ind-idle"></div>
     </div>
-
     <div class="agent-row">
-      <div class="agent-icon" style="background:#f0ede8">🌳</div>
-      <div class="agent-info">
-        <div class="agent-name">Grove</div>
-        <div class="agent-status">Visual Development</div>
-      </div>
+      <div class="agent-icon" style="background:#f5ede0">🌳</div>
+      <div class="agent-info"><div class="agent-name">Grove</div><div class="agent-status">Visual Development</div></div>
       <div class="agent-indicator ind-idle"></div>
     </div>
-
     <div class="agent-row">
-      <div class="agent-icon" style="background:#f0ede8">🌼</div>
-      <div class="agent-info">
-        <div class="agent-name">Meadow</div>
-        <div class="agent-status">Customer Voice</div>
-      </div>
+      <div class="agent-icon" style="background:#f5ede0">🌼</div>
+      <div class="agent-info"><div class="agent-name">Meadow</div><div class="agent-status">Customer Voice</div></div>
       <div class="agent-indicator ind-idle"></div>
     </div>
 
@@ -681,20 +722,13 @@
     <div class="phase-tag">Phase 2 · Dormant</div>
 
     <div class="agent-row">
-      <div class="agent-icon" style="background:#f5f2ee">🍀</div>
-      <div class="agent-info">
-        <div class="agent-name">Clover</div>
-        <div class="agent-status">Child Development</div>
-      </div>
+      <div class="agent-icon" style="background:#f5ede0">🍀</div>
+      <div class="agent-info"><div class="agent-name">Clover</div><div class="agent-status">Child Development</div></div>
       <div class="agent-indicator ind-dormant"></div>
     </div>
-
     <div class="agent-row">
-      <div class="agent-icon" style="background:#f5f2ee">🌿</div>
-      <div class="agent-info">
-        <div class="agent-name">Fern</div>
-        <div class="agent-status">Accessibility</div>
-      </div>
+      <div class="agent-icon" style="background:#f5ede0">🌿</div>
+      <div class="agent-info"><div class="agent-name">Fern</div><div class="agent-status">Accessibility</div></div>
       <div class="agent-indicator ind-dormant"></div>
     </div>
 
@@ -702,21 +736,14 @@
 
   <script>
     function handleKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMsg();
-      }
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
     }
-
     function sendMsg() {
       const input = document.getElementById('input');
       const text = input.value.trim();
       if (!text) return;
-
       const messages = document.getElementById('messages');
       const thinkingMsg = document.getElementById('thinking-msg');
-
-      // add user message before thinking
       const userMsg = document.createElement('div');
       userMsg.className = 'msg user';
       userMsg.innerHTML = `
@@ -726,29 +753,20 @@
           <div class="msg-meta">Just now</div>
         </div>`;
       messages.insertBefore(userMsg, thinkingMsg);
-
       input.value = '';
-
-      // move thinking to end
       messages.appendChild(thinkingMsg);
       thinkingMsg.style.display = 'flex';
-
-      // make character think
       document.getElementById('blossom').classList.add('thinking');
-
       messages.scrollTop = messages.scrollHeight;
-
-      // fake response after delay
       setTimeout(() => {
         thinkingMsg.style.display = 'none';
         document.getElementById('blossom').classList.remove('thinking');
-
         const reply = document.createElement('div');
         reply.className = 'msg';
         reply.innerHTML = `
-          <div class="msg-avatar">🌸</div>
+          <div class="msg-avatar">🌵</div>
           <div>
-            <div class="msg-bubble">Logged. I'll handle that — give me a moment to think through it.</div>
+            <div class="msg-bubble">Logged. Give me a moment.</div>
             <div class="msg-meta">Blossom · Just now</div>
           </div>`;
         messages.appendChild(reply);
