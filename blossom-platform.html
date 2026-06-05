@@ -592,7 +592,14 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
   </nav>
 
   <div class="sidebar-sep"></div>
-  <div class="sidebar-footer">Phase 0 · Idea Validation<br>for every bloom.</div>
+  <div class="sidebar-footer">
+    Phase 0 · Idea Validation<br>for every bloom.
+    <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;font-size:10px;color:#5a4028">
+      <div><span style="color:#7a5a30">⌘K</span> — command palette</div>
+      <div><span style="color:#7a5a30">1–5</span> — navigate views</div>
+      <div><span style="color:#7a5a30">↵</span> — send message</div>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════
@@ -653,7 +660,10 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
             </div>
             <div class="msg" id="thinking-row" style="display:none">
               <div class="msg-av">🌵</div>
-              <div class="thinking-bub"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+              <div>
+                <div class="thinking-bub"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="msg-time" id="thinking-label">Blossom · thinking…</div>
+              </div>
             </div>
           </div>
 
@@ -696,6 +706,16 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
               <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Mercury bank account</div>
               <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Google Workspace + domain</div>
               <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Anthropic API account</div>
+            </div>
+          </div>
+          <!-- Quick asks -->
+          <div class="widget">
+            <div class="widget-title">Quick Asks</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="brief-q" style="cursor:pointer" onclick="quickAsk('What\'s the one thing I should do today?')">What's the one thing I should do today?</div>
+              <div class="brief-q" style="cursor:pointer" onclick="quickAsk('Summarize where we are on Jelex')">Summarize where we are on Jelex</div>
+              <div class="brief-q" style="cursor:pointer" onclick="quickAsk('What\'s blocking formation?')">What's blocking formation?</div>
+              <div class="brief-q" style="cursor:pointer" onclick="quickAsk('Show me the full budget breakdown')">Show me the full budget breakdown</div>
             </div>
           </div>
         </div>
@@ -799,8 +819,8 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
               <span class="dc-tag">Tier 2</span>
             </div>
             <div class="dc-actions">
-              <button class="btn primary">Proceed with Jelex</button>
-              <button class="btn">Keep searching</button>
+              <button class="btn primary" onclick="toast('Decision logged ✓','Jelex confirmed. Next: attorney trademark clearance ($300–500). Blossom will queue this.','✅')">Proceed with Jelex</button>
+              <button class="btn" onclick="toast('Back to search','Noted. I\'ll flag Jelex as a candidate and continue scanning.','🌵')">Keep searching</button>
             </div>
           </div>
 
@@ -812,8 +832,8 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
               <span class="dc-tag">Tier 3</span>
             </div>
             <div class="dc-actions">
-              <button class="btn primary">Informal for now</button>
-              <button class="btn">Set up compensation</button>
+              <button class="btn primary" onclick="toast('Decision logged ✓','Informal advisory arrangement confirmed. No paperwork needed at this stage.','✅')">Informal for now</button>
+              <button class="btn" onclick="toast('Compensation track','Flagged for accountant setup after entity formation.','📋')">Set up compensation</button>
             </div>
           </div>
 
@@ -1505,10 +1525,14 @@ function sendMsg() {
 
   // Sometimes show a consulting indicator
   const showConsult = Math.random() > 0.5;
+  let consultedAgent = null;
   if (showConsult) {
-    const agent = agentConsults[Math.floor(Math.random()*agentConsults.length)];
-    barTxt.textContent = `Consulting ${agent.name} — ${agent.msg}`;
+    consultedAgent = agentConsults[Math.floor(Math.random()*agentConsults.length)];
+    barTxt.textContent = `Consulting ${consultedAgent.name} — ${consultedAgent.msg}`;
     bar.classList.add('visible');
+    document.getElementById('thinking-label').textContent = `Blossom · consulting ${consultedAgent.name}…`;
+  } else {
+    document.getElementById('thinking-label').textContent = 'Blossom · thinking…';
   }
 
   setTimeout(()=>{
@@ -1530,6 +1554,13 @@ function sendMsg() {
     box.appendChild(rm);
     box.scrollTop = box.scrollHeight;
   }, 1800);
+}
+
+function quickAsk(text) {
+  const input = document.getElementById('chat-input');
+  input.value = text;
+  input.focus();
+  sendMsg();
 }
 
 function escapeHtml(t) {
