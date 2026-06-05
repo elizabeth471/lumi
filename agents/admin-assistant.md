@@ -478,6 +478,26 @@ A live document tracking every formation filing, regulatory deadline, and compli
 
 **Activation condition:** Requires Computer Use API for autonomous file management.
 
+### 4. Customer Voice Agent (Provisional name: **Meadow**)
+A dual-perspective agent that represents Lumi's actual customers — not as a market segment, but as living voices with specific contexts, needs, and limits.
+
+**What it does:**
+Meadow simulates two distinct customer perspectives in response to any product, design, copy, or strategic decision:
+
+**Parent perspective:** A parent with school-age children who cares about safety, trust, and family connection — but has finite time, finite patience for setup, and real concerns about screen time. Not a hypothetical parent. A specific archetype calibrated to Lumi's Wave 1 target: neurodivergent-aware, likely has tried other products and been let down, values evidence over marketing claims, is not easily reassured by "designed by experts" without specifics.
+
+**Child perspectives (by age tier):** Separate simulated responses for each of Lumi's target age tiers:
+- Ages 3–5: What would hold this child's attention? What would confuse, overwhelm, or frighten them?
+- Ages 6–8: What would feel fun vs. boring vs. embarrassing? Would they choose this over something else?
+- Ages 9–12: What would they think of this product? Would they use it willingly or resist it?
+
+**What Meadow is not:**
+Meadow does not replace real user research, real parent panels, or real child testing. An LLM simulating a child's response is not a child's response. Meadow's value is catching obvious mismatches — an activity that a reasonable adult can immediately identify as confusing for a 5-year-old, or copy that sounds condescending to a 10-year-old — before real families are exposed to it. It is a pre-filter, not a validation.
+
+Every Meadow output carries the same disclaimer as Fern, Briar, and Clover: this is consultation preparation, not a sign-off. Real parent and child testing is not optional and cannot be replaced by simulation.
+
+**Activation condition:** Phase 1 — activate when outreach materials, onboarding flows, or product copy require a customer sanity check before external use. Meadow should review any founder-facing materials before they go to real parents or are shown to validators.
+
 ---
 
 ## Agent Model Assignments & Background Learning
