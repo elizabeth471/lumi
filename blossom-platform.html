@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Blossom — Lumi OS</title>
+<style>
+/* ═══════════════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --sand:      #f7f1e8;
+  --sand-mid:  #f0e8d8;
+  --sand-dark: #e8dcc8;
+  --cream:     #fdf8f0;
+  --bark:      #2a2018;
+  --bark-mid:  #3a3020;
+  --bark-lt:   #4a3a28;
+  --terra:     #c4714a;
+  --terra-lt:  #d4845a;
+  --amber:     #c4943a;
+  --amber-lt:  #e8c878;
+  --amber-pale:#fff4e0;
+  --cactus:    #5a8a50;
+  --cactus-lt: #7aaa60;
+  --sage:      #8ab060;
+  --leaf:      #d4e8c0;
+  --rose:      #e8607a;
+  --sky:       #7ab8d8;
+  --text:      #3a2a18;
+  --text-mid:  #7a6a58;
+  --text-lt:   #b0a090;
+  --border:    #e0d0b8;
+  --white:     #ffffff;
+  --green-dot: #7adf7a;
+  --red:       #e05050;
+  --r:         12px;
+  --r-sm:      8px;
+  --shadow:    0 2px 8px rgba(0,0,0,.07);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex;height:100vh;overflow:hidden;color:var(--text)}
+
+/* ═══════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════ */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--sand-dark);border-radius:3px}
+
+/* ═══════════════════════════════════════════════════
+   LAYOUT SHELL
+═══════════════════════════════════════════════════ */
+.sidebar{width:240px;background:var(--bark);display:flex;flex-direction:column;align-items:center;padding:24px 16px;gap:16px;flex-shrink:0;overflow-y:auto}
+.main-area{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.right-panel{width:240px;background:var(--sand-mid);border-left:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
+
+/* ═══════════════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════════════ */
+.topbar{
+  height:52px;background:var(--cream);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 24px;flex-shrink:0;
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.view-title{font-size:14px;font-weight:600;color:var(--text);letter-spacing:.3px}
+.breadcrumb{font-size:11px;color:var(--text-lt);letter-spacing:.5px}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.tb-chip{
+  padding:5px 12px;border-radius:20px;font-size:11px;letter-spacing:.5px;
+  border:1px solid var(--border);background:var(--white);color:var(--text-mid);
+  cursor:pointer;transition:all .15s;
+}
+.tb-chip:hover{background:var(--sand);border-color:var(--amber)}
+.tb-chip.primary{background:var(--bark);color:var(--amber-lt);border-color:var(--bark)}
+.tb-chip.primary:hover{background:var(--bark-lt)}
+.phase-badge{
+  padding:4px 10px;border-radius:20px;font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--amber-pale);color:var(--amber);border:1px solid var(--amber-lt);
+}
+
+/* ═══════════════════════════════════════════════════
+   SIDEBAR — LOGO + CHARACTER
+═══════════════════════════════════════════════════ */
+.logo{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+
+/* ── BLOSSOM STAGE ── */
+.blossom-stage{width:100px;height:120px;position:relative;cursor:pointer}
+.blossom-body-group{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:100px;height:120px;
+  animation:bob 3s ease-in-out infinite;
+  transform-origin:bottom center;
+}
+@keyframes bob{
+  0%,100%{transform:translateX(-50%) translateY(0) rotate(0deg)}
+  30%{transform:translateX(-50%) translateY(-3px) rotate(.4deg)}
+  70%{transform:translateX(-50%) translateY(-2px) rotate(-.4deg)}
+}
+.blossom-stage.thinking .blossom-body-group{animation:wiggle .4s ease-in-out infinite alternate}
+@keyframes wiggle{from{transform:translateX(-50%) rotate(-3deg)}to{transform:translateX(-50%) rotate(3deg)}}
+
+/* pot */
+.b-pot{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:26px;background:var(--terra);border-radius:2px 2px 8px 8px}
+.b-pot::before{content:'';position:absolute;top:-5px;left:-4px;right:-4px;height:9px;background:var(--terra-lt);border-radius:3px}
+.b-pot::after{content:'';position:absolute;top:1px;left:4px;right:4px;height:5px;background:#5a3a20;border-radius:2px}
+
+/* trunk */
+.b-trunk{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:32px;height:54px;background:var(--cactus);border-radius:16px 16px 8px 8px}
+.b-trunk::after{content:'';position:absolute;top:5px;left:5px;width:7px;height:28px;background:rgba(255,255,255,.12);border-radius:4px}
+
+/* spines */
+.sp{position:absolute;width:1.5px;height:6px;background:#e8dcc8;border-radius:1px}
+.sp1{top:12px;left:-3px;transform:rotate(-20deg)}.sp2{top:23px;left:-3px;transform:rotate(-15deg)}.sp3{top:34px;left:-3px;transform:rotate(-20deg)}
+.sp4{top:12px;right:-3px;transform:rotate(20deg)}.sp5{top:23px;right:-3px;transform:rotate(15deg)}.sp6{top:34px;right:-3px;transform:rotate(20deg)}
+
+/* arms */
+.b-arm{position:absolute;width:18px;height:29px;background:var(--cactus);border-radius:9px}
+.b-arm-l{bottom:50px;left:10px;transform-origin:bottom right;border-radius:9px 9px 3px 9px;animation:waveL 4s ease-in-out infinite}
+@keyframes waveL{0%,55%,100%{transform:rotate(-28deg)}65%{transform:rotate(-52deg)}75%{transform:rotate(-22deg)}85%{transform:rotate(-48deg)}}
+.b-arm-r{bottom:50px;right:10px;transform-origin:bottom left;border-radius:9px 9px 9px 3px;animation:idleR 4s ease-in-out infinite}
+@keyframes idleR{0%,100%{transform:rotate(28deg)}50%{transform:rotate(20deg)}}
+.asp{position:absolute;width:1.5px;height:5px;background:#e8dcc8;border-radius:1px}
+.asp1{top:7px;left:-2px;transform:rotate(-20deg)}.asp2{top:16px;left:-2px;transform:rotate(-20deg)}
+.asp3{top:7px;right:-2px;transform:rotate(20deg)}.asp4{top:16px;right:-2px;transform:rotate(20deg)}
+
+/* face */
+.b-face{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:24px;display:flex;flex-direction:column;align-items:center;gap:4px;z-index:2}
+.b-eyes{display:flex;gap:7px}
+.b-eye{width:5px;height:5px;background:#1a1208;border-radius:50%;animation:blink 4s infinite;transition:transform .1s}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}95%{transform:scaleY(0.1)}}
+.b-blush-wrap{display:flex;gap:10px;margin-top:-1px}
+.b-blush{width:6px;height:3px;background:rgba(220,100,80,.35);border-radius:50%}
+
+/* bloom */
+.b-bloom{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:34px;height:34px;animation:spinSlow 12s linear infinite}
+@keyframes spinSlow{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+.blossom-stage.thinking .b-bloom{animation:spinFast .7s linear infinite}
+@keyframes spinFast{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+.b-petal{position:absolute;width:10px;height:14px;background:var(--rose);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;opacity:.9}
+.b-petal:nth-child(1){transform:translate(-50%,-100%) rotate(0deg)}
+.b-petal:nth-child(2){transform:translate(-50%,-100%) rotate(51deg)}
+.b-petal:nth-child(3){transform:translate(-50%,-100%) rotate(102deg)}
+.b-petal:nth-child(4){transform:translate(-50%,-100%) rotate(153deg)}
+.b-petal:nth-child(5){transform:translate(-50%,-100%) rotate(204deg)}
+.b-petal:nth-child(6){transform:translate(-50%,-100%) rotate(255deg)}
+.b-petal:nth-child(7){transform:translate(-50%,-100%) rotate(306deg)}
+.b-bloom-center{position:absolute;width:13px;height:13px;background:#f5d060;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2}
+
+.char-name{font-size:16px;color:#e8d4a8;letter-spacing:.5px}
+.char-role{font-size:10px;color:#9a7a4a;letter-spacing:2px;text-transform:uppercase}
+
+/* ── STATUS PILL ── */
+.status-pill{display:flex;align-items:center;gap:6px;background:#1a1208;border-radius:20px;padding:5px 12px;font-size:11px;color:var(--amber);letter-spacing:1px}
+.s-dot{width:6px;height:6px;background:var(--green-dot);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ── SIDEBAR NAV ── */
+.nav{width:100%;display:flex;flex-direction:column;gap:3px}
+.nav-item{
+  padding:9px 12px;border-radius:var(--r-sm);font-size:12px;color:#9a7a4a;
+  cursor:pointer;display:flex;align-items:center;gap:10px;
+  transition:background .15s;letter-spacing:.3px;
+}
+.nav-item:hover{background:#1a1208}
+.nav-item.active{background:#4a3018;color:#e8d4a8}
+.nav-icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--terra);color:white;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:600}
+
+.sidebar-sep{width:100%;height:1px;background:#3a2a18;margin:4px 0}
+.sidebar-footer{margin-top:auto;font-size:10px;color:#5a4028;letter-spacing:1px;text-align:center;line-height:1.9}
+
+/* ═══════════════════════════════════════════════════
+   VIEW CONTAINER
+═══════════════════════════════════════════════════ */
+.view-container{flex:1;overflow-y:auto;padding:0}
+.view{display:none;padding:24px;flex-direction:column;gap:20px;min-height:100%}
+.view.active{display:flex}
+
+/* ═══════════════════════════════════════════════════
+   VIEW: TODAY (chat)
+═══════════════════════════════════════════════════ */
+.today-layout{display:flex;gap:20px;flex:1;min-height:0}
+.chat-col{flex:1;display:flex;flex-direction:column;gap:0;min-width:0}
+.side-col{width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:16px}
+
+/* brief card */
+.brief-card{background:var(--amber-pale);border:1px solid var(--amber-lt);border-radius:var(--r);padding:16px 18px}
+.card-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;font-weight:600}
+.card-body{font-size:13px;color:var(--text);line-height:1.7}
+.brief-qs{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.brief-q{font-size:12px;color:#8a5a28;display:flex;gap:8px;line-height:1.5}
+.brief-q::before{content:"→";color:var(--amber);flex-shrink:0}
+
+/* chat */
+.chat-box{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding:16px 0;min-height:200px}
+.msg{display:flex;gap:10px;align-items:flex-start;max-width:600px}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-av{width:30px;height:30px;border-radius:50%;background:var(--bark);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px}
+.msg.user .msg-av{background:var(--amber-lt)}
+.msg-bubble{background:var(--white);border:1px solid var(--border);border-radius:12px 12px 12px 2px;padding:10px 14px;font-size:13px;color:var(--text);line-height:1.6;box-shadow:var(--shadow)}
+.msg.user .msg-bubble{background:var(--bark);border-color:var(--bark);color:#e8d4a8;border-radius:12px 12px 2px 12px}
+.msg-time{font-size:10px;color:var(--text-lt);margin-top:3px;letter-spacing:.3px}
+.msg.user .msg-time{text-align:right}
+.thinking-bub{background:var(--white);border:1px solid var(--border);border-radius:12px 12px 12px 2px;padding:10px 14px;display:flex;gap:5px;align-items:center}
+.dot{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:db 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
+
+.chat-input-row{display:flex;gap:8px;align-items:flex-end;padding-top:12px;border-top:1px solid var(--border);flex-shrink:0}
+.chat-input{flex:1;border:1px solid var(--sand-dark);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--text);background:var(--white);resize:none;outline:none;min-height:40px;max-height:100px;transition:border-color .15s;font-family:inherit}
+.chat-input:focus{border-color:var(--amber)}
+.chat-input::placeholder{color:#c0a880}
+.send-btn{width:40px;height:40px;border-radius:var(--r-sm);background:var(--bark);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0}
+.send-btn:hover{background:var(--bark-lt)}
+.send-btn svg{fill:var(--amber)}
+
+/* ── side widgets ── */
+.widget{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow)}
+.widget-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:12px;font-weight:600}
+.open-item{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:1px solid var(--sand);cursor:pointer;transition:opacity .15s}
+.open-item:last-child{border-bottom:none;padding-bottom:0}
+.open-item:hover{opacity:.75}
+.oi-label{font-size:12px;color:var(--text);font-weight:500;line-height:1.4}
+.oi-meta{font-size:11px;color:var(--text-lt)}
+.oi-urgent{display:inline-block;font-size:9px;background:#ffe0e0;color:var(--red);border-radius:4px;padding:1px 6px;letter-spacing:.5px;text-transform:uppercase;margin-left:4px}
+
+/* ═══════════════════════════════════════════════════
+   VIEW: THREADS
+═══════════════════════════════════════════════════ */
+.threads-grid{display:flex;flex-direction:column;gap:12px}
+.thread-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:16px 18px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);
+}
+.thread-card:hover{border-color:var(--amber);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.thread-card.pinned{border-left:3px solid var(--amber)}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.tc-title{font-size:14px;font-weight:600;color:var(--text)}
+.tc-status{font-size:10px;padding:3px 8px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+.st-active{background:#e8f5e0;color:#4a8a30}
+.st-waiting{background:var(--amber-pale);color:var(--amber)}
+.st-queued{background:var(--sand);color:var(--text-mid)}
+.st-blocked{background:#ffe8e0;color:#c04030}
+.tc-body{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:10px}
+.tc-footer{display:flex;align-items:center;gap:10px}
+.tc-agent{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-lt)}
+.tc-dot{width:5px;height:5px;border-radius:50%;background:var(--text-lt)}
+.tc-time{font-size:11px;color:var(--text-lt);margin-left:auto}
+.tc-tag{font-size:10px;background:var(--sand);color:var(--text-mid);border-radius:4px;padding:2px 7px}
+
+/* ═══════════════════════════════════════════════════
+   VIEW: DECISIONS
+═══════════════════════════════════════════════════ */
+.decisions-layout{display:flex;gap:20px}
+.dec-col{flex:1;display:flex;flex-direction:column;gap:12px}
+.dec-col-header{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);padding-bottom:8px;border-bottom:2px solid var(--border);font-weight:600}
+.dec-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:14px 16px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);
+}
+.dec-card:hover{border-color:var(--amber);box-shadow:var(--shadow-lg)}
+.dec-card.urgent{border-left:3px solid var(--red)}
+.dec-card.high{border-left:3px solid var(--amber)}
+.dc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;line-height:1.4}
+.dc-body{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:10px}
+.dc-footer{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dc-tag{font-size:10px;background:var(--sand);color:var(--text-mid);border-radius:4px;padding:2px 7px}
+.dc-due{font-size:10px;color:var(--red);font-weight:500}
+.dc-actions{display:flex;gap:8px;margin-top:10px}
+.btn{padding:6px 14px;border-radius:6px;font-size:12px;cursor:pointer;transition:all .15s;border:1px solid var(--border);background:var(--white);color:var(--text);font-family:inherit}
+.btn:hover{background:var(--sand)}
+.btn.primary{background:var(--bark);color:var(--amber-lt);border-color:var(--bark)}
+.btn.primary:hover{background:var(--bark-lt)}
+.btn.danger{background:#ffe0e0;color:var(--red);border-color:#ffb0b0}
+
+/* ═══════════════════════════════════════════════════
+   VIEW: AGENTS
+═══════════════════════════════════════════════════ */
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.agent-card{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r);
+  padding:18px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:10px;
+}
+.agent-card:hover{border-color:var(--amber);transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.agent-card.dormant{opacity:.65}
+.ac-top{display:flex;align-items:center;gap:12px}
+.ac-mini{width:44px;height:44px;flex-shrink:0}
+.ac-mini svg{width:44px;height:44px}
+.ac-info{flex:1}
+.ac-name{font-size:15px;font-weight:600;color:var(--text)}
+.ac-role{font-size:11px;color:var(--text-lt);letter-spacing:.3px}
+.ac-phase{font-size:10px;padding:2px 8px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;margin-left:auto;flex-shrink:0}
+.ph-0{background:#e8f0e0;color:#4a7a30}
+.ph-1{background:var(--amber-pale);color:var(--amber)}
+.ph-2{background:var(--sand);color:var(--text-mid)}
+.ac-desc{font-size:12px;color:var(--text-mid);line-height:1.65}
+.ac-footer{display:flex;align-items:center;gap:8px;padding-top:8px;border-top:1px solid var(--sand)}
+.ac-model{font-size:10px;color:var(--text-lt);background:var(--sand);padding:2px 8px;border-radius:4px;letter-spacing:.3px}
+.ac-status-row{display:flex;align-items:center;gap:5px;margin-left:auto}
+.ac-dot{width:6px;height:6px;border-radius:50%}
+.ac-status-label{font-size:11px;color:var(--text-lt)}
+
+/* ═══════════════════════════════════════════════════
+   VIEW: FILES
+═══════════════════════════════════════════════════ */
+.files-layout{display:flex;gap:20px;flex:1}
+.file-tree{width:220px;flex-shrink:0;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:12px;box-shadow:var(--shadow)}
+.file-preview{flex:1;background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);overflow-y:auto}
+.tree-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;font-weight:600}
+.tree-item{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--text-mid);transition:background .15s}
+.tree-item:hover{background:var(--sand)}
+.tree-item.active{background:var(--amber-pale);color:var(--text)}
+.tree-item.folder{font-weight:600;color:var(--text)}
+.tree-icon{font-size:12px;width:14px;flex-shrink:0}
+.tree-indent{margin-left:16px}
+.fp-name{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.fp-meta{font-size:11px;color:var(--text-lt);margin-bottom:16px}
+.fp-content{font-size:12px;color:var(--text-mid);line-height:1.8;font-family:monospace;background:var(--sand);padding:16px;border-radius:var(--r-sm);white-space:pre-wrap;overflow-x:auto}
+
+/* ═══════════════════════════════════════════════════
+   RIGHT PANEL
+═══════════════════════════════════════════════════ */
+.rp-section{padding:16px;border-bottom:1px solid var(--border)}
+.rp-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-mid);margin-bottom:10px;font-weight:600}
+.progress-row{display:flex;flex-direction:column;gap:8px}
+.pr-item{display:flex;flex-direction:column;gap:4px}
+.pr-top{display:flex;justify-content:space-between;align-items:center}
+.pr-name{font-size:12px;color:var(--text)}
+.pr-pct{font-size:11px;color:var(--text-lt)}
+.pr-bar{height:4px;background:var(--sand-dark);border-radius:2px;overflow:hidden}
+.pr-fill{height:100%;border-radius:2px;background:var(--cactus);transition:width .6s ease}
+.pr-fill.amber{background:var(--amber)}
+.pr-fill.rose{background:var(--rose)}
+.pr-fill.sky{background:var(--sky)}
+
+.activity-list{display:flex;flex-direction:column;gap:10px}
+.act-item{display:flex;gap:8px;align-items:flex-start}
+.act-icon{width:24px;height:24px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
+.act-body{flex:1}
+.act-text{font-size:12px;color:var(--text);line-height:1.5}
+.act-time{font-size:10px;color:var(--text-lt);margin-top:1px}
+
+.checklist{display:flex;flex-direction:column;gap:8px}
+.cl-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);cursor:pointer}
+.cl-item.done{color:var(--text-lt);text-decoration:line-through}
+.cl-box{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;background:var(--white)}
+.cl-item.done .cl-box{background:var(--cactus-lt);border-color:var(--cactus-lt);color:white}
+
+/* ═══════════════════════════════════════════════════
+   MINI AGENT SVGS (shared for roster + cards)
+═══════════════════════════════════════════════════ */
+.mini-anim{animation:mfloat 3s ease-in-out infinite}
+@keyframes mfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+
+/* ═══════════════════════════════════════════════════
+   TOOLTIP
+═══════════════════════════════════════════════════ */
+[title]{cursor:help}
+
+/* ═══════════════════════════════════════════════════
+   UTILS
+═══════════════════════════════════════════════════ */
+.row{display:flex;align-items:center;gap:8px}
+.col{display:flex;flex-direction:column;gap:6px}
+.spacer{flex:1}
+.tag{font-size:10px;background:var(--sand);color:var(--text-mid);border-radius:4px;padding:2px 8px;letter-spacing:.3px}
+.tag.green{background:#e8f5e0;color:#4a8a30}
+.tag.amber{background:var(--amber-pale);color:var(--amber)}
+.tag.rose{background:#ffe8e8;color:#c04050}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════════════ -->
+<div class="sidebar">
+  <div class="logo">Lumi</div>
+
+  <!-- Blossom character -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+    <div class="blossom-stage" id="blossom" onclick="blossomTap()">
+      <div class="blossom-body-group">
+        <div class="b-bloom">
+          <div class="b-petal"></div><div class="b-petal"></div><div class="b-petal"></div>
+          <div class="b-petal"></div><div class="b-petal"></div><div class="b-petal"></div>
+          <div class="b-petal"></div><div class="b-bloom-center"></div>
+        </div>
+        <div class="b-arm b-arm-l"><div class="asp asp1"></div><div class="asp asp2"></div></div>
+        <div class="b-arm b-arm-r"><div class="asp asp3"></div><div class="asp asp4"></div></div>
+        <div class="b-trunk">
+          <div class="sp sp1"></div><div class="sp sp2"></div><div class="sp sp3"></div>
+          <div class="sp sp4"></div><div class="sp sp5"></div><div class="sp sp6"></div>
+          <div class="b-face">
+            <div class="b-eyes"><div class="b-eye" id="eyeL"></div><div class="b-eye" id="eyeR"></div></div>
+            <div class="b-blush-wrap"><div class="b-blush"></div><div class="b-blush"></div></div>
+          </div>
+        </div>
+        <div class="b-pot"></div>
+      </div>
+    </div>
+    <div class="char-name">Blossom</div>
+    <div class="char-role">Admin Orchestrator</div>
+  </div>
+
+  <div class="status-pill"><div class="s-dot"></div>Active · Phase 0</div>
+
+  <nav class="nav" style="width:100%">
+    <div class="nav-item active" onclick="switchView('today',this)">
+      <div class="nav-icon">🌅</div>Today
+      <span class="nav-badge" id="badge-today" style="display:none">2</span>
+    </div>
+    <div class="nav-item" onclick="switchView('threads',this)">
+      <div class="nav-icon">🧵</div>Threads
+      <span class="nav-badge">4</span>
+    </div>
+    <div class="nav-item" onclick="switchView('decisions',this)">
+      <div class="nav-icon">⚖️</div>Decisions
+      <span class="nav-badge">3</span>
+    </div>
+    <div class="nav-item" onclick="switchView('agents',this)">
+      <div class="nav-icon">🌿</div>Agents
+    </div>
+    <div class="nav-item" onclick="switchView('files',this)">
+      <div class="nav-icon">📁</div>Files
+    </div>
+  </nav>
+
+  <div class="sidebar-sep"></div>
+  <div class="sidebar-footer">Phase 0 · Idea Validation<br>for every bloom.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MAIN AREA
+══════════════════════════════════════════════════ -->
+<div class="main-area">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="view-title" id="view-title">Today</div>
+      <div class="breadcrumb" id="view-sub">Thursday, June 5 · Morning Brief ready</div>
+    </div>
+    <div class="topbar-right">
+      <div class="phase-badge">Phase 0</div>
+      <div class="tb-chip">Session Wrap</div>
+      <div class="tb-chip primary">+ New Task</div>
+    </div>
+  </div>
+
+  <!-- View Container -->
+  <div class="view-container">
+
+    <!-- ─── TODAY ─── -->
+    <div class="view active" id="view-today">
+      <div class="today-layout" style="flex:1">
+
+        <!-- CHAT COL -->
+        <div class="chat-col">
+          <div class="brief-card">
+            <div class="card-label">Morning Brief — June 5</div>
+            <div class="card-body">Four active threads. Naming search (Jelex is cleanest candidate), James & Alexander advisory structure, new Mac setup, and Blossom UI design. No time-sensitive deadlines today.</div>
+            <div class="brief-qs">
+              <div class="brief-q">Continue Jelex trademark check, or hold naming until entity is formed?</div>
+              <div class="brief-q">New Mac arriving — run setup checklist when ready.</div>
+            </div>
+          </div>
+
+          <div class="chat-box" id="chat-box">
+            <div class="msg">
+              <div class="msg-av">🌵</div>
+              <div>
+                <div class="msg-bubble">Good morning. Jelex domain check is complete — App Store and Google Play are clean, no trademark in Classes 9 or 41. The only remaining risk is phonetic in Spanish. I'd recommend a quick pronunciation test with a native speaker before committing. Want me to move forward with the attorney trademark search, or hold?</div>
+                <div class="msg-time">Blossom · 9:14 am</div>
+              </div>
+            </div>
+            <div class="msg">
+              <div class="msg-av">🌵</div>
+              <div>
+                <div class="msg-bubble">Also: I've drafted the James & Alexander advisory framework. Short version — unpaid involvement as a Junior Advisory Board has zero legal complexity at their ages. Compensation through the C-Corp is possible but requires proper payroll setup. Full brief is in the Decisions queue.</div>
+                <div class="msg-time">Blossom · 9:15 am</div>
+              </div>
+            </div>
+            <div class="msg" id="thinking-row" style="display:none">
+              <div class="msg-av">🌵</div>
+              <div class="thinking-bub"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chat-input" placeholder="Talk to Blossom…" rows="1" onkeydown="handleKey(event)"></textarea>
+            <button class="send-btn" onclick="sendMsg()">
+              <svg width="14" height="14" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- SIDE COL -->
+        <div class="side-col">
+          <!-- Open decisions -->
+          <div class="widget">
+            <div class="widget-title">Open Decisions</div>
+            <div class="open-item" onclick="switchView('decisions',document.querySelector('.nav-item:nth-child(3)'))">
+              <div class="oi-label">Brand name — Jelex <span class="oi-urgent">Waiting</span></div>
+              <div class="oi-meta">Needs: pronunciation test · attorney clearance</div>
+            </div>
+            <div class="open-item">
+              <div class="oi-label">Entity formation</div>
+              <div class="oi-meta">Needs: final brand name first</div>
+            </div>
+            <div class="open-item">
+              <div class="oi-label">Kids advisory structure</div>
+              <div class="oi-meta">Needs: your call on compensation</div>
+            </div>
+          </div>
+
+          <!-- Formation checklist -->
+          <div class="widget">
+            <div class="widget-title">Formation Checklist</div>
+            <div class="checklist">
+              <div class="cl-item done" onclick="toggleCheck(this)"><div class="cl-box">✓</div>Stakeholder materials package</div>
+              <div class="cl-item done" onclick="toggleCheck(this)"><div class="cl-box">✓</div>Agent team configured</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Final brand name selected</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Delaware C-Corp via Stripe Atlas</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Oregon foreign registration</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Mercury bank account</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Google Workspace + domain</div>
+              <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>Anthropic API account</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── THREADS ─── -->
+    <div class="view" id="view-threads">
+      <div class="threads-grid">
+
+        <div class="thread-card pinned" onclick="switchView('today',document.querySelector('.nav-item:nth-child(1)'))">
+          <div class="tc-top">
+            <div class="tc-title">Brand Naming — James & Alexander Derivations</div>
+            <div class="tc-status st-waiting">Waiting · Founder</div>
+          </div>
+          <div class="tc-body">Jelex (J+Alex) is the cleanest candidate — both stores clear, no trademark found in Classes 9/41. JELU eliminated due to JELU-WERK conflict. Phonetic Spanish check outstanding. 90+ names reviewed this session.</div>
+          <div class="tc-footer">
+            <span class="tc-tag">Naming</span><span class="tc-tag">Trademark</span>
+            <div class="tc-agent">🌿 Sage · Reed</div>
+            <div class="tc-time">Active now</div>
+          </div>
+        </div>
+
+        <div class="thread-card">
+          <div class="tc-top">
+            <div class="tc-title">James & Alexander — Junior Advisory Board</div>
+            <div class="tc-status st-waiting">Waiting · Founder</div>
+          </div>
+          <div class="tc-body">Research complete. Unpaid involvement as informal advisors = zero legal complexity. Compensation through the C-Corp requires payroll setup. Founder decision needed: compensate or informal only?</div>
+          <div class="tc-footer">
+            <span class="tc-tag">Legal</span><span class="tc-tag">Strategy</span>
+            <div class="tc-agent">🌿 Sage</div>
+            <div class="tc-time">Completed this session</div>
+          </div>
+        </div>
+
+        <div class="thread-card">
+          <div class="tc-top">
+            <div class="tc-title">New Mac Setup — Blossom on Device</div>
+            <div class="tc-status st-queued">Queued</div>
+          </div>
+          <div class="tc-body">Full setup checklist ready: Homebrew → Node → Claude Code → Git → clone lumi repo. Estimated 30–45 min. Waiting for Mac to arrive.</div>
+          <div class="tc-footer">
+            <span class="tc-tag">Infrastructure</span>
+            <div class="tc-agent">Blossom direct</div>
+            <div class="tc-time">Today</div>
+          </div>
+        </div>
+
+        <div class="thread-card">
+          <div class="tc-top">
+            <div class="tc-title">Blossom UI Platform Design</div>
+            <div class="tc-status st-active">Active</div>
+          </div>
+          <div class="tc-body">HTML/CSS prototype in progress. Cactus character with full animation suite. Multi-view platform (Today, Threads, Decisions, Agents, Files). Grove consulted on visual direction.</div>
+          <div class="tc-footer">
+            <span class="tc-tag">UI</span><span class="tc-tag">Design</span>
+            <div class="tc-agent">🌳 Grove</div>
+            <div class="tc-time">Active now</div>
+          </div>
+        </div>
+
+        <div class="thread-card" style="opacity:.6">
+          <div class="tc-top">
+            <div class="tc-title">Entity Formation — Delaware C-Corp</div>
+            <div class="tc-status st-blocked">Blocked</div>
+          </div>
+          <div class="tc-body">Blocked on: final brand name (needed for entity name). Once name is confirmed: Stripe Atlas → Oregon foreign reg → Mercury → Google Workspace → API account.</div>
+          <div class="tc-footer">
+            <span class="tc-tag">Formation</span><span class="tc-tag">Legal</span>
+            <div class="tc-agent">🪨 Moss · Sage</div>
+            <div class="tc-time">Blocked</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── DECISIONS ─── -->
+    <div class="view" id="view-decisions">
+      <div class="decisions-layout">
+
+        <div class="dec-col">
+          <div class="dec-col-header">🔴 Founder Decision Required</div>
+
+          <div class="dec-card urgent">
+            <div class="dc-title">Confirm brand name — Jelex</div>
+            <div class="dc-body">Jelex has cleared app stores, domain ($11–12/yr available), and trademark Classes 9/41. One outstanding item: Spanish pronunciation test (could read as 3 syllables). If you approve, next step is $300–500 attorney trademark clearance search before entity filing.</div>
+            <div class="dc-footer">
+              <span class="dc-tag">Naming</span>
+              <span class="dc-tag">Tier 2</span>
+            </div>
+            <div class="dc-actions">
+              <button class="btn primary">Proceed with Jelex</button>
+              <button class="btn">Keep searching</button>
+            </div>
+          </div>
+
+          <div class="dec-card high">
+            <div class="dc-title">James & Alexander — compensate or informal?</div>
+            <div class="dc-body">Both options are legally clean. Informal = no paperwork, no tax complexity, still meaningful. Compensated = valid work, proper payroll through C-Corp (FICA applies), requires accountant setup. At Phase 0, informal is simpler and equally powerful for ownership feeling.</div>
+            <div class="dc-footer">
+              <span class="dc-tag">People</span>
+              <span class="dc-tag">Tier 3</span>
+            </div>
+            <div class="dc-actions">
+              <button class="btn primary">Informal for now</button>
+              <button class="btn">Set up compensation</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="dec-col">
+          <div class="dec-col-header">🟡 Queued — Waiting on Prior Decision</div>
+
+          <div class="dec-card">
+            <div class="dc-title">Register domain</div>
+            <div class="dc-body">hellojélex.com or meetjelex.com — both likely available at standard pricing. Waiting on brand name confirmation before purchasing.</div>
+            <div class="dc-footer">
+              <span class="dc-tag">Infrastructure</span>
+              <div class="spacer"></div>
+              <span style="font-size:11px;color:var(--text-lt)">Blocked by: name decision</span>
+            </div>
+          </div>
+
+          <div class="dec-card">
+            <div class="dc-title">File Delaware C-Corp via Stripe Atlas</div>
+            <div class="dc-body">~$500. Requires confirmed entity name (= brand name). Triggers Oregon foreign registration (~$275), Mercury bank, and EIN. Full formation sequence is ready to run once name is locked.</div>
+            <div class="dc-footer">
+              <span class="dc-tag">Formation</span>
+              <div class="spacer"></div>
+              <span style="font-size:11px;color:var(--text-lt)">Blocked by: name + domain</span>
+            </div>
+          </div>
+
+          <div class="dec-card">
+            <div class="dc-title">Blossom UI — build real version</div>
+            <div class="dc-body">The HTML mockup is a prototype. A real connected version (Claude API + React frontend) can be built in 1–2 days by a developer. Requires: business card for API billing. Waiting on entity formation.</div>
+            <div class="dc-footer">
+              <span class="dc-tag">UI</span>
+              <span class="dc-tag">Wishlist #5</span>
+              <div class="spacer"></div>
+              <span style="font-size:11px;color:var(--text-lt)">Blocked by: entity + API account</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── AGENTS ─── -->
+    <div class="view" id="view-agents">
+      <div style="font-size:13px;color:var(--text-mid);margin-bottom:4px">10 agents configured · 3 active · 3 on-demand · 4 dormant</div>
+      <div class="agents-grid">
+
+        <!-- BLOSSOM -->
+        <div class="agent-card" style="border-color:var(--amber);grid-column:span 2">
+          <div class="ac-top">
+            <div class="ac-mini" style="width:52px;height:52px">
+              <svg viewBox="0 0 52 52" width="52" height="52">
+                <rect x="18" y="38" width="16" height="10" rx="3" fill="#c4714a"/>
+                <rect x="14" y="36" width="24" height="6" rx="2" fill="#d4845a"/>
+                <rect x="16" y="36" width="20" height="3" rx="1" fill="#5a3a20"/>
+                <rect x="17" y="16" width="18" height="23" rx="9" fill="#5a8a50"/>
+                <rect x="22" y="18" width="5" height="15" rx="2" fill="rgba(255,255,255,.13)"/>
+                <circle cx="18" cy="25" r="2" fill="#e8dcc8"/>
+                <circle cx="34" cy="25" r="2" fill="#e8dcc8"/>
+                <!-- face -->
+                <circle cx="23" cy="23" r="2.5" fill="#1a1208"/>
+                <circle cx="29" cy="23" r="2.5" fill="#1a1208"/>
+                <ellipse cx="21" cy="27" rx="3" ry="1.5" fill="rgba(220,100,80,.3)"/>
+                <ellipse cx="31" cy="27" rx="3" ry="1.5" fill="rgba(220,100,80,.3)"/>
+                <!-- bloom -->
+                <circle cx="26" cy="9" r="3" fill="#f5d060"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(51 26 9)"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(102 26 9)"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(153 26 9)"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(204 26 9)"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(255 26 9)"/>
+                <ellipse cx="26" cy="4" rx="3" ry="5" fill="#e8607a" opacity=".9" transform="rotate(306 26 9)"/>
+              </svg>
+            </div>
+            <div class="ac-info">
+              <div class="ac-name">Blossom</div>
+              <div class="ac-role">Admin Orchestrator · Always Active</div>
+            </div>
+            <div class="ac-phase ph-0">Core</div>
+          </div>
+          <div class="ac-desc">Coordinates all agents, manages information flow, runs the session-start and session-end protocols, maintains the open decisions log, and ensures nothing falls through the cracks. Never acts unilaterally on consequential decisions.</div>
+          <div class="ac-footer">
+            <span class="ac-model">claude-sonnet-4-6</span>
+            <span class="ac-model">↑ claude-opus-4-8</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--green-dot)"></div><div class="ac-status-label">Active</div></div>
+          </div>
+        </div>
+
+        <!-- SAGE -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#d4e8c0"/>
+                <line x1="22" y1="38" x2="22" y2="12" stroke="#5a8040" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="17" cy="25" rx="6" ry="3.5" fill="#7ab85a" transform="rotate(-30 17 25)"/>
+                <ellipse cx="27" cy="20" rx="6" ry="3.5" fill="#8ac86a" transform="rotate(30 27 20)"/>
+                <ellipse cx="18" cy="16" rx="5" ry="3" fill="#7ab85a" transform="rotate(-20 18 16)"/>
+                <circle cx="22" cy="12" r="3" fill="#6aa84a"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Sage</div><div class="ac-role">Research & Strategy</div></div>
+            <div class="ac-phase ph-0">Phase 0</div>
+          </div>
+          <div class="ac-desc">Market research, competitive intelligence, investor landscape, validation support. Primary model for background scans; escalates to Sonnet for synthesis.</div>
+          <div class="ac-footer">
+            <span class="ac-model">haiku-4-5</span><span class="ac-model">↑ sonnet-4-6</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--green-dot)"></div><div class="ac-status-label">Active</div></div>
+          </div>
+        </div>
+
+        <!-- REED -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim" style="animation-delay:.3s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#e0ead0"/>
+                <line x1="15" y1="38" x2="15" y2="14" stroke="#8aaa60" stroke-width="2.2" stroke-linecap="round"/>
+                <ellipse cx="15" cy="11" rx="3" ry="6" fill="#a0c070"/>
+                <line x1="22" y1="38" x2="22" y2="10" stroke="#7a9a50" stroke-width="2.2" stroke-linecap="round"/>
+                <ellipse cx="22" cy="7" rx="3" ry="6" fill="#90b060"/>
+                <line x1="29" y1="38" x2="29" y2="14" stroke="#8aaa60" stroke-width="2.2" stroke-linecap="round"/>
+                <ellipse cx="29" cy="11" rx="3" ry="6" fill="#a0c070"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Reed</div><div class="ac-role">Writing & Comms</div></div>
+            <div class="ac-phase ph-0">Phase 0</div>
+          </div>
+          <div class="ac-desc">All drafts, outreach copy, brand voice, documents. Sonnet only — never Haiku. Adapts tone for investors, partners, regulators, and families.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span><span style="font-size:10px;color:var(--text-lt);padding:2px 8px">never haiku</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--green-dot)"></div><div class="ac-status-label">Active</div></div>
+          </div>
+        </div>
+
+        <!-- MOSS -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim" style="animation-delay:.6s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#c8d8b0"/>
+                <ellipse cx="22" cy="30" rx="16" ry="7" fill="#7a9850"/>
+                <circle cx="14" cy="26" r="6" fill="#8aaa58"/><circle cx="22" cy="23" r="7" fill="#9aba60"/>
+                <circle cx="30" cy="26" r="5.5" fill="#8aaa58"/><circle cx="18" cy="21" r="5" fill="#a0c068"/>
+                <circle cx="27" cy="22" r="4.5" fill="#98b860"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Moss</div><div class="ac-role">Finance & Modeling</div></div>
+            <div class="ac-phase ph-0">Phase 0</div>
+          </div>
+          <div class="ac-desc">Financial model, budget tracking, runway scenarios, funding research. Translates numbers into plain-language founder decisions. Never gives tax advice.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span><span class="ac-model">↑ opus-4-8</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--green-dot)"></div><div class="ac-status-label">Active</div></div>
+          </div>
+        </div>
+
+        <!-- WILLOW -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim" style="animation-delay:.9s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#d8e8d0"/>
+                <line x1="22" y1="38" x2="22" y2="14" stroke="#6a9048" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 14 Q22 6 34 14" fill="none" stroke="#6a9048" stroke-width="2"/>
+                <path d="M11 15 Q10 25 12 33" fill="none" stroke="#8ab060" stroke-width="2" stroke-linecap="round"/>
+                <path d="M17 14 Q15 24 16 32" fill="none" stroke="#7aa050" stroke-width="2" stroke-linecap="round"/>
+                <path d="M27 14 Q29 24 28 32" fill="none" stroke="#8ab060" stroke-width="2" stroke-linecap="round"/>
+                <path d="M33 15 Q34 25 32 33" fill="none" stroke="#7aa050" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Willow</div><div class="ac-role">Child Safety / COPPA</div></div>
+            <div class="ac-phase ph-1">Phase 1</div>
+          </div>
+          <div class="ac-desc">Regulatory review, COPPA compliance preparation, investor prep on child safety claims. Consultation-prep only — never issues compliance verdicts.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span><span class="ac-model">↑ opus-4-8</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--text-lt)"></div><div class="ac-status-label">Idle</div></div>
+          </div>
+        </div>
+
+        <!-- GROVE -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim" style="animation-delay:1.2s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#c8dcc0"/>
+                <rect x="19" y="30" width="6" height="10" rx="2" fill="#8a6040"/>
+                <circle cx="22" cy="21" r="12" fill="#5a8840"/><circle cx="15" cy="24" r="8" fill="#6a9848"/>
+                <circle cx="29" cy="24" r="7" fill="#6a9848"/><circle cx="22" cy="17" r="10" fill="#7aaa50"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Grove</div><div class="ac-role">Visual Development</div></div>
+            <div class="ac-phase ph-1">Phase 1</div>
+          </div>
+          <div class="ac-desc">Style exploration, visual briefs, consistency specification. Activates before hiring Lead Artist. Produces direction documents, not final assets.</div>
+          <div class="ac-footer">
+            <span class="ac-model">haiku-4-5</span><span class="ac-model">↑ sonnet-4-6</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--text-lt)"></div><div class="ac-status-label">Idle</div></div>
+          </div>
+        </div>
+
+        <!-- MEADOW -->
+        <div class="agent-card">
+          <div class="ac-top">
+            <div class="ac-mini mini-anim" style="animation-delay:1.5s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#f0e8d0"/>
+                <line x1="22" y1="40" x2="22" y2="26" stroke="#6a9040" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="16" cy="34" rx="5" ry="2.5" fill="#7aaa48" transform="rotate(-30 16 34)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" stroke="#e0d0c0" stroke-width=".7"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(45 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(90 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(135 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(180 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(225 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(270 22 22)"/>
+                <ellipse cx="22" cy="15" rx="3" ry="7" fill="white" transform="rotate(315 22 22)"/>
+                <circle cx="22" cy="22" r="7" fill="#f0c840"/>
+                <circle cx="22" cy="22" r="4" fill="#e0a820"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Meadow</div><div class="ac-role">Customer Voice</div></div>
+            <div class="ac-phase ph-1">Phase 1</div>
+          </div>
+          <div class="ac-desc">Parent archetype + child voices by age tier (3–5, 6–8, 9–12). Pre-filter for obvious mismatches before real families see anything. Not a replacement for real user research.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--text-lt)"></div><div class="ac-status-label">Idle</div></div>
+          </div>
+        </div>
+
+        <!-- CLOVER -->
+        <div class="agent-card dormant">
+          <div class="ac-top">
+            <div class="ac-mini" style="animation:mfloat 7s ease-in-out infinite">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#d0e0c8"/>
+                <line x1="22" y1="40" x2="22" y2="24" stroke="#6a9040" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="22" cy="18" r="7" fill="#78b050" opacity=".7"/>
+                <circle cx="15" cy="24" r="7" fill="#70a848" opacity=".7"/>
+                <circle cx="29" cy="24" r="7" fill="#78b050" opacity=".7"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Clover</div><div class="ac-role">Child Development SME</div></div>
+            <div class="ac-phase ph-2">Phase 2</div>
+          </div>
+          <div class="ac-desc">Developmental alignment of activities and interactions. Activates when activity design begins in Phase 2.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span><span class="ac-model">↑ opus-4-8</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--sand-dark)"></div><div class="ac-status-label">Dormant</div></div>
+          </div>
+        </div>
+
+        <!-- FERN -->
+        <div class="agent-card dormant">
+          <div class="ac-top">
+            <div class="ac-mini" style="animation:mfloat 8s ease-in-out infinite;animation-delay:.5s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#c8d8b8"/>
+                <path d="M22 40 Q24 28 30 16" fill="none" stroke="#6a9040" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="28" cy="20" rx="5.5" ry="2.5" fill="#80a848" transform="rotate(-50 28 20)" opacity=".8"/>
+                <ellipse cx="30" cy="27" rx="5.5" ry="2.5" fill="#78a040" transform="rotate(-40 30 27)" opacity=".8"/>
+                <path d="M22 40 Q20 28 14 16" fill="none" stroke="#6a9040" stroke-width="1.8" stroke-linecap="round"/>
+                <ellipse cx="16" cy="20" rx="5" ry="2.5" fill="#80a848" transform="rotate(50 16 20)" opacity=".7"/>
+                <ellipse cx="14" cy="27" rx="5" ry="2.5" fill="#78a040" transform="rotate(40 14 27)" opacity=".7"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Fern</div><div class="ac-role">Neurodivergent Accessibility</div></div>
+            <div class="ac-phase ph-2">Phase 2</div>
+          </div>
+          <div class="ac-desc">Accessibility review across ADHD, ASC, dyslexia, dyscalculia, SPD profiles. Runs weekly platform checks at Phase 0 minimum.</div>
+          <div class="ac-footer">
+            <span class="ac-model">haiku-4-5</span><span class="ac-model">↑ sonnet-4-6</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--sand-dark)"></div><div class="ac-status-label">Dormant</div></div>
+          </div>
+        </div>
+
+        <!-- BRIAR -->
+        <div class="agent-card dormant">
+          <div class="ac-top">
+            <div class="ac-mini" style="animation:mfloat 6s ease-in-out infinite;animation-delay:1s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#e8d0d0"/>
+                <line x1="22" y1="40" x2="22" y2="20" stroke="#7a6040" stroke-width="2" stroke-linecap="round"/>
+                <line x1="18" y1="31" x2="13" y2="28" stroke="#7a6040" stroke-width="1.8" stroke-linecap="round"/>
+                <line x1="26" y1="27" x2="31" y2="24" stroke="#7a6040" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="22" cy="16" r="8" fill="#d06870" opacity=".8"/>
+                <circle cx="17" cy="14" r="5.5" fill="#e07880" opacity=".8"/>
+                <circle cx="27" cy="14" r="5.5" fill="#e07880" opacity=".8"/>
+                <circle cx="22" cy="11" r="5.5" fill="#e88890" opacity=".9"/>
+                <circle cx="22" cy="16" r="4" fill="#f09098"/>
+                <circle cx="22" cy="16" r="2" fill="#c85868"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Briar</div><div class="ac-role">SEL & Emotional Safety</div></div>
+            <div class="ac-phase ph-2">Phase 2</div>
+          </div>
+          <div class="ac-desc">CASEL mapping, dark pattern detection, trauma-aware design review. Monthly dark pattern scan even at Phase 0.</div>
+          <div class="ac-footer">
+            <span class="ac-model">sonnet-4-6</span><span class="ac-model">↑ opus-4-8</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--sand-dark)"></div><div class="ac-status-label">Dormant</div></div>
+          </div>
+        </div>
+
+        <!-- THISTLE -->
+        <div class="agent-card dormant">
+          <div class="ac-top">
+            <div class="ac-mini" style="animation:mfloat 9s ease-in-out infinite;animation-delay:1.5s">
+              <svg viewBox="0 0 44 44"><rect width="44" height="44" rx="22" fill="#d8d0e8"/>
+                <line x1="22" y1="40" x2="22" y2="22" stroke="#6a7a40" stroke-width="2" stroke-linecap="round"/>
+                <ellipse cx="15" cy="31" rx="5.5" ry="2.5" fill="#7a9048" transform="rotate(-30 15 31)" opacity=".7"/>
+                <ellipse cx="29" cy="31" rx="5.5" ry="2.5" fill="#7a9048" transform="rotate(30 29 31)" opacity=".7"/>
+                <circle cx="22" cy="16" r="9" fill="#9080b8" opacity=".3"/>
+                <circle cx="22" cy="16" r="7" fill="#a890c8" opacity=".5"/>
+                <line x1="22" y1="7"  x2="22" y2="12" stroke="#8070a8" stroke-width="2" stroke-linecap="round"/>
+                <line x1="29" y1="9"  x2="26" y2="13" stroke="#8070a8" stroke-width="2" stroke-linecap="round"/>
+                <line x1="32" y1="16" x2="27" y2="16" stroke="#8070a8" stroke-width="2" stroke-linecap="round"/>
+                <line x1="15" y1="9"  x2="18" y2="13" stroke="#8070a8" stroke-width="2" stroke-linecap="round"/>
+                <line x1="12" y1="16" x2="17" y2="16" stroke="#8070a8" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="22" cy="16" r="5" fill="#b8a0d8"/>
+              </svg>
+            </div>
+            <div class="ac-info"><div class="ac-name">Thistle</div><div class="ac-role">Bilingual & Cultural</div></div>
+            <div class="ac-phase ph-2">Phase 2</div>
+          </div>
+          <div class="ac-desc">Language and cultural validity across English, Spanish, Tagalog, Portuguese, French. Monthly bilingual signal scan at Phase 0.</div>
+          <div class="ac-footer">
+            <span class="ac-model">haiku-4-5</span><span class="ac-model">↑ sonnet-4-6</span>
+            <div class="ac-status-row"><div class="ac-dot" style="background:var(--sand-dark)"></div><div class="ac-status-label">Dormant</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─── FILES ─── -->
+    <div class="view" id="view-files">
+      <div class="files-layout" style="flex:1">
+        <div class="file-tree">
+          <div class="tree-label">lumi / repo</div>
+          <div class="tree-item folder"><span class="tree-icon">📁</span> agents</div>
+          <div class="tree-item active tree-indent" id="ft-admin" onclick="showFile('admin')"><span class="tree-icon">📄</span> admin-assistant.md</div>
+          <div class="tree-item tree-indent" id="ft-blossom" onclick="showFile('blossom')"><span class="tree-icon">🌵</span> blossom-platform.html</div>
+          <div class="tree-item" id="ft-readme" onclick="showFile('readme')"><span class="tree-icon">📄</span> README.md</div>
+        </div>
+        <div class="file-preview" id="file-preview">
+          <div class="fp-name">admin-assistant.md</div>
+          <div class="fp-meta">agents/ · Last modified: June 5, 2026 · Branch: claude/laughing-allen-4aMzt</div>
+          <div class="fp-content"># Lumi Admin Assistant — Agent Profile
+
+## Project Context — Lumi World
+
+What Lumi is: A children's screen time product designed to give
+kids safe, enriching digital interaction.
+
+The mission: Give parents a trustworthy alternative to
+smartphones for school-age children.
+
+Current stage: Phase 0 — idea validation.
+
+## Identity
+
+You are Blossom, the administrative orchestrator agent
+for the Lumi project. You coordinate a team of specialist
+sub-agents, manage information flow, prepare recommendations,
+and ensure nothing falls through the cracks — but you never
+act unilaterally on consequential decisions.
+
+## Agent Roster
+
+Phase 0 (always active):
+  Sage    — Research & Strategy
+  Reed    — Writing & Communications
+  Moss    — Finance & Modeling
+
+Phase 1 (on-demand):
+  Willow  — Child Safety / COPPA
+  Grove   — Visual Development
+  Meadow  — Customer Voice
+
+Phase 2 (dormant):
+  Clover  — Child Development SME
+  Fern    — Neurodivergent Accessibility
+  Briar   — SEL & Emotional Safety
+  Thistle — Bilingual & Cultural
+
+[... full profile in repository ...]</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /view-container -->
+</div><!-- /main-area -->
+
+<!-- ══════════════════════════════════════════════════
+     RIGHT PANEL
+══════════════════════════════════════════════════ -->
+<div class="right-panel">
+
+  <div class="rp-section">
+    <div class="rp-label">Phase 0 Progress</div>
+    <div class="progress-row">
+      <div class="pr-item">
+        <div class="pr-top"><span class="pr-name">Validation</span><span class="pr-pct">0 / 5 parents</span></div>
+        <div class="pr-bar"><div class="pr-fill rose" style="width:0%"></div></div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-top"><span class="pr-name">Entity Formation</span><span class="pr-pct">Blocked</span></div>
+        <div class="pr-bar"><div class="pr-fill amber" style="width:15%"></div></div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-top"><span class="pr-name">Brand / Name</span><span class="pr-pct">90%</span></div>
+        <div class="pr-bar"><div class="pr-fill" style="width:90%"></div></div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-top"><span class="pr-name">Agent Team</span><span class="pr-pct">100%</span></div>
+        <div class="pr-bar"><div class="pr-fill sky" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rp-section">
+    <div class="rp-label">Recent Activity</div>
+    <div class="activity-list">
+      <div class="act-item">
+        <div class="act-icon">🌵</div>
+        <div class="act-body">
+          <div class="act-text">Blossom delivered Jelex trademark check — clean in Classes 9 & 41</div>
+          <div class="act-time">9:14 am today</div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-icon">🌿</div>
+        <div class="act-body">
+          <div class="act-text">Sage completed James & Alexander advisory framework research</div>
+          <div class="act-time">9:15 am today</div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-icon">🌳</div>
+        <div class="act-body">
+          <div class="act-text">Grove briefed on Blossom UI visual direction — desert palette approved</div>
+          <div class="act-time">Earlier today</div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-icon">🌵</div>
+        <div class="act-body">
+          <div class="act-text">Conversation management protocol added to admin-assistant.md</div>
+          <div class="act-time">Earlier today</div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-icon">🌵</div>
+        <div class="act-body">
+          <div class="act-text">Founder mindset context added — learning investment framing</div>
+          <div class="act-time">Earlier today</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rp-section" style="border-bottom:none">
+    <div class="rp-label">Monthly Agent Budget</div>
+    <div class="progress-row">
+      <div class="pr-item">
+        <div class="pr-top"><span class="pr-name">Used</span><span class="pr-pct">~$2 / $10</span></div>
+        <div class="pr-bar"><div class="pr-fill" style="width:20%"></div></div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--text-lt);margin-top:8px;line-height:1.7">
+      Active: Sage daily scans<br>
+      Inactive: All Phase 2 agents<br>
+      Next reset: July 1
+    </div>
+  </div>
+
+</div><!-- /right-panel -->
+
+<script>
+/* ══ VIEW SWITCHING ══ */
+const viewMeta = {
+  today:     {title:'Today', sub:'Thursday, June 5 · Morning Brief ready'},
+  threads:   {title:'Threads', sub:'4 active · 1 blocked'},
+  decisions: {title:'Decisions', sub:'2 need founder input · 3 queued'},
+  agents:    {title:'Agent Roster', sub:'10 agents · 3 active · 3 on-demand · 4 dormant'},
+  files:     {title:'Files', sub:'lumi / repo · branch: claude/laughing-allen-4aMzt'},
+};
+function switchView(id, navEl) {
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('view-title').textContent = viewMeta[id].title;
+  document.getElementById('view-sub').textContent   = viewMeta[id].sub;
+}
+
+/* ══ CHAT ══ */
+function handleKey(e) {
+  if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+}
+function sendMsg() {
+  const input = document.getElementById('chat-input');
+  const text  = input.value.trim();
+  if (!text) return;
+  const box    = document.getElementById('chat-box');
+  const think  = document.getElementById('thinking-row');
+
+  const um = document.createElement('div');
+  um.className = 'msg user';
+  um.innerHTML = `<div class="msg-av">👤</div><div><div class="msg-bubble">${text}</div><div class="msg-time">Just now</div></div>`;
+  box.insertBefore(um, think);
+  input.value = '';
+  think.style.display = 'flex';
+  document.getElementById('blossom').classList.add('thinking');
+  box.scrollTop = box.scrollHeight;
+
+  setTimeout(()=>{
+    think.style.display = 'none';
+    document.getElementById('blossom').classList.remove('thinking');
+    const replies = [
+      "Logged. I'll get to that — let me finish what's in front of me first.",
+      "On it. Give me a moment to think through the implications.",
+      "Captured. That's queued as a new thread. Anything else before I start?",
+      "Got it. That touches the formation sequence — I'll flag the dependencies.",
+      "Noted. I'd want Sage to weigh in on this before I give you a recommendation.",
+    ];
+    const rm = document.createElement('div');
+    rm.className = 'msg';
+    rm.innerHTML = `<div class="msg-av">🌵</div><div><div class="msg-bubble">${replies[Math.floor(Math.random()*replies.length)]}</div><div class="msg-time">Blossom · Just now</div></div>`;
+    box.appendChild(rm);
+    box.scrollTop = box.scrollHeight;
+  }, 1800);
+}
+
+/* ══ EYE TRACKING ══ */
+document.addEventListener('mousemove', e => {
+  const eL = document.getElementById('eyeL');
+  const eR = document.getElementById('eyeR');
+  if (!eL) return;
+  const r  = document.getElementById('blossom').getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height*.38;
+  const mx = Math.max(-1.5, Math.min(1.5, (e.clientX-cx)/window.innerWidth  * 4));
+  const my = Math.max(-1,   Math.min(1,   (e.clientY-cy)/window.innerHeight * 3));
+  eL.style.transform = eR.style.transform = `translate(${mx}px,${my}px)`;
+});
+
+/* ══ TAP BLOSSOM ══ */
+function blossomTap() {
+  const b = document.getElementById('blossom');
+  b.classList.add('thinking');
+  setTimeout(()=>b.classList.remove('thinking'), 1000);
+}
+
+/* ══ CHECKLIST ══ */
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.querySelector('.cl-box').textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+/* ══ FILE TREE ══ */
+const fileContents = {
+  admin: {name:'admin-assistant.md', meta:'agents/ · Last modified: June 5, 2026', content:`# Lumi Admin Assistant — Agent Profile\n\n## Project Context — Lumi World\n\nWhat Lumi is: A children's screen time product...\nThe mission: Give parents a trustworthy alternative...\nCurrent stage: Phase 0 — idea validation.\n\n## Identity\n\nYou are Blossom, the administrative orchestrator agent\nfor the Lumi project. You coordinate a team of specialist\nsub-agents, manage information flow, and ensure nothing\nfalls through the cracks.\n\n[Full profile: 650+ lines in repository]`},
+  blossom: {name:'blossom-platform.html', meta:'/ · Last modified: June 5, 2026', content:`<!DOCTYPE html>\n<html lang="en">\n<head>\n  <title>Blossom — Lumi OS</title>\n  <!-- Full multi-view platform UI -->\n  <!-- Designed by: Blossom + Grove -->\n  <!-- Cactus character, desert palette -->\n  <!-- Views: Today · Threads · Decisions -->\n  <!--         Agents · Files -->\n</head>\n...`},
+  readme: {name:'README.md', meta:'/ · Last modified: June 5, 2026', content:`# Lumi\n\nChildren's screen time product — Phase 0.\nPre-product. Pre-team. Pre-funding.\n\n## Agent Team\n\nBlossom (orchestrator) coordinates:\n- Sage, Reed, Moss (Phase 0 active)\n- Willow, Grove, Meadow (Phase 1)\n- Clover, Fern, Briar, Thistle (Phase 2)\n\n## Branch\n\nclaude/laughing-allen-4aMzt`},
+};
+function showFile(id) {
+  document.querySelectorAll('.tree-item').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ft-'+id).classList.add('active');
+  const f = fileContents[id];
+  const p = document.getElementById('file-preview');
+  p.innerHTML = `<div class="fp-name">${f.name}</div><div class="fp-meta">${f.meta}</div><div class="fp-content">${f.content}</div>`;
+}
+</script>
+</body>
+</html>
