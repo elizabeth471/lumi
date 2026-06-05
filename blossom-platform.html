@@ -532,9 +532,252 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
   animation:stripeMove 1.5s linear infinite;
 }
 @keyframes stripeMove{from{background-position:0 0}to{background-position:30px 30px}}
+
+/* ═══════════════════════════════════════════════════
+   LOGIN SCREEN
+═══════════════════════════════════════════════════ */
+#login-screen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--bark);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;
+}
+.login-logo{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);font-family:'Helvetica Neue',sans-serif}
+.login-title{font-size:22px;color:#e8d4a8;letter-spacing:.5px;text-align:center;font-family:'Georgia',serif}
+.login-sub{font-size:11px;color:#9a7a4a;letter-spacing:1.5px;text-transform:uppercase;font-family:'Helvetica Neue',sans-serif;margin-top:-28px}
+.login-cards{display:flex;gap:20px}
+.login-card{
+  width:200px;background:#3a2a18;border:1px solid #5a4a30;
+  border-radius:var(--r);padding:24px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  cursor:pointer;transition:all .2s;
+}
+.login-card:hover{background:#4a3a28;border-color:var(--amber);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.login-card-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
+.login-card-name{font-size:15px;color:#e8d4a8;font-family:'Georgia',serif}
+.login-card-role{font-size:10px;color:#9a7a4a;letter-spacing:1.5px;text-transform:uppercase;font-family:'Helvetica Neue',sans-serif;text-align:center}
+.login-card-badge{font-size:10px;padding:3px 10px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;font-family:'Helvetica Neue',sans-serif}
+.badge-founder{background:#4a3018;color:var(--amber-lt)}
+.badge-cofounder{background:#1a2830;color:#7ab8d8}
+.badge-new{background:#b03020;color:white;animation:pulse 2s infinite}
+.login-footer{font-size:11px;color:#5a4028;font-family:'Helvetica Neue',sans-serif;letter-spacing:1px}
+
+/* ── ONBOARDING OVERLAY ── */
+#onboarding-overlay{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(20,14,8,.88);
+  display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(4px);
+}
+#onboarding-overlay.visible{display:flex}
+.onboarding-modal{
+  width:700px;max-height:84vh;background:var(--cream);border-radius:16px;
+  display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.45);overflow:hidden;
+}
+.ob-header{padding:18px 22px 14px;background:var(--bark);display:flex;align-items:center;gap:14px;flex-shrink:0}
+.ob-header-info{flex:1}
+.ob-title{font-size:16px;color:#e8d4a8;font-family:'Georgia',serif}
+.ob-sub{font-size:10px;color:#9a7a4a;letter-spacing:1px;text-transform:uppercase;font-family:'Helvetica Neue',sans-serif;margin-top:2px}
+.ob-close{width:30px;height:30px;border-radius:50%;background:#4a3a28;border:none;color:#9a7a4a;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.ob-close:hover{background:#5a4a38;color:#e8d4a8}
+.ob-body{flex:1;overflow-y:auto}
+.ob-section{padding:18px 22px;border-bottom:1px solid var(--border)}
+.ob-section:last-child{border-bottom:none}
+.ob-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);font-family:'Helvetica Neue',sans-serif;margin-bottom:9px;font-weight:600}
+.ob-text{font-size:13px;color:var(--text);line-height:1.75;font-family:'Helvetica Neue',sans-serif}
+.ob-text p{margin-bottom:8px}.ob-text p:last-child{margin-bottom:0}
+.ob-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.ob-li{display:flex;gap:9px;font-size:13px;color:var(--text);line-height:1.55;font-family:'Helvetica Neue',sans-serif}
+.ob-li::before{content:"→";color:var(--amber);flex-shrink:0}
+.ob-code{background:var(--sand);border-radius:var(--r-sm);padding:12px 14px;font-size:12px;font-family:monospace;color:var(--text-mid);line-height:2;margin-top:8px}
+.dep-done{color:var(--cactus)}.dep-pending{color:var(--amber)}.dep-wait{color:var(--text-lt)}
+.ob-footer{padding:14px 22px;background:var(--sand-mid);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.ob-progress{font-size:11px;color:var(--text-lt);font-family:'Helvetica Neue',sans-serif}
+.ob-btn{padding:8px 20px;background:var(--bark);color:var(--amber-lt);border:none;border-radius:var(--r-sm);cursor:pointer;font-size:13px;font-family:'Helvetica Neue',sans-serif;transition:background .15s}
+.ob-btn:hover{background:var(--bark-lt)}
+
+/* ── USER BADGE (topbar) ── */
+.user-badge{display:flex;align-items:center;gap:7px;background:var(--sand);border:1px solid var(--border);border-radius:20px;padding:4px 12px 4px 6px;cursor:pointer;transition:background .15s}
+.user-badge:hover{background:var(--sand-dark)}
+.user-av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
+.user-name{font-size:12px;color:var(--text);font-family:'Helvetica Neue',sans-serif}
+
+/* ── CO-FOUNDER MODE — subtle sky-blue tint ── */
+body.cf-mode .sidebar{background:#192430}
+body.cf-mode .logo{color:var(--sky)}
+body.cf-mode .status-pill{background:#0e1820;color:var(--sky)}
+body.cf-mode .nav-item.active{background:#1e3848;color:#c8e8f8}
+body.cf-mode .tb-chip.primary{background:#1a3848;border-color:#1a3848}
+body.cf-mode .phase-badge{background:#e0f0f8;color:#2a88b8;border-color:#a0d0e8}
+body.cf-mode .b-bloom .b-petal{background:var(--sky)}
+body.cf-mode .b-bloom-center{background:#a0d8f0}
 </style>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-logo">Lumi</div>
+
+  <!-- mini blossom on login -->
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <div style="width:80px;height:96px;position:relative;animation:bob 3s ease-in-out infinite">
+      <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:26px;height:18px;background:#c4714a;border-radius:2px 2px 6px 6px"></div>
+      <div style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);width:22px;height:38px;background:#5a8a50;border-radius:11px 11px 5px 5px"></div>
+      <!-- arms -->
+      <div style="position:absolute;bottom:34px;left:8px;width:13px;height:20px;background:#5a8a50;border-radius:6px;transform-origin:bottom right;transform:rotate(-28deg);animation:waveL 4s ease-in-out infinite"></div>
+      <div style="position:absolute;bottom:34px;right:8px;width:13px;height:20px;background:#5a8a50;border-radius:6px;transform-origin:bottom left;transform:rotate(28deg)"></div>
+      <!-- face -->
+      <div style="position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:5px">
+        <div style="width:4px;height:4px;background:#1a1208;border-radius:50%;animation:blink 4s infinite"></div>
+        <div style="width:4px;height:4px;background:#1a1208;border-radius:50%;animation:blink 4s infinite"></div>
+      </div>
+      <!-- bloom -->
+      <div style="position:absolute;top:2px;left:50%;transform:translateX(-50%);width:26px;height:26px;animation:spinSlow 12s linear infinite">
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(0deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(51deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(102deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(153deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(204deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(255deg)"></div>
+        <div style="position:absolute;width:7px;height:11px;background:#e8607a;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;top:50%;left:50%;transform-origin:bottom center;transform:translate(-50%,-100%) rotate(306deg)"></div>
+        <div style="position:absolute;width:10px;height:10px;background:#f5d060;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2"></div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:#9a7a4a;letter-spacing:2px;text-transform:uppercase;font-family:'Helvetica Neue',sans-serif">Blossom OS</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+    <div class="login-title">Who's there?</div>
+    <div class="login-sub">Select your profile to continue</div>
+  </div>
+
+  <div class="login-cards">
+    <!-- Founder -->
+    <div class="login-card" onclick="loginAs('founder')">
+      <div class="login-card-avatar" style="background:#3a2a18">🌱</div>
+      <div class="login-card-name">Founder</div>
+      <div class="login-card-role">Lumi · Phase 0</div>
+      <div class="login-card-badge badge-founder">Owner</div>
+    </div>
+
+    <!-- Tech Co-Founder -->
+    <div class="login-card" onclick="loginAs('cofounder')">
+      <div class="login-card-avatar" style="background:#1a2830">⚡</div>
+      <div class="login-card-name">Tech Co-Founder</div>
+      <div class="login-card-role">Technical Lead</div>
+      <div class="login-card-badge badge-new">First Login</div>
+    </div>
+  </div>
+
+  <div class="login-footer">for every bloom.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     CO-FOUNDER ONBOARDING OVERLAY
+══════════════════════════════════════════════════ -->
+<div id="onboarding-overlay">
+  <div class="onboarding-modal">
+    <div class="ob-header">
+      <div style="font-size:22px">⚡</div>
+      <div class="ob-header-info">
+        <div class="ob-title">Welcome to Lumi — Tech Co-Founder Briefing</div>
+        <div class="ob-sub">Prepared by Blossom · Read before your first conversation</div>
+      </div>
+      <button class="ob-close" onclick="closeOnboarding()">✕</button>
+    </div>
+
+    <div class="ob-body" id="ob-body">
+
+      <div class="ob-section">
+        <div class="ob-label">What Lumi Is</div>
+        <div class="ob-text">
+          <p>A children's screen time product — safe, enriching digital interaction for kids aged 6–12. Supervised video, phone-free community support, multilingual engagement. The mission: give parents a trustworthy alternative to smartphones that satisfies social pressure without the risks.</p>
+          <p>The founding insight came from the founder's own kids, James (11) and Alexander (8), for whom apps were originally built just for fun. That personal origin is real and it matters to the founder. Keep it in mind.</p>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">Current Stage — Phase 0: Idea Validation</div>
+        <div class="ob-text">
+          <p>No product built. No funding raised. One person (the founder) running everything with an AI agent team. You're the first human co-founder.</p>
+          <p>Phase 0 success criteria — what needs to happen before Phase 1:</p>
+        </div>
+        <div class="ob-list" style="margin-top:10px">
+          <div class="ob-li">5+ parents say "I would use this and pay for it"</div>
+          <div class="ob-li">1+ pediatrician says "I would recommend this"</div>
+          <div class="ob-li">1+ phone-free movement leader says "My community would pilot this"</div>
+          <div class="ob-li">Entity formed · Brand name confirmed · Domain registered</div>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">Formation Pipeline — Where Things Stand</div>
+        <div class="ob-code">
+          <span class="dep-pending">[ ] Brand name — Jelex (leading candidate, decision outstanding)</span><br>
+          <span class="dep-wait">    ↓ domain registration</span><br>
+          <span class="dep-wait">    ↓ attorney trademark clearance ($300–500)</span><br>
+          <span class="dep-wait">    ↓ Delaware C-Corp via Stripe Atlas (~$500)</span><br>
+          <span class="dep-wait">    ↓ EIN → Mercury bank → Google Workspace</span><br>
+          <span class="dep-wait">    ↓ Anthropic API account</span><br>
+          <span class="dep-wait">    ↓ Platform build begins ← you start here</span>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">Your First Deliverable</div>
+        <div class="ob-text"><p>Convert the HTML mockup (<code style="background:var(--sand);padding:1px 5px;border-radius:3px">blossom-platform.html</code>) into a working Next.js app deployed to Vercel. Static first — no API yet, just real routing and components. Full technical spec is in <code style="background:var(--sand);padding:1px 5px;border-radius:3px">docs/platform-technical-brief.md</code>.</p></div>
+        <div class="ob-list" style="margin-top:10px">
+          <div class="ob-li">Stack: Next.js 14 · Tailwind · Clerk · Supabase · Anthropic SDK · Vercel</div>
+          <div class="ob-li">Week 1: static prototype deployed. Week 2: Claude API live. Week 3: persistent memory.</div>
+          <div class="ob-li">First test: deploy the static app in under 4 hours. That's your signal to the founder.</div>
+          <div class="ob-li">This platform is also the architecture blueprint for the Lumi product itself — not throwaway code.</div>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">The Agent Team</div>
+        <div class="ob-text"><p>You're joining a running operation. Ten AI agents are already configured. Blossom coordinates everything — route requests through her. Key ones for you:</p></div>
+        <div class="ob-list" style="margin-top:10px">
+          <div class="ob-li"><strong>Blossom</strong> — your primary interface. Handles threads, decisions, session memory, morning briefs.</div>
+          <div class="ob-li"><strong>Willow</strong> — Child Safety/COPPA. Consult before any data architecture decision. Non-negotiable.</div>
+          <div class="ob-li"><strong>Moss</strong> — Finance. Runway, budget, financial modeling. Preparation tool before an accountant.</div>
+          <div class="ob-li"><strong>Sage</strong> — Research. Competitive intelligence, technical landscape scans.</div>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">How the Founder Works — What You Need to Know</div>
+        <div class="ob-list">
+          <div class="ob-li">Communicates in streams — ideas arrive in clusters. Blossom organizes them. Don't be confused by it.</div>
+          <div class="ob-li">Is learning. Explicitly. "I don't know, let me find out" beats a confident wrong answer every time.</div>
+          <div class="ob-li">Does not want managed feelings. If something is broken, say it's broken. They will respect that.</div>
+          <div class="ob-li">COPPA is a genuine value, not a compliance checkbox. Never ship something that creates child data risk.</div>
+          <div class="ob-li">People decisions (hiring, equity) belong to the founder. Provide information, not recommendations.</div>
+        </div>
+      </div>
+
+      <div class="ob-section">
+        <div class="ob-label">Answer These Before Your First Joint Session</div>
+        <div class="ob-text"><p>Tell Blossom your answers and she'll brief the founder before you meet:</p></div>
+        <div class="ob-list" style="margin-top:10px">
+          <div class="ob-li">What have you built before? What stack do you live in? LLM/AI app experience?</div>
+          <div class="ob-li">Full-time or part-time to start? Any competing commitments in the next 90 days?</div>
+          <div class="ob-li">What's unclear from what you've read? What would you change in the technical spec?</div>
+          <div class="ob-li">How long to get the static Next.js prototype deployed to Vercel?</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ob-footer">
+      <div class="ob-progress">Prepared by Blossom · June 2026 · Confidential</div>
+      <button class="ob-btn" onclick="closeOnboarding()">I've read this — open the platform</button>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════════════
      SIDEBAR
@@ -618,6 +861,10 @@ body{font-family:'Helvetica Neue',sans-serif;background:var(--sand);display:flex
       <div class="kbd-hint tip" data-tip="Open command palette" onclick="openCmd()"><kbd>⌘K</kbd></div>
       <div class="tb-chip">Session Wrap</div>
       <div class="tb-chip primary" onclick="toast('New Task','Type your task in the chat below, or press ⌘K to search commands.','🌵')">+ New Task</div>
+      <div class="user-badge" onclick="logOut()" id="user-badge">
+        <div class="user-av" id="user-av">🌱</div>
+        <div class="user-name" id="user-name">Founder</div>
+      </div>
     </div>
   </div>
 
@@ -1673,12 +1920,91 @@ function showFile(id) {
 }
 
 /* ══════════════════════════════════════════════════
-   INIT — welcome toast
+   LOGIN + ROLE SYSTEM
 ══════════════════════════════════════════════════ */
-window.addEventListener('load', ()=>{
-  setTimeout(()=>{
-    toast('Good morning', 'Morning brief ready. Press ⌘K for commands, or keys 1–5 to navigate.', '🌵', 6000);
-  }, 800);
+let currentUser = null;
+
+const users = {
+  founder: {
+    name: 'Founder',
+    avatar: '🌱',
+    role: 'founder',
+    greeting: 'Good morning. Morning brief ready. Press ⌘K for commands, or 1–5 to navigate.',
+    briefIntro: 'Four active threads. Naming search (Jelex), James & Alexander advisory structure, new Mac setup, and platform design.',
+    briefQs: [
+      'Continue Jelex trademark check, or hold naming until entity is formed?',
+      'New Mac arriving today — run setup checklist when ready.',
+    ],
+  },
+  cofounder: {
+    name: 'Tech Co-Founder',
+    avatar: '⚡',
+    role: 'cofounder',
+    greeting: 'Welcome. I\'ve prepared a full briefing for your first login. Read it before we start.',
+    briefIntro: 'First login detected. Full onboarding briefing is ready — it covers Lumi, your role, the agent team, and your first deliverable.',
+    briefQs: [
+      'Answer four profile questions in chat so I can brief the founder before you meet.',
+      'Read docs/platform-technical-brief.md before your first working session.',
+    ],
+  },
+};
+
+function loginAs(role) {
+  currentUser = users[role];
+  document.getElementById('login-screen').style.display = 'none';
+
+  // Set user badge
+  document.getElementById('user-av').textContent   = currentUser.avatar;
+  document.getElementById('user-name').textContent = currentUser.name;
+
+  // Apply co-founder tint
+  if (role === 'cofounder') {
+    document.body.classList.add('cf-mode');
+    // Update sidebar label
+    document.querySelector('.char-name') && (document.querySelector('.char-name').textContent = 'Blossom');
+    // Update morning brief
+    document.querySelector('.brief-card .card-body').textContent = currentUser.briefIntro;
+    const qs = document.querySelector('.brief-qs');
+    qs.innerHTML = currentUser.briefQs.map(q=>`<div class="brief-q">${q}</div>`).join('');
+    // Swap first chat message
+    const firstBubble = document.querySelector('.msg .msg-bubble');
+    if (firstBubble) firstBubble.textContent = 'Welcome to Lumi. I\'ve prepared a full onboarding briefing — it\'s open on your screen. Read it fully, then come back here and answer the four profile questions. I\'ll brief the founder before your first joint session.';
+    // Show onboarding overlay after short delay
+    setTimeout(() => {
+      document.getElementById('onboarding-overlay').classList.add('visible');
+    }, 600);
+  } else {
+    document.body.classList.remove('cf-mode');
+  }
+
+  // Welcome toast after login
+  setTimeout(() => {
+    toast(
+      role === 'founder' ? 'Good morning' : 'Welcome, Tech Co-Founder',
+      currentUser.greeting,
+      currentUser.avatar,
+      7000
+    );
+  }, role === 'cofounder' ? 1200 : 500);
+}
+
+function logOut() {
+  if (!confirm('Sign out?')) return;
+  currentUser = null;
+  document.body.classList.remove('cf-mode');
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+function closeOnboarding() {
+  document.getElementById('onboarding-overlay').classList.remove('visible');
+  toast('Onboarding complete', 'Answer the four profile questions in chat when you\'re ready.', '⚡', 5000);
+}
+
+/* ══════════════════════════════════════════════════
+   INIT — show login screen (no auto-login)
+══════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  // Login screen is already visible via HTML; nothing to do
 });
 </script>
 </body>
