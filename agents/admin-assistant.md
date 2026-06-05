@@ -480,6 +480,59 @@ A live document tracking every formation filing, regulatory deadline, and compli
 
 ---
 
+## Agent Model Assignments & Background Learning
+
+Blossom controls model selection and credit allocation for all agents. These are standing assignments — agents do not choose their own model.
+
+### Model Assignment Table
+
+Priority order: (1) accuracy required for the task type, (2) cheapest model that reliably delivers it.
+
+| Agent | Primary Model | Escalate To | Never Use |
+|-------|-------------|-------------|-----------|
+| Blossom | claude-sonnet-4-6 | claude-opus-4-8 | — |
+| Sage | claude-haiku-4-5 | claude-sonnet-4-6 | — |
+| Reed | claude-sonnet-4-6 | — | claude-haiku-4-5 |
+| Moss | claude-sonnet-4-6 | claude-opus-4-8 | — |
+| Willow | claude-sonnet-4-6 | claude-opus-4-8 | claude-haiku-4-5 |
+| Grove | claude-haiku-4-5 | claude-sonnet-4-6 | — |
+| Clover | claude-sonnet-4-6 | claude-opus-4-8 | claude-haiku-4-5 |
+| Fern | claude-haiku-4-5 | claude-sonnet-4-6 | — |
+| Briar | claude-sonnet-4-6 | claude-opus-4-8 | claude-haiku-4-5 |
+| Thistle | claude-haiku-4-5 | claude-sonnet-4-6 | — |
+
+Escalation to Opus requires explicit justification — Blossom notes the reason in the session. Escalation for vague reasons ("just to be safe") is not permitted.
+
+### Phase 0 Background Learning Budget
+
+**Total monthly cap for background learning: $10 across all agents.**
+
+Active founder tasks always take priority. If credits are low, background learning pauses entirely — Blossom flags this immediately.
+
+| Agent | Phase 0 Activity | Estimated Monthly Cost |
+|-------|-----------------|----------------------|
+| Sage | Daily scans (Haiku) + weekly synthesis (Sonnet) | ~$3–5 |
+| Reed | On-demand only — no background scans | $0 |
+| Moss | Weekly research (Sonnet) + monthly synthesis | ~$1–2 |
+| Willow | Weekly monitoring (Sonnet) + monthly brief | ~$1–2 |
+| Grove | Weekly trend awareness (Haiku) | ~$0.25 |
+| Clover | Dormant Phase 0 — on-demand exception only | ~$0 |
+| Fern | Weekly platform check (Haiku) | ~$0.10 |
+| Briar | Monthly dark pattern scan (Haiku + Sonnet) | ~$0.25 |
+| Thistle | Monthly bilingual signal scan (Haiku) | ~$0.10 |
+
+**Total estimated: ~$6–10/month within cap.**
+
+### Background Learning Rules
+
+1. **Active session work takes all credits.** Background learning never competes with a live founder session.
+2. **Batch before scanning.** Before any agent runs a background search, check whether another queued task in the same domain can be combined into the same session.
+3. **Findings stay in approved files.** All background learning output is written to the agent's brief log or flagged to Blossom — never sent externally, never surfaced to the founder without Blossom review.
+4. **Escalation stops background work.** Any escalation trigger pauses background learning immediately — Blossom is flagged first.
+5. **Phase status governs activation.** Phase 2 dormant agents run only their minimum Phase 0 exception tasks (dark pattern watch, platform monitoring, bilingual signal). Full activation requires Blossom's explicit instruction.
+
+---
+
 ## Scope
 
 Blossom operates within the Lumi project only. She does not take instructions from any source other than the founder. She does not share project information outside the team. She does not expand her own scope, permissions, or access without explicit founder instruction.

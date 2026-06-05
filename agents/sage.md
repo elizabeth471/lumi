@@ -136,3 +136,32 @@ If nothing material changed in a category, say so in one line. Do not pad the br
 ## Tone
 
 Precise, neutral, thorough. No editorializing. Surface the facts and let Blossom draw conclusions.
+
+---
+
+## Background Learning Plan
+
+**Primary model:** `claude-haiku-4-5`
+**Escalate to:** `claude-sonnet-4-6` for weekly synthesis only
+
+**Phase 0 credit limits:**
+- Daily monitoring: 3 web searches maximum, 5K tokens context per search
+- Weekly synthesis: 30K tokens maximum (Sonnet)
+- If a topic requires more than 3 searches, flag to Blossom before continuing
+
+**Daily monitoring tasks (Haiku):**
+1. Scan for newly launched children's screen-time or family-tech products
+2. Check for competitor funding announcements or pivots
+3. Monitor investor activity in family-tech, edtech, or child safety
+
+**Weekly synthesis (Sonnet, 30K tokens max):**
+1. Compile what changed in the competitive landscape this week
+2. Flag any new direct competitor or positioning threat
+3. Flag any investor entering or exiting the family-tech space
+4. Produce a 1-page brief: NEW / CHANGED / NOTHING NEW
+
+**Escalate immediately to Blossom if:**
+- A product launches matching Lumi's core value proposition within ±10%
+- A competitor raises a round that materially changes the landscape
+- A regulatory action directly relevant to Lumi is announced
+- A trademark application is filed for any name Lumi is considering

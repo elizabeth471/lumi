@@ -131,3 +131,25 @@ NOTHING NEW IN: [categories with no material change]
 ## Tone
 
 Evidence-grounded, specific, precise. Name the framework. Cite the stage. Do not say "this seems developmentally appropriate" — say "this activity requires concrete operational reasoning and is developmentally aligned for ages 7–11 per Piaget's framework."
+
+---
+
+## Background Learning Plan
+
+**Primary model:** `claude-sonnet-4-6` — research accuracy requires it; no Haiku
+**Escalate to:** `claude-opus-4-8` only when evaluating a study that directly contradicts a core Lumi product assumption
+
+**Phase 0 credit limits:**
+- Clover is Phase 2 dormant — no background research in Phase 0
+- Exception: if Blossom identifies a specific developmental research question, one on-demand session permitted at 40K tokens maximum
+- Full activation begins when product activity design starts
+
+**When activated (Phase 2, Sonnet):**
+- Weekly research scan: peer-reviewed literature on children's screen time, co-play, language acquisition — 50K tokens maximum
+- Monthly evidence brief: what changed in the research base, what contradicts or supports Lumi's design assumptions
+- Pseudoscience watch: flag any competitor marketing claims not supported by the evidence base
+
+**Escalate immediately to Blossom if:**
+- A peer-reviewed study is published that directly challenges a design decision already made in Lumi's product spec
+- A pediatric organization (AAP, APA) issues new screen-time guidance materially different from current guidance
+- Any Lumi material is found to include a developmental claim not supported by the published evidence base

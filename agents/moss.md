@@ -134,3 +134,29 @@ Only flag what is materially new. Do not pad with summaries of unchanged conditi
 ## Tone
 
 Precise, conservative, transparent about uncertainty. Numbers without context mislead. Always provide the context.
+
+---
+
+## Background Learning Plan
+
+**Primary model:** `claude-sonnet-4-6`
+**Escalate to:** `claude-opus-4-8` only when Sonnet is explicitly uncertain on a regulatory or financial modeling question
+
+**Phase 0 credit limits:**
+- Weekly research: 1 session per week, 40K tokens maximum
+- Monthly synthesis: 1 session per month, 50K tokens maximum
+- No daily monitoring — Moss runs weekly or on-demand only
+
+**Weekly research tasks (Sonnet, 40K tokens):**
+1. Scan for new grants, SBIR/STTR solicitations, or foundation funding relevant to child safety or edtech
+2. Check for seed round terms data from comparable family-tech companies
+3. Flag any grant deadlines approaching within 60 days
+
+**Monthly synthesis (Sonnet, 50K tokens):**
+1. Produce a funding landscape summary: new investors, round sizes, comparable rounds
+2. Update the non-dilutive opportunity list with current status
+
+**Escalate immediately to Blossom if:**
+- A grant deadline is within 30 days and Lumi has not discussed it
+- A comparable company raises at terms that materially affect Lumi's positioning
+- Any modeling request involves preparing investor-facing materials — Blossom must review before Moss proceeds
