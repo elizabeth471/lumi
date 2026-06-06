@@ -28,22 +28,6 @@ const SEED: Msg[] = [
   },
 ];
 
-const CONSULTS = [
-  { name: "Sage", msg: "Let me run a quick scan on that." },
-  { name: "Reed", msg: "I can draft that for you." },
-  { name: "Moss", msg: "Checking the numbers on that." },
-];
-
-const REPLIES = [
-  "Logged. I'll get to that — let me finish what's in front of me first.",
-  "On it. Give me a moment to think through the implications.",
-  "Captured. That's queued as a new thread. Anything else before I start?",
-  "Got it. That touches the formation sequence — I'll flag the dependencies.",
-  "Noted. I'd want Sage to weigh in on this before I give you a recommendation.",
-  "That's a good one to sit with. I've added it to the open questions log.",
-  "Understood. I'll surface this at the next decision point.",
-];
-
 const CHECKLIST_SEED = [
   { label: "Stakeholder materials package", done: true },
   { label: "Agent team configured", done: true },
@@ -57,7 +41,7 @@ const CHECKLIST_SEED = [
 
 export default function TodayPage() {
   const router = useRouter();
-  const { user, toast, setThinking, consulting, setConsulting } = usePlatform();
+  const { user, toast, setThinking, consulting } = usePlatform();
   const [messages, setMessages] = useState<Msg[]>(SEED);
   const [thinkingLabel, setThinkingLabel] = useState<string | null>(null);
   const [input, setInput] = useState("");
@@ -73,36 +57,63 @@ export default function TodayPage() {
     });
   };
 
-  const send = (raw?: string) => {
+  const send = async (raw?: string) => {
     const text = (raw ?? input).trim();
     if (!text) return;
     const um: Msg = { id: ++nextId.current, role: "user", text, time: "Just now" };
+    // Build the API history from the conversation so far + this new turn.
+    const history = [...messages, um]
+      .map((m) => ({ role: m.role === "user" ? "user" : "assistant", content: m.text }));
     setMessages((m) => [...m, um]);
     setInput("");
     setThinking(true);
+    setThinkingLabel("Blossom · thinking…");
     scroll();
 
-    let label = "Blossom · thinking…";
-    if (Math.random() > 0.5) {
-      const c = CONSULTS[Math.floor(Math.random() * CONSULTS.length)];
-      setConsulting({ visible: true, text: `Consulting ${c.name} — ${c.msg}` });
-      label = `Blossom · consulting ${c.name}…`;
-    }
-    setThinkingLabel(label);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      });
+      if (!res.ok || !res.body) {
+        const errText = await res.text().catch(() => "");
+        throw new Error(errText || `request failed (${res.status})`);
+      }
 
-    setTimeout(() => {
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      const replyId = ++nextId.current;
+      let acc = "";
+      let started = false;
+
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        if (!started) {
+          started = true;
+          setThinking(false);
+          setThinkingLabel(null);
+          setMessages((m) => [
+            ...m,
+            { id: replyId, role: "blossom", text: acc, time: "Blossom · Just now" },
+          ]);
+        } else {
+          setMessages((m) => m.map((msg) => (msg.id === replyId ? { ...msg, text: acc } : msg)));
+        }
+        scroll();
+      }
+    } catch (err) {
       setThinking(false);
-      setConsulting({ visible: false, text: "" });
       setThinkingLabel(null);
-      const rm: Msg = {
-        id: ++nextId.current,
-        role: "blossom",
-        text: REPLIES[Math.floor(Math.random() * REPLIES.length)],
-        time: "Blossom · Just now",
-      };
-      setMessages((m) => [...m, rm]);
+      const msg = err instanceof Error ? err.message : "something went wrong";
+      setMessages((m) => [
+        ...m,
+        { id: ++nextId.current, role: "blossom", text: `I couldn't reach my reasoning engine — ${msg}`, time: "Blossom · Just now" },
+      ]);
       scroll();
-    }, 1800);
+    }
   };
 
   const onKey = (e: React.KeyboardEvent) => {
