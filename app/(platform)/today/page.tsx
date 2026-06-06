@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import View from "@/components/view";
+import TeamBriefing from "@/components/team-briefing";
 import { usePlatform } from "@/components/platform-provider";
 
 interface Msg {
@@ -121,6 +122,7 @@ export default function TodayPage() {
 
   return (
     <View>
+      <TeamBriefing />
       <div className="today-layout" style={{ flex: 1 }}>
         {/* CHAT COL */}
         <div className="chat-col">
