@@ -58,22 +58,58 @@ function Group({ label, agents }: { label: string; agents: Agent[] }) {
   );
 }
 
+const TLDR = [
+  "Blossom orchestrates a 10-agent team and is your single point of contact — she reports to you (Ian), who has final say on everything.",
+  "Three agents are active now (Sage · research, Reed · writing, Moss · finance); three are on-demand for Phase 1; four stay dormant until Phase 2.",
+  "She prepares, drafts, and coordinates — but is barred from money, legal, people, and external actions, and can be confidently wrong, so keep real oversight on anything consequential.",
+];
+
+type Mode = "tldr" | "full" | "hidden";
+
 export default function TeamBriefing() {
-  const [open, setOpen] = useState(true);
+  const [mode, setMode] = useState<Mode>("tldr");
+
+  const tab = (m: Mode, label: string) => (
+    <button
+      onClick={() => setMode(m)}
+      style={{
+        background: mode === m ? "var(--bark)" : "none",
+        color: mode === m ? "var(--amber-lt)" : "var(--text-mid)",
+        border: "1px solid var(--border)",
+        borderColor: mode === m ? "var(--bark)" : "var(--border)",
+        borderRadius: 6,
+        padding: "3px 10px",
+        fontSize: 11,
+        cursor: "pointer",
+        fontFamily: "inherit",
+      }}
+    >
+      {label}
+    </button>
+  );
 
   return (
     <div className="brief-card" style={{ background: "var(--white)", borderColor: "var(--border)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
         <div className="card-label" style={{ marginBottom: 0 }}>Blossom &amp; Team — Founder Briefing</div>
-        <button
-          onClick={() => setOpen((o) => !o)}
-          style={{ background: "none", border: "1px solid var(--border)", borderRadius: 6, padding: "3px 10px", fontSize: 11, color: "var(--text-mid)", cursor: "pointer", fontFamily: "inherit" }}
-        >
-          {open ? "Hide" : "Show"}
-        </button>
+        <div style={{ display: "flex", gap: 6 }}>
+          {tab("tldr", "TL;DR")}
+          {tab("full", "Full")}
+          {tab("hidden", "Hide")}
+        </div>
       </div>
 
-      {open && (
+      {mode === "tldr" && (
+        <div className="brief-qs" style={{ marginTop: 12 }}>
+          {TLDR.map((p, i) => (
+            <div className="brief-q" key={i} style={{ color: "var(--text)" }}>
+              {p}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {mode === "full" && (
         <div style={{ marginTop: 12 }}>
           {/* BLOSSOM */}
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 14 }}>

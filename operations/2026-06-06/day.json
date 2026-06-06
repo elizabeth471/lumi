@@ -1,0 +1,56 @@
+{
+  "date": "2026-06-06",
+  "phase": 0,
+  "tldr": [
+    "Blossom OS went from a static HTML mockup to a real Next.js app running locally with all 5 views, plus a founder team-briefing card.",
+    "Blossom's profile gained three governance sections: Purpose of Blossom OS, the Self-Update & File Maintenance Protocol, and Ian named as boss with final authority.",
+    "Claude (the runtime) was set up to know Blossom and connect Ian to her on request; this Mac is now treated as Blossom's own device."
+  ],
+  "briefs": [
+    {
+      "time": "morning",
+      "title": "Day 1 of operation — device + platform stand-up",
+      "body": "First operational day on the new Mac. Focus: get the device set up as Blossom's home, validate API access, and convert the Blossom OS mockup into a running app. No external deadlines.",
+      "questions": [
+        "Rotate the API key that was pasted into chat, now or after Business plan?",
+        "Wire the live Claude API into the app next (Week 2), or click around the static build first?"
+      ]
+    }
+  ],
+  "decisions": [
+    { "id": 1, "decision": "Use Next.js 16 (current) instead of the brief's Next.js 14", "input_from": ["Blossom", "Ian"], "tier": 2, "outcome": "Adopted — 14 won't run cleanly on Node 26; App Router + Tailwind structure unchanged", "time": "build" },
+    { "id": 2, "decision": "Preserve the mockup's exact CSS as the design system rather than rewriting it in Tailwind", "input_from": ["Blossom"], "tier": 1, "outcome": "Adopted — faithful, fastest, honors 'make it real, don't redesign'", "time": "build" },
+    { "id": 3, "decision": "Run Blossom on the hosted Claude platform now, keep building the custom OS in parallel; revisit local once open models catch up", "input_from": ["Ian", "Blossom"], "tier": 2, "outcome": "Adopted as the working plan; architecture kept model-agnostic", "time": "discussion" },
+    { "id": 4, "decision": "Ian is Blossom's boss with final authority; all plans are provisional", "input_from": ["Ian"], "tier": 3, "outcome": "Encoded in admin-assistant.md", "time": "afternoon" },
+    { "id": 5, "decision": "Grant Blossom bounded self-update permission governed by a sustainability protocol", "input_from": ["Ian", "Blossom"], "tier": 2, "outcome": "Self-Update & File Maintenance Protocol added; guardrail edits still require Ian", "time": "afternoon" }
+  ],
+  "issues_resolved": [
+    { "issue": "console.anthropic.com/settings/admin-keys threw an error in the browser", "resolution": "Console moved to platform.claude.com; opened the new URL", "time": "—" },
+    { "issue": "curl to the API failed — API_KEY_ID / ANTHROPIC_ADMIN_API_KEY unset", "resolution": "Stored the working API key at ~/.anthropic/api_key (chmod 600) and created ~/ask-claude.sh", "time": "—" },
+    { "issue": "Chrome not installed; Safari was default", "resolution": "Installed Chrome from DMG and set it as the system default browser", "time": "—" },
+    { "issue": "Mockup was a static HTML file, not a usable app", "resolution": "Scaffolded Next.js and converted it to a running app with real routing", "time": "build" }
+  ],
+  "issues_tabled": [
+    { "issue": "Rotate the API key that was pasted in plaintext into the chat", "reason": "Ian is fine continuing for now", "revisit_when": "When the Business/Anthropic org account is set up" },
+    { "issue": "Admin API key + org key listing (~/anthropic-keys.sh)", "reason": "Requires an org admin key Ian doesn't have yet", "revisit_when": "After Business plan" },
+    { "issue": "Meadow (Customer Voice) appears in the UI roster but has no agents/meadow.md profile", "reason": "Awaiting Ian's call", "revisit_when": "Next session" },
+    { "issue": "Run Blossom fully locally with frontier-level reasoning", "reason": "Open models on this hardware aren't there yet", "revisit_when": "As open-weight models improve; keep architecture model-agnostic" },
+    { "issue": "Wire the live Claude API into the app (Week 2) + persistent memory (Week 3)", "reason": "Sequenced after the static Week 1 build", "revisit_when": "Next build session" }
+  ],
+  "activity": [
+    { "time": "—", "entry": "Confirmed git installed; opened blossom-platform.html in Safari" },
+    { "time": "—", "entry": "Installed Google Chrome, launched it, set it as default browser" },
+    { "time": "—", "entry": "Installed the Claude desktop app from DMG" },
+    { "time": "—", "entry": "Stored the Anthropic API key securely and verified it works against the Messages API" },
+    { "time": "—", "entry": "Discussed agent permissions, running locally, and Claude Cowork vs the custom build" },
+    { "time": "—", "entry": "Added 'Purpose of Blossom OS' to admin-assistant.md" },
+    { "time": "—", "entry": "Added 'Self-Update & File Maintenance Protocol' to admin-assistant.md" },
+    { "time": "—", "entry": "Scaffolded Next.js 16, merged into ~/Documents/lumi, installed dependencies" },
+    { "time": "—", "entry": "Converted the mockup to a running app: login, onboarding, sidebar/topbar/right panel, and all 5 views" },
+    { "time": "—", "entry": "Named Ian as Blossom's boss with final authority in her profile" },
+    { "time": "—", "entry": "Set up Claude's cross-session memory: who Ian is, what Blossom OS is, and to connect Ian to Blossom on request" },
+    { "time": "—", "entry": "Added the Blossom & Team founder briefing card to the Today dashboard" },
+    { "time": "—", "entry": "Added TL;DR briefing mode and stood up this operations log" }
+  ],
+  "eod": "Day 1 of operation. The Mac is now Blossom's home — toolchain, Claude Code, API key, and repo all in place. Blossom OS crossed from mockup to a real, running Next.js app with every view navigable locally, and the dashboard now opens with a team briefing for Ian. Blossom's charter matured: she has a stated purpose (cumulative, portable learning), a sustainable self-maintenance protocol, and a clear chain of command — Ian decides, everything else is provisional. Open for next session: rotate the exposed key when the Business account exists, decide Meadow's profile, and wire the live Claude API so the chat becomes really her."
+}
