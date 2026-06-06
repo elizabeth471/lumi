@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi — Product Mockups</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sky:    #d6eef8;
+    --sky-mid:#a8d8f0;
+    --sky-deep:#5b9ec9;
+    --sun:    #f9d84a;
+    --sun-glow:#fef3b0;
+    --leaf:   #5aaa6a;
+    --leaf-lt:#a8d8a0;
+    --bark:   #4a3020;
+    --sand:   #f5e8c8;
+    --clay:   #c8784a;
+    --rose:   #f08080;
+    --plum:   #8878c8;
+    --amber:  #f0a830;
+    --white:  #ffffff;
+    --text:   #2a2018;
+    --muted:  #7a6858;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 60px;
+  }
+
+  .section-label {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: -40px;
+    align-self: flex-start;
+    margin-left: calc(50% - 360px);
+  }
+
+  /* Device frame */
+  .device {
+    width: 360px;
+    height: 720px;
+    background: #111;
+    border-radius: 44px;
+    padding: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .device-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 34px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ─── SCREEN 1: Child Home ─── */
+  .home-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, var(--sky) 0%, var(--sky-mid) 40%, var(--leaf-lt) 75%, var(--leaf) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sun */
+  .sun {
+    position: absolute;
+    top: 32px;
+    right: 48px;
+    width: 72px;
+    height: 72px;
+    background: var(--sun);
+    border-radius: 50%;
+    box-shadow: 0 0 40px var(--sun-glow), 0 0 80px rgba(249,216,74,0.3);
+  }
+
+  /* Clouds */
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.85;
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+  }
+  .cloud-1 { width: 80px; height: 24px; top: 70px; left: 30px; }
+  .cloud-1::before { width: 36px; height: 36px; top: -18px; left: 10px; }
+  .cloud-1::after  { width: 28px; height: 28px; top: -14px; left: 34px; }
+  .cloud-2 { width: 60px; height: 18px; top: 110px; right: 24px; opacity: 0.6; }
+  .cloud-2::before { width: 28px; height: 28px; top: -14px; left: 8px; }
+  .cloud-2::after  { width: 20px; height: 20px; top: -10px; left: 28px; }
+
+  /* Hills */
+  .hills {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+  }
+  .hill {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .hill-back  { width: 480px; height: 280px; background: #4a9858; bottom: 60px; left: -60px; }
+  .hill-front { width: 420px; height: 240px; background: var(--leaf); bottom: 0; right: -40px; }
+
+  /* Greeting card */
+  .greeting-card {
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 28px;
+    padding: 20px 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  .greeting-emoji { font-size: 36px; margin-bottom: 6px; }
+  .greeting-name  { font-size: 22px; font-weight: 800; color: var(--text); }
+  .greeting-sub   { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* Activity pills */
+  .activity-row {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    width: 300px;
+    justify-content: center;
+  }
+  .activity-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.88);
+    border-radius: 20px;
+    padding: 14px 10px;
+    width: 80px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transition: transform 0.15s;
+  }
+  .activity-icon { font-size: 26px; }
+  .activity-label { font-size: 10px; font-weight: 700; color: var(--text); text-align: center; line-height: 1.2; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: rgba(255,255,255,0.95);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 12px 8px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .nav-item.active { color: var(--leaf); }
+  .nav-icon { font-size: 22px; }
+
+  /* ─── SCREEN 2: Watch ─── */
+  .watch-bg {
+    width: 100%;
+    height: 100%;
+    background: #0f1b2d;
+    position: relative;
+    overflow: hidden;
+  }
+  .watch-topbar {
+    padding: 16px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .watch-back { font-size: 20px; color: rgba(255,255,255,0.6); cursor: pointer; }
+  .watch-title { font-size: 14px; font-weight: 700; color: white; }
+  .watch-dots { display: flex; gap: 4px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .dot.active { background: var(--amber); }
+
+  /* Video thumbnail hero */
+  .video-hero {
+    margin: 14px 16px 0;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    background: linear-gradient(135deg, #1a4a6b 0%, #0d2e45 100%);
+  }
+  .video-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .video-whale { font-size: 64px; }
+  .video-bubbles {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+  }
+  .bubble {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    margin-right: 4px;
+  }
+  .play-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 4px 16px rgba(240,168,48,0.5);
+  }
+  .video-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+  }
+  .video-info {
+    padding: 12px 16px 0;
+  }
+  .video-title { font-size: 16px; font-weight: 800; color: white; }
+  .video-sub   { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* Up next */
+  .section-head {
+    padding: 16px 16px 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .thumb-row {
+    display: flex;
+    gap: 10px;
+    padding: 0 16px;
+    overflow-x: auto;
+  }
+  .thumb-row::-webkit-scrollbar { display: none; }
+  .thumb {
+    flex-shrink: 0;
+    width: 110px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #1e3a5a;
+    cursor: pointer;
+  }
+  .thumb-img {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .thumb-a { background: linear-gradient(135deg, #2d5a3d, #1a3328); }
+  .thumb-b { background: linear-gradient(135deg, #4a2d5a, #2a1a38); }
+  .thumb-c { background: linear-gradient(135deg, #5a3a1a, #3a2010); }
+  .thumb-label { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8); padding: 6px 8px; line-height: 1.3; }
+
+  /* Language toggle */
+  .lang-bar {
+    margin: 14px 16px 0;
+    background: rgba(255,255,255,0.08);
+    border-radius: 14px;
+    display: flex;
+    padding: 4px;
+    gap: 4px;
+  }
+  .lang-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+  }
+  .lang-btn.active { background: var(--amber); color: var(--bark); }
+
+  /* ─── SCREEN 3: Game ─── */
+  .game-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #1a0a3a 0%, #2a1050 60%, #3a1868 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+  }
+  .star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+
+  .game-topbar {
+    position: relative;
+    padding: 16px 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .xp-bar-wrap { flex: 1; margin: 0 12px; }
+  .xp-bar-label { font-size: 10px; color: rgba(255,255,255,0.5); margin-bottom: 4px; font-weight: 600; }
+  .xp-bar-track { height: 8px; background: rgba(255,255,255,0.15); border-radius: 6px; overflow: hidden; }
+  .xp-bar-fill  { height: 100%; width: 65%; background: linear-gradient(90deg, var(--plum), var(--rose)); border-radius: 6px; }
+  .xp-gems { font-size: 13px; font-weight: 800; color: var(--sun); }
+
+  /* Game card */
+  .game-card {
+    position: relative;
+    margin: 20px 16px 0;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 20px;
+    text-align: center;
+  }
+  .game-prompt-label { font-size: 11px; color: rgba(255,255,255,0.5); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .game-prompt { font-size: 22px; font-weight: 900; color: white; margin: 8px 0 4px; line-height: 1.2; }
+  .game-prompt-es { font-size: 14px; color: var(--amber); font-weight: 600; margin-bottom: 16px; }
+  .game-image { font-size: 72px; margin: 8px 0; }
+  .answer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .answer-btn {
+    padding: 12px;
+    border-radius: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.1s;
+  }
+  .answer-a { background: rgba(88,120,200,0.3); border-color: rgba(88,120,200,0.5); }
+  .answer-b { background: rgba(200,88,120,0.3); border-color: rgba(200,88,120,0.5); }
+  .answer-c { background: rgba(88,200,120,0.3); border-color: rgba(88,200,120,0.5); }
+  .answer-d { background: rgba(200,168,88,0.3); border-color: rgba(200,168,88,0.5); }
+
+  .streak-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(240,168,48,0.2);
+    border: 1px solid rgba(240,168,48,0.4);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-top: 16px;
+  }
+
+  /* ─── SCREEN 4: Parent Dashboard ─── */
+  .dash-bg {
+    width: 100%;
+    height: 100%;
+    background: #f5f0e8;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .dash-header {
+    background: white;
+    padding: 20px 20px 14px;
+    border-bottom: 1px solid #e8e0d0;
+  }
+  .dash-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .dash-title { font-size: 18px; font-weight: 800; color: #2a2018; }
+  .dash-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--leaf), var(--sky-deep));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .child-tabs {
+    display: flex;
+    gap: 8px;
+  }
+  .child-tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    background: #f0e8d8;
+    cursor: pointer;
+  }
+  .child-tab.active { background: var(--leaf); color: white; }
+
+  .dash-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .dash-body::-webkit-scrollbar { display: none; }
+
+  /* Summary row */
+  .summary-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 12px 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .summary-num { font-size: 22px; font-weight: 900; color: var(--text); }
+  .summary-unit { font-size: 9px; color: var(--muted); font-weight: 600; margin-top: 1px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .summary-icon { font-size: 16px; margin-bottom: 4px; }
+
+  /* Wellbeing card */
+  .wellbeing-card {
+    background: white;
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .signal-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .signal-label { font-size: 12px; font-weight: 600; color: var(--text); width: 90px; }
+  .signal-bar-track { flex: 1; height: 8px; background: #f0e8d8; border-radius: 6px; overflow: hidden; }
+  .signal-bar-fill { height: 100%; border-radius: 6px; }
+  .fill-green  { background: var(--leaf); }
+  .fill-amber  { background: var(--amber); }
+  .fill-blue   { background: var(--sky-deep); }
+  .fill-rose   { background: var(--rose); }
+  .signal-pct { font-size: 11px; font-weight: 700; color: var(--muted); width: 28px; text-align: right; }
+
+  /* Activity log */
+  .activity-log {
+    background: white;
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .log-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0e8d8;
+  }
+  .log-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .log-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .log-icon-green { background: #e8f5e8; }
+  .log-icon-blue  { background: #e0eef8; }
+  .log-icon-amber { background: #fef3d8; }
+  .log-text { flex: 1; }
+  .log-main { font-size: 12px; font-weight: 600; color: var(--text); }
+  .log-time { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .log-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    align-self: center;
+  }
+  .badge-green { background: #e8f5e8; color: var(--leaf); }
+  .badge-amber { background: #fef3d8; color: #b07820; }
+
+  /* Screen labels outside device */
+  .mock-label {
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    align-self: center;
+  }
+
+  .mock-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Two-up layout for wider screens */
+  .row-two {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .page-title {
+    color: white;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    color: #888;
+    font-size: 14px;
+  }
+  .page-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-4px); }
+  }
+  .cloud-1 { animation: bob 4s ease-in-out infinite; }
+  .cloud-2 { animation: bob 5s ease-in-out infinite 1s; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">Lumi</div>
+  <div class="page-sub">Product concept screens — for Ian</div>
+</div>
+
+<!-- ROW 1 -->
+<div class="row-two">
+
+  <!-- Screen 1: Child Home -->
+  <div class="mock-group">
+    <div class="mock-label">1 — Child Home</div>
+    <div class="device">
+      <div class="device-screen">
+        <div class="home-bg">
+          <div class="sun"></div>
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+
+          <div class="greeting-card">
+            <div class="greeting-emoji">🌱</div>
+            <div class="greeting-name">Hi, James!</div>
+            <div class="greeting-sub">Ready to explore today?</div>
+          </div>
+
+          <div class="hills">
+            <div class="hill hill-back"></div>
+            <div class="hill hill-front"></div>
+          </div>
+
+          <div class="activity-row">
+            <div class="activity-pill">
+              <div class="activity-icon">🎬</div>
+              <div class="activity-label">Watch</div>
+            </div>
+            <div class="activity-pill">
+              <div class="activity-icon">🎮</div>
+              <div class="activity-label">Play</div>
+            </div>
+            <div class="activity-pill">
+              <div class="activity-icon">📖</div>
+              <div class="activity-label">Read</div>
+            </div>
+          </div>
+
+          <div class="bottom-nav">
+            <div class="nav-item active">
+              <div class="nav-icon">🏡</div>
+              Home
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🌟</div>
+              Progress
+            </div>
+            <div class="nav-item">
+              <div class="nav-icon">🔔</div>
+              Messages
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2: Watch -->
+  <div class="mock-group">
+    <div class="mock-label">2 — Watch</div>
+    <div class="device">
+      <div class="device-screen">
+        <div class="watch-bg">
+          <div class="watch-topbar">
+            <div class="watch-back">←</div>
+            <div class="watch-title">Watch</div>
+            <div class="watch-dots">
+              <div class="dot active"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+
+          <div class="video-hero">
+            <div class="video-scene">
+              <div class="video-whale">🐋</div>
+            </div>
+            <div class="video-badge">🌊 Ocean Life</div>
+            <div class="video-bubbles">
+              <span class="bubble"></span>
+              <span class="bubble"></span>
+              <span class="bubble"></span>
+            </div>
+            <div class="play-btn">▶</div>
+          </div>
+
+          <div class="video-info">
+            <div class="video-title">Blue Whales: Giants of the Deep</div>
+            <div class="video-sub">12 min · Ages 8–12 · Nature</div>
+          </div>
+
+          <div class="lang-bar">
+            <div class="lang-btn active">English</div>
+            <div class="lang-btn">Español</div>
+            <div class="lang-btn">Filipino</div>
+          </div>
+
+          <div class="section-head">Up Next</div>
+          <div class="thumb-row">
+            <div class="thumb">
+              <div class="thumb-img thumb-a">🦁</div>
+              <div class="thumb-label">Lions of the Savanna</div>
+            </div>
+            <div class="thumb">
+              <div class="thumb-img thumb-b">🦋</div>
+              <div class="thumb-label">Monarch Migration</div>
+            </div>
+            <div class="thumb">
+              <div class="thumb-img thumb-c">🦅</div>
+              <div class="thumb-label">Eagles: Sky Hunters</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROW 2 -->
+<div class="row-two">
+
+  <!-- Screen 3: Game / Learning -->
+  <div class="mock-group">
+    <div class="mock-label">3 — Learning Game</div>
+    <div class="device">
+      <div class="device-screen">
+        <div class="game-bg">
+          <div class="stars">
+            <div class="star" style="top:8%;left:15%"></div>
+            <div class="star" style="top:12%;left:70%"></div>
+            <div class="star" style="top:5%;left:40%"></div>
+            <div class="star" style="top:20%;left:88%"></div>
+            <div class="star" style="top:18%;left:28%"></div>
+            <div class="star" style="top:3%;left:55%"></div>
+          </div>
+
+          <div class="game-topbar">
+            <div style="font-size:20px;color:rgba(255,255,255,0.5);cursor:pointer">←</div>
+            <div class="xp-bar-wrap">
+              <div class="xp-bar-label">Level 4</div>
+              <div class="xp-bar-track"><div class="xp-bar-fill"></div></div>
+            </div>
+            <div class="xp-gems">💎 240</div>
+          </div>
+
+          <div class="game-card">
+            <div class="game-prompt-label">What animal is this?</div>
+            <div class="game-image">🐘</div>
+            <div class="game-prompt">Elephant</div>
+            <div class="game-prompt-es">¿Cómo se dice en español?</div>
+            <div class="answer-grid">
+              <div class="answer-btn answer-a">🐘 Elefante</div>
+              <div class="answer-btn answer-b">🦒 Jirafa</div>
+              <div class="answer-btn answer-c">🐆 Leopardo</div>
+              <div class="answer-btn answer-d">🦏 Rinoceronte</div>
+            </div>
+          </div>
+
+          <div style="text-align:center">
+            <div class="streak-badge">🔥 5 day streak — keep it up!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 4: Parent Dashboard -->
+  <div class="mock-group">
+    <div class="mock-label">4 — Parent Dashboard</div>
+    <div class="device">
+      <div class="device-screen">
+        <div class="dash-bg">
+
+          <div class="dash-header">
+            <div class="dash-header-top">
+              <div class="dash-title">Dashboard</div>
+              <div class="dash-avatar">👩</div>
+            </div>
+            <div class="child-tabs">
+              <div class="child-tab active">James, 11</div>
+              <div class="child-tab">Alexander, 8</div>
+            </div>
+          </div>
+
+          <div class="dash-body">
+
+            <div class="summary-row">
+              <div class="summary-card">
+                <div class="summary-icon">⏱</div>
+                <div class="summary-num">42</div>
+                <div class="summary-unit">min today</div>
+              </div>
+              <div class="summary-card">
+                <div class="summary-icon">🎯</div>
+                <div class="summary-num">8</div>
+                <div class="summary-unit">activities</div>
+              </div>
+              <div class="summary-card">
+                <div class="summary-icon">🔥</div>
+                <div class="summary-num">5</div>
+                <div class="summary-unit">day streak</div>
+              </div>
+            </div>
+
+            <div class="wellbeing-card">
+              <div class="card-title">Wellbeing Signals</div>
+              <div class="signal-row">
+                <div class="signal-label">Focus</div>
+                <div class="signal-bar-track"><div class="signal-bar-fill fill-green" style="width:78%"></div></div>
+                <div class="signal-pct">78%</div>
+              </div>
+              <div class="signal-row">
+                <div class="signal-label">Engagement</div>
+                <div class="signal-bar-track"><div class="signal-bar-fill fill-blue" style="width:85%"></div></div>
+                <div class="signal-pct">85%</div>
+              </div>
+              <div class="signal-row">
+                <div class="signal-label">Pace</div>
+                <div class="signal-bar-track"><div class="signal-bar-fill fill-amber" style="width:60%"></div></div>
+                <div class="signal-pct">60%</div>
+              </div>
+              <div class="signal-row" style="margin-bottom:0">
+                <div class="signal-label">Calm exits</div>
+                <div class="signal-bar-track"><div class="signal-bar-fill fill-green" style="width:90%"></div></div>
+                <div class="signal-pct">90%</div>
+              </div>
+            </div>
+
+            <div class="activity-log">
+              <div class="card-title">Today's Activity</div>
+              <div class="log-item">
+                <div class="log-icon-wrap log-icon-blue"><span>🎬</span></div>
+                <div class="log-text">
+                  <div class="log-main">Blue Whales video</div>
+                  <div class="log-time">12 min · 9:14 AM</div>
+                </div>
+                <div class="log-badge badge-green">Done</div>
+              </div>
+              <div class="log-item">
+                <div class="log-icon-wrap log-icon-green"><span>🎮</span></div>
+                <div class="log-text">
+                  <div class="log-main">Spanish Animals game</div>
+                  <div class="log-time">18 min · 9:30 AM</div>
+                </div>
+                <div class="log-badge badge-green">+30 XP</div>
+              </div>
+              <div class="log-item">
+                <div class="log-icon-wrap log-icon-amber"><span>📖</span></div>
+                <div class="log-text">
+                  <div class="log-main">Reading: The Jungle Book</div>
+                  <div class="log-time">12 min · 10:05 AM</div>
+                </div>
+                <div class="log-badge badge-amber">In progress</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
