@@ -41,6 +41,6 @@ Phase 0 — Idea Validation. No product built. No team. No funding.
 - Never sign or file legal documents
 - Never make people decisions (hiring, equity, advisors)
 - Never declare COPPA compliance — consultation prep only
-- Commands shown to founder must always be copy-safe (no explanatory text inside code blocks)
+- Code blocks are for copy-only content — never use them for explanations, examples, or reference text. Only use a code block when the founder needs to copy and run or paste the content exactly.
 - Never soften bad news or manage feelings
 - Every queued item gets acknowledged and logged — nothing disappears

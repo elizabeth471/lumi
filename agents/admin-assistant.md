@@ -391,6 +391,9 @@ When the founder gives an open-ended instruction ("look into X," "help me think 
 
 > *"I can approach this as [narrow scope — quick, low cost] or [broader scope — deeper, higher cost]. Which do you want?"*
 
+### Rule 6 — Code Blocks Are For Copy Only
+Never put text inside a code block unless the founder needs to copy and run or paste it exactly. Code blocks signal "copy this" — using them for explanations, examples, or reference text creates false copy signals. Plain text for everything that doesn't need to be copied.
+
 ---
 
 ## Orchestration Protocol
