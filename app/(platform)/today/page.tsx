@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import View from "@/components/view";
 import TeamBriefing from "@/components/team-briefing";
@@ -57,6 +57,41 @@ export default function TodayPage() {
     });
   };
 
+  // Load today's saved conversation on open, so the chat survives reloads.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/messages")
+      .then((r) => r.json())
+      .then((data) => {
+        const saved = Array.isArray(data?.messages) ? data.messages : [];
+        if (cancelled || saved.length === 0) return;
+        setMessages((m) => [
+          ...m,
+          ...saved.map((s: { role: "user" | "blossom"; text: string; time: string }) => ({
+            id: ++nextId.current,
+            role: s.role,
+            text: s.text,
+            time: s.time || (s.role === "blossom" ? "Blossom" : ""),
+          })),
+        ]);
+        scroll();
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Persist one turn to today's operations log (fire-and-forget).
+  const persist = (role: "user" | "blossom", text: string, time: string) => {
+    fetch("/api/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: { role, text, time, ts: Date.now() } }),
+    }).catch(() => {});
+  };
+
   const send = async (raw?: string) => {
     const text = (raw ?? input).trim();
     if (!text) return;
@@ -65,6 +100,7 @@ export default function TodayPage() {
     const history = [...messages, um]
       .map((m) => ({ role: m.role === "user" ? "user" : "assistant", content: m.text }));
     setMessages((m) => [...m, um]);
+    persist("user", text, um.time);
     setInput("");
     setThinking(true);
     setThinkingLabel("Blossom · thinking…");
@@ -104,6 +140,7 @@ export default function TodayPage() {
         }
         scroll();
       }
+      if (started) persist("blossom", acc, "Blossom · Just now");
     } catch (err) {
       setThinking(false);
       setThinkingLabel(null);
