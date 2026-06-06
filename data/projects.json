@@ -1,0 +1,68 @@
+{
+  "currency": "USD",
+  "note": "Projects + their running costs. One source of truth. Expense amounts that are null are PENDING — fill them in (Blossom never invents figures).",
+  "projects": [
+    {
+      "id": "blossom-os",
+      "name": "Blossom OS",
+      "priority": true,
+      "status": "active",
+      "expenses": [
+        {
+          "label": "MacBook Pro",
+          "category": "hardware",
+          "amount": 2149.99,
+          "note": "One-time. Eli's personal Costco card — flag for reimbursement once the company account exists."
+        },
+        {
+          "label": "Claude — Blossom OS & agents",
+          "category": "tokens",
+          "amount": null,
+          "note": "Likely a share of the Claude subscription (not per-token API). Pending allocation."
+        }
+      ]
+    },
+    {
+      "id": "lumi",
+      "name": "Lumi",
+      "priority": false,
+      "status": "active",
+      "expenses": [
+        {
+          "label": "Claude — Lumi",
+          "category": "tokens",
+          "amount": null,
+          "note": "Pending — subscription share or API usage for Lumi work."
+        }
+      ]
+    },
+    {
+      "id": "benchlife",
+      "name": "Benchlife",
+      "priority": false,
+      "status": "active",
+      "expenses": []
+    },
+    {
+      "id": "beast-academy",
+      "name": "Beast Academy",
+      "priority": false,
+      "status": "active",
+      "expenses": [
+        {
+          "label": "Claude — Beast Academy",
+          "category": "tokens",
+          "amount": null,
+          "note": "Pending — earlier Claude work."
+        }
+      ]
+    },
+    {
+      "id": "open-authoring-kit",
+      "name": "Open Authoring Kit",
+      "priority": false,
+      "status": "active",
+      "expenses": []
+    }
+  ]
+}

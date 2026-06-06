@@ -19,11 +19,14 @@ export default function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const items: CmdItem[] = [
-    { icon: "🌅", label: "Go to Today", hint: "View 1", action: () => router.push("/today") },
-    { icon: "🧵", label: "Go to Threads", hint: "View 2", action: () => router.push("/threads") },
-    { icon: "⚖️", label: "Go to Decisions", hint: "View 3", action: () => router.push("/decisions") },
-    { icon: "🌿", label: "Go to Agents", hint: "View 4", action: () => router.push("/agents") },
-    { icon: "📁", label: "Go to Files", hint: "View 5", action: () => router.push("/files") },
+    { icon: "🌅", label: "Go to Today", hint: "View", action: () => router.push("/today") },
+    { icon: "🗂️", label: "Go to Projects", hint: "View", action: () => router.push("/projects") },
+    { icon: "🧵", label: "Go to Threads", hint: "View", action: () => router.push("/threads") },
+    { icon: "⚖️", label: "Go to Decisions", hint: "View", action: () => router.push("/decisions") },
+    { icon: "💰", label: "Go to Costs", hint: "Investment", action: () => router.push("/costs") },
+    { icon: "🌿", label: "Go to Agents", hint: "View", action: () => router.push("/agents") },
+    { icon: "📁", label: "Go to Files", hint: "View", action: () => router.push("/files") },
+    { icon: "🗂️", label: "New Project", hint: "Create", action: () => router.push("/projects") },
     {
       icon: "🌵",
       label: "Proceed with Jelex",

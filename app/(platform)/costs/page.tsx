@@ -41,7 +41,7 @@ export default function CostsPage() {
   const [data, setData] = useState<CostsData | null>(null);
 
   useEffect(() => {
-    fetch("/api/costs")
+    fetch("/api/projects")
       .then((r) => r.json())
       .then(setData)
       .catch(() => setData({ currency: "USD", projects: [] }));

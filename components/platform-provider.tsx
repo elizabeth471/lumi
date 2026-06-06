@@ -158,10 +158,12 @@ export function PlatformProvider({ children }: { children: React.ReactNode }) {
       }
       const navMap: Record<string, string> = {
         "1": "today",
-        "2": "threads",
-        "3": "decisions",
-        "4": "agents",
-        "5": "files",
+        "2": "projects",
+        "3": "threads",
+        "4": "decisions",
+        "5": "costs",
+        "6": "agents",
+        "7": "files",
       };
       if (navMap[e.key]) {
         router.push("/" + navMap[e.key]);

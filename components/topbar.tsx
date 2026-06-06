@@ -6,8 +6,10 @@ import { usePlatform } from "@/components/platform-provider";
 
 const META: Record<string, { title: string; sub: string }> = {
   today: { title: "Today", sub: "Thursday, June 5 · Morning Brief ready" },
+  projects: { title: "Projects", sub: "Blossom OS (priority) · Lumi · Benchlife · Beast Academy · Open Authoring Kit" },
   threads: { title: "Threads", sub: "4 active · 1 blocked" },
   decisions: { title: "Decisions", sub: "2 need founder input · 3 queued" },
+  costs: { title: "Costs", sub: "Running investment across projects" },
   agents: { title: "Agent Roster", sub: "10 agents · 3 active · 3 on-demand · 4 dormant" },
   files: { title: "Files", sub: "lumi / repo · branch: claude/laughing-allen-4aMzt" },
 };

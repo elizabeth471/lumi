@@ -6,8 +6,10 @@ import BlossomCharacter from "@/components/blossom-character";
 
 const NAV = [
   { id: "today", icon: "🌅", label: "Today" },
+  { id: "projects", icon: "🗂️", label: "Projects" },
   { id: "threads", icon: "🧵", label: "Threads", badge: "4", badgeLabel: "4 active threads" },
   { id: "decisions", icon: "⚖️", label: "Decisions", badge: "3", badgeLabel: "3 pending decisions" },
+  { id: "costs", icon: "💰", label: "Costs" },
   { id: "agents", icon: "🌿", label: "Agents" },
   { id: "files", icon: "📁", label: "Files" },
 ];
