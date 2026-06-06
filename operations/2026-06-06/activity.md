@@ -18,3 +18,7 @@ type: activity
 - Set up Claude's cross-session memory: who Ian is, what Blossom OS is, and to connect Ian to Blossom on request.
 - Added the **Blossom & Team founder briefing** card to the Today dashboard.
 - Added **TL;DR** briefing mode and stood up this **operations log** (folder-per-day, portable schema).
+- Wired **live Claude API** for the chat (Week 2) and **persistent chat** (local-first, Week 3 start).
+- Accessibility pass from an external UI/UX audit; created `agents/meadow.md`; added `docs/wishlist.md` + `docs/accounts.md`.
+- Removed user hierarchy → **Eli** and **Ian** as equal users.
+- Ran the **Naming Protocol** on "Blossom OS" and saved it as `playbooks/naming-protocol.md` (found the Blossom Health / crowded-namespace conflicts).
