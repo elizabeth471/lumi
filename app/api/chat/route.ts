@@ -22,6 +22,20 @@ function getSystemPrompt(): string {
   return cachedSystem;
 }
 
+// Authoritative current build state — so Blossom answers from fact, not guesses.
+function getStatus(): string {
+  try {
+    const p = path.join(process.cwd(), "operations", "STATUS.md");
+    if (!fs.existsSync(p)) return "";
+    return (
+      `\n\n---\n# CURRENT PLATFORM STATE (authoritative — do NOT speculate about what is or isn't built; rely on this)\n\n` +
+      fs.readFileSync(p, "utf8")
+    );
+  } catch {
+    return "";
+  }
+}
+
 // Memory loop: pull the most recent day's end-of-day summary into the system
 // prompt so Blossom continues with continuity instead of starting cold.
 // (Not cached — re-read each request so the latest summary is always current.)
@@ -77,7 +91,7 @@ export async function POST(req: Request) {
   let system: string;
   try {
     client = new Anthropic({ apiKey: getApiKey() });
-    system = getSystemPrompt() + getCarryForward();
+    system = getSystemPrompt() + getStatus() + getCarryForward();
   } catch {
     return new Response(
       "Blossom isn't connected yet — no API key found at ~/.anthropic/api_key.",
