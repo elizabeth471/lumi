@@ -62,6 +62,17 @@ export async function POST(req: Request) {
     return new Response("No user message", { status: 400 });
   }
 
+  // Local-only chat: requests through a public tunnel won't spend the API key.
+  const host = req.headers.get("host") || "";
+  const isLocal = /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/i.test(host);
+  if (!isLocal) {
+    const preview =
+      "You're viewing a shared preview of Blossom OS, so my live chat is off here — it runs only on the local machine. Explore every view though: Today, Projects, Costs, Agents, Threads, and Files.";
+    return new Response(preview, {
+      headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
+    });
+  }
+
   let client: Anthropic;
   let system: string;
   try {

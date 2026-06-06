@@ -38,9 +38,17 @@ export default function Topbar() {
         </div>
         <div
           className="tb-chip"
-          onClick={() =>
-            toast("Session Wrap", "Preparing end-of-session summary. All open items will be logged.", "📋")
-          }
+          onClick={async () => {
+            toast("Session Wrap", "Writing the session summary to today's log…", "📋");
+            try {
+              const res = await fetch("/api/session-wrap", { method: "POST" });
+              const data = await res.json();
+              if (data.ok) toast("Session wrapped ✓", "Summary saved to today's operations log — it carries forward next time.", "✅", 6000);
+              else toast("Session Wrap", data.message || "Nothing to wrap yet.", "📋", 6000);
+            } catch {
+              toast("Session Wrap", "Couldn't reach the wrap service.", "🌵");
+            }
+          }}
         >
           Session Wrap
         </div>
