@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lumi — Product Mockups</title>
+<title>Lumi — Product + Blossom OS Mockups</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -605,6 +605,446 @@
   }
   .cloud-1 { animation: bob 4s ease-in-out infinite; }
   .cloud-2 { animation: bob 5s ease-in-out infinite 1s; }
+
+  /* ─── BLOSSOM OS STYLES ─── */
+  :root {
+    --b-sand:     #f7f1e8;
+    --b-bark:     #2a2018;
+    --b-terra:    #c4714a;
+    --b-amber:    #c4943a;
+    --b-amber-lt: #e8c878;
+    --b-amber-pale:#fff4e0;
+    --b-cactus:   #5a8a50;
+    --b-rose:     #e8607a;
+    --b-sky:      #7ab8d8;
+    --b-muted:    #9a8878;
+  }
+
+  .divider-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0 0;
+  }
+  .divider-label::before,
+  .divider-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+  .divider-text {
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Desktop-style device for Blossom OS */
+  .desktop-device {
+    width: 760px;
+    height: 480px;
+    background: #111;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 2px #333;
+    flex-shrink: 0;
+  }
+  .desktop-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: var(--b-sand);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Topbar */
+  .bos-topbar {
+    height: 44px;
+    background: var(--b-bark);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .bos-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--b-amber-lt);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .bos-cactus-mini {
+    width: 22px;
+    height: 22px;
+  }
+  .bos-nav {
+    display: flex;
+    gap: 2px;
+    margin-left: 8px;
+  }
+  .bos-nav-item {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+  }
+  .bos-nav-item.active {
+    background: rgba(255,255,255,0.1);
+    color: var(--b-amber-lt);
+  }
+  .bos-spacer { flex: 1; }
+  .bos-user {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.5);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .bos-user-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--b-cactus);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+  }
+
+  /* Body layout */
+  .bos-body {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* Left sidebar */
+  .bos-sidebar {
+    width: 200px;
+    background: #f0e8d8;
+    border-right: 1px solid #e0d4c0;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    flex-shrink: 0;
+  }
+  .bos-sidebar-section {
+    padding: 0 10px 8px;
+  }
+  .bos-sidebar-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--b-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 6px 4px;
+  }
+  .bos-sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--b-bark);
+    cursor: pointer;
+    margin-bottom: 1px;
+  }
+  .bos-sidebar-item:hover { background: rgba(0,0,0,0.05); }
+  .bos-sidebar-item.active { background: var(--b-amber-pale); color: var(--b-terra); }
+  .bos-sidebar-icon { font-size: 13px; width: 16px; text-align: center; }
+  .bos-sidebar-count {
+    margin-left: auto;
+    background: var(--b-terra);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+  }
+  .bos-divider { height: 1px; background: #e0d4c0; margin: 4px 10px 8px; }
+
+  /* Main chat area */
+  .bos-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .bos-chat-area {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .bos-chat-area::-webkit-scrollbar { display: none; }
+
+  /* Morning brief */
+  .bos-brief {
+    background: var(--b-amber-pale);
+    border: 1px solid var(--b-amber-lt);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .bos-brief-head {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--b-amber);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .bos-brief-body { font-size: 11px; color: var(--b-bark); line-height: 1.5; }
+  .bos-brief-items { list-style: none; margin-top: 6px; display: flex; flex-direction: column; gap: 3px; }
+  .bos-brief-item { display: flex; gap: 6px; font-size: 11px; color: #5a4a38; }
+  .bos-brief-bullet { color: var(--b-terra); font-weight: 700; flex-shrink: 0; }
+
+  /* Blossom message */
+  .bos-msg {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    max-width: 88%;
+  }
+  .bos-msg-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--b-cactus);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .bos-msg-bubble {
+    background: white;
+    border-radius: 14px 14px 14px 4px;
+    padding: 9px 12px;
+    font-size: 11px;
+    color: var(--b-bark);
+    line-height: 1.5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* Founder message */
+  .bos-msg-founder {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+  .bos-msg-founder .bos-msg-avatar {
+    background: var(--b-terra);
+  }
+  .bos-msg-founder .bos-msg-bubble {
+    background: var(--b-bark);
+    color: white;
+    border-radius: 14px 14px 4px 14px;
+  }
+
+  /* Typing indicator */
+  .bos-typing {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .bos-typing-label {
+    font-size: 10px;
+    color: var(--b-muted);
+    font-style: italic;
+  }
+  .bos-typing-dots {
+    display: flex;
+    gap: 3px;
+  }
+  .bos-typing-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--b-cactus);
+    opacity: 0.6;
+  }
+
+  /* Input bar */
+  .bos-input-bar {
+    padding: 10px 14px;
+    border-top: 1px solid #e0d4c0;
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bos-input {
+    flex: 1;
+    background: var(--b-sand);
+    border: 1px solid #e0d4c0;
+    border-radius: 10px;
+    padding: 7px 12px;
+    font-size: 11px;
+    color: var(--b-bark);
+  }
+  .bos-send {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: var(--b-cactus);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  /* Right panel */
+  .bos-right {
+    width: 180px;
+    border-left: 1px solid #e0d4c0;
+    background: #f8f2e8;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .bos-right-section {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e8dece;
+  }
+  .bos-right-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--b-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .bos-progress-row {
+    margin-bottom: 7px;
+  }
+  .bos-progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--b-bark);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .bos-progress-pct { color: var(--b-muted); }
+  .bos-progress-track { height: 5px; background: #e0d4c0; border-radius: 4px; overflow: hidden; }
+  .bos-progress-fill { height: 100%; border-radius: 4px; }
+  .fill-terra  { background: var(--b-terra); }
+  .fill-cactus { background: var(--b-cactus); }
+  .fill-sky    { background: var(--b-sky); }
+
+  .bos-decision-item {
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .bos-decision-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .dot-urgent { background: var(--b-rose); }
+  .dot-normal { background: var(--b-amber); }
+  .bos-decision-text { font-size: 10px; color: var(--b-bark); line-height: 1.4; }
+
+  /* ─── AGENTS VIEW ─── */
+  .bos-agents-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .bos-agents-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid #e0d4c0;
+  }
+  .bos-agents-title { font-size: 14px; font-weight: 800; color: var(--b-bark); }
+  .bos-agents-sub { font-size: 10px; color: var(--b-muted); margin-top: 2px; }
+  .bos-agents-grid {
+    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .bos-agents-grid::-webkit-scrollbar { display: none; }
+  .bos-agent-card {
+    background: white;
+    border-radius: 14px;
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    position: relative;
+    cursor: pointer;
+  }
+  .bos-agent-icon { font-size: 28px; }
+  .bos-agent-name { font-size: 11px; font-weight: 800; color: var(--b-bark); }
+  .bos-agent-role { font-size: 9px; color: var(--b-muted); text-align: center; line-height: 1.3; }
+  .bos-agent-status {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1.5px solid white;
+  }
+  .status-active   { background: var(--b-cactus); }
+  .status-idle     { background: var(--b-amber); }
+  .status-dormant  { background: #ccc; }
+  .bos-agent-phase {
+    font-size: 8px;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-weight: 700;
+    background: var(--b-amber-pale);
+    color: var(--b-terra);
+  }
+  .bos-agent-phase.phase-later { background: #f0f0f0; color: #aaa; }
+
+  @keyframes bloom-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .bos-agent-card.active-now {
+    border: 2px solid var(--b-cactus);
+    background: #f4faf4;
+  }
+  .bos-agent-card.active-now .bos-agent-icon {
+    animation: bloom-spin 8s linear infinite;
+  }
 </style>
 </head>
 <body>
@@ -878,6 +1318,333 @@
     </div>
   </div>
 
+</div>
+
+<!-- BLOSSOM OS DIVIDER -->
+<div class="divider-label">
+  <span class="divider-text">Blossom OS — Internal Platform</span>
+</div>
+
+<!-- BLOSSOM OS: Today / Chat View -->
+<div class="mock-group">
+  <div class="mock-label">5 — Blossom OS · Today</div>
+  <div class="desktop-device">
+    <div class="desktop-screen">
+
+      <!-- Topbar -->
+      <div class="bos-topbar">
+        <div class="bos-logo">
+          <svg class="bos-cactus-mini" viewBox="0 0 22 22" fill="none">
+            <rect x="9" y="4" width="4" height="14" rx="2" fill="#5a8a50"/>
+            <rect x="4" y="9" width="5" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="13" y="7" width="5" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="2" y="12" width="3" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="17" y="10" width="3" height="3" rx="1.5" fill="#5a8a50"/>
+          </svg>
+          BLOSSOM
+        </div>
+        <div class="bos-nav">
+          <div class="bos-nav-item active">Today</div>
+          <div class="bos-nav-item">Threads</div>
+          <div class="bos-nav-item">Decisions</div>
+          <div class="bos-nav-item">Agents</div>
+          <div class="bos-nav-item">Files</div>
+        </div>
+        <div class="bos-spacer"></div>
+        <div class="bos-user">
+          <div class="bos-user-dot">E</div>
+          Elizabeth
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="bos-body">
+
+        <!-- Sidebar -->
+        <div class="bos-sidebar">
+          <div class="bos-sidebar-section">
+            <div class="bos-sidebar-label">Active</div>
+            <div class="bos-sidebar-item active">
+              <span class="bos-sidebar-icon">🌿</span> Morning Brief
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🏷</span> Brand Name
+              <span class="bos-sidebar-count">!</span>
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🏛</span> Formation
+            </div>
+          </div>
+          <div class="bos-divider"></div>
+          <div class="bos-sidebar-section">
+            <div class="bos-sidebar-label">Open Decisions</div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">⚖️</span> Jelex vs. alt
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🗓</span> Ian meeting
+            </div>
+          </div>
+          <div class="bos-divider"></div>
+          <div class="bos-sidebar-section">
+            <div class="bos-sidebar-label">Agents</div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🌱</span> Blossom
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🔬</span> Sage
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">✍️</span> Reed
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat -->
+        <div class="bos-main">
+          <div class="bos-chat-area">
+
+            <!-- Morning brief card -->
+            <div class="bos-brief">
+              <div class="bos-brief-head">🌅 Morning Brief — June 6</div>
+              <div class="bos-brief-body">Good morning. One decision is blocking formation. Everything else is clear.</div>
+              <ul class="bos-brief-items">
+                <li class="bos-brief-item"><span class="bos-brief-bullet">→</span> Brand name: Jelex still pending Spanish pronunciation check</li>
+                <li class="bos-brief-item"><span class="bos-brief-bullet">→</span> Ian presentation ready — 13 slides, awaiting your review</li>
+                <li class="bos-brief-item"><span class="bos-brief-bullet">→</span> Validation conversations: 0 of 7 started</li>
+              </ul>
+            </div>
+
+            <!-- Founder msg -->
+            <div class="bos-msg bos-msg-founder">
+              <div class="bos-msg-avatar">E</div>
+              <div class="bos-msg-bubble">Let's move forward with Jelex. What's the next step?</div>
+            </div>
+
+            <!-- Blossom msg -->
+            <div class="bos-msg">
+              <div class="bos-msg-avatar">🌵</div>
+              <div class="bos-msg-bubble">
+                Confirmed. Three things happen in order once you say go:<br><br>
+                1. Register jelex.com ($12/yr via Namecheap)<br>
+                2. Attorney trademark clearance — $300–500, one-time<br>
+                3. Stripe Atlas — Delaware C-Corp — ~$500<br><br>
+                Want me to draft the attorney brief for step 2?
+              </div>
+            </div>
+
+            <!-- Founder msg -->
+            <div class="bos-msg bos-msg-founder">
+              <div class="bos-msg-avatar">E</div>
+              <div class="bos-msg-bubble">Yes — and loop in Moss on the budget impact.</div>
+            </div>
+
+            <!-- Typing -->
+            <div class="bos-typing">
+              <div class="bos-typing-label">Blossom · consulting Moss</div>
+              <div class="bos-typing-dots">
+                <div class="bos-typing-dot"></div>
+                <div class="bos-typing-dot"></div>
+                <div class="bos-typing-dot"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Input -->
+          <div class="bos-input-bar">
+            <div class="bos-input">Ask Blossom anything…</div>
+            <div class="bos-send">↑</div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="bos-right">
+          <div class="bos-right-section">
+            <div class="bos-right-label">Phase 0 Progress</div>
+            <div class="bos-progress-row">
+              <div class="bos-progress-top"><span>Validation</span><span class="bos-progress-pct">0%</span></div>
+              <div class="bos-progress-track"><div class="bos-progress-fill fill-terra" style="width:0%"></div></div>
+            </div>
+            <div class="bos-progress-row">
+              <div class="bos-progress-top"><span>Formation</span><span class="bos-progress-pct">15%</span></div>
+              <div class="bos-progress-track"><div class="bos-progress-fill fill-cactus" style="width:15%"></div></div>
+            </div>
+            <div class="bos-progress-row">
+              <div class="bos-progress-top"><span>Platform</span><span class="bos-progress-pct">30%</span></div>
+              <div class="bos-progress-track"><div class="bos-progress-fill fill-sky" style="width:30%"></div></div>
+            </div>
+          </div>
+          <div class="bos-right-section">
+            <div class="bos-right-label">Open Decisions</div>
+            <div class="bos-decision-item">
+              <div class="bos-decision-dot dot-urgent"></div>
+              <div class="bos-decision-text">Brand name final call — blocks everything</div>
+            </div>
+            <div class="bos-decision-item">
+              <div class="bos-decision-dot dot-normal"></div>
+              <div class="bos-decision-text">Ian meeting — schedule this week</div>
+            </div>
+            <div class="bos-decision-item">
+              <div class="bos-decision-dot dot-normal"></div>
+              <div class="bos-decision-text">First validator outreach — 5 parents needed</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOSSOM OS: Agents View -->
+<div class="mock-group" style="margin-top: 0;">
+  <div class="mock-label">6 — Blossom OS · Agents</div>
+  <div class="desktop-device">
+    <div class="desktop-screen">
+
+      <!-- Topbar -->
+      <div class="bos-topbar">
+        <div class="bos-logo">
+          <svg class="bos-cactus-mini" viewBox="0 0 22 22" fill="none">
+            <rect x="9" y="4" width="4" height="14" rx="2" fill="#5a8a50"/>
+            <rect x="4" y="9" width="5" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="13" y="7" width="5" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="2" y="12" width="3" height="3" rx="1.5" fill="#5a8a50"/>
+            <rect x="17" y="10" width="3" height="3" rx="1.5" fill="#5a8a50"/>
+          </svg>
+          BLOSSOM
+        </div>
+        <div class="bos-nav">
+          <div class="bos-nav-item">Today</div>
+          <div class="bos-nav-item">Threads</div>
+          <div class="bos-nav-item">Decisions</div>
+          <div class="bos-nav-item active">Agents</div>
+          <div class="bos-nav-item">Files</div>
+        </div>
+        <div class="bos-spacer"></div>
+        <div class="bos-user">
+          <div class="bos-user-dot">E</div>
+          Elizabeth
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="bos-body">
+
+        <!-- Sidebar -->
+        <div class="bos-sidebar">
+          <div class="bos-sidebar-section">
+            <div class="bos-sidebar-label">Filter</div>
+            <div class="bos-sidebar-item active">
+              <span class="bos-sidebar-icon">✦</span> All Agents
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🟢</span> Active Now
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">📅</span> Phase 0
+            </div>
+            <div class="bos-sidebar-item">
+              <span class="bos-sidebar-icon">🌙</span> Dormant
+            </div>
+          </div>
+          <div class="bos-divider"></div>
+          <div class="bos-sidebar-section">
+            <div class="bos-sidebar-label">Currently Active</div>
+            <div class="bos-sidebar-item" style="background:rgba(90,138,80,0.1);color:#3a6a30;">
+              <span class="bos-sidebar-icon">🌵</span> Blossom
+              <span style="margin-left:auto;width:7px;height:7px;border-radius:50%;background:#5a8a50;display:inline-block;"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agents grid -->
+        <div class="bos-agents-body">
+          <div class="bos-agents-header">
+            <div class="bos-agents-title">Agent Roster</div>
+            <div class="bos-agents-sub">10 agents · 1 active · 3 on-demand · 6 dormant until Phase 1–2</div>
+          </div>
+          <div class="bos-agents-grid">
+
+            <div class="bos-agent-card active-now">
+              <div class="bos-agent-status status-active"></div>
+              <div class="bos-agent-icon">🌵</div>
+              <div class="bos-agent-name">Blossom</div>
+              <div class="bos-agent-role">Admin Orchestrator</div>
+              <div class="bos-agent-phase">Phase 0</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-idle"></div>
+              <div class="bos-agent-icon">🌿</div>
+              <div class="bos-agent-name">Sage</div>
+              <div class="bos-agent-role">Research & Strategy</div>
+              <div class="bos-agent-phase">Phase 0</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-idle"></div>
+              <div class="bos-agent-icon">🪶</div>
+              <div class="bos-agent-name">Reed</div>
+              <div class="bos-agent-role">Writing & Comms</div>
+              <div class="bos-agent-phase">Phase 0</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-idle"></div>
+              <div class="bos-agent-icon">🍃</div>
+              <div class="bos-agent-name">Moss</div>
+              <div class="bos-agent-role">Finance & Modeling</div>
+              <div class="bos-agent-phase">Phase 0</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-dormant"></div>
+              <div class="bos-agent-icon">🌾</div>
+              <div class="bos-agent-name">Willow</div>
+              <div class="bos-agent-role">Child Safety · COPPA</div>
+              <div class="bos-agent-phase phase-later">Phase 1</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-dormant"></div>
+              <div class="bos-agent-icon">🌳</div>
+              <div class="bos-agent-name">Grove</div>
+              <div class="bos-agent-role">Dev Ops Support</div>
+              <div class="bos-agent-phase phase-later">Phase 1</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-dormant"></div>
+              <div class="bos-agent-icon">🌼</div>
+              <div class="bos-agent-name">Meadow</div>
+              <div class="bos-agent-role">Customer Voice</div>
+              <div class="bos-agent-phase phase-later">Wishlist</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-dormant"></div>
+              <div class="bos-agent-icon">🌸</div>
+              <div class="bos-agent-name">Clover</div>
+              <div class="bos-agent-role">Community & Growth</div>
+              <div class="bos-agent-phase phase-later">Phase 2</div>
+            </div>
+
+            <div class="bos-agent-card">
+              <div class="bos-agent-status status-dormant"></div>
+              <div class="bos-agent-icon">🌱</div>
+              <div class="bos-agent-name">Fern</div>
+              <div class="bos-agent-role">Child UX Research</div>
+              <div class="bos-agent-phase phase-later">Phase 2</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
