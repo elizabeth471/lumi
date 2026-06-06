@@ -17,7 +17,7 @@ export default function OnboardingOverlay() {
         <div className="ob-header">
           <div style={{ fontSize: 22 }}>⚡</div>
           <div className="ob-header-info">
-            <div className="ob-title">Welcome to Lumi — Tech Co-Founder Briefing</div>
+            <div className="ob-title">Welcome to Lumi — Team Briefing</div>
             <div className="ob-sub">Prepared by Blossom · Read before your first conversation</div>
           </div>
           <button className="ob-close" onClick={close}>
@@ -46,8 +46,8 @@ export default function OnboardingOverlay() {
             <div className="ob-label">Current Stage — Phase 0: Idea Validation</div>
             <div className="ob-text">
               <p>
-                No product built. No funding raised. One person (the founder) running everything with an AI agent team.
-                You&apos;re the first human co-founder.
+                No product built. No funding raised. The team is Eli and Ian, running everything with an AI agent
+                team — equal partners, no hierarchy.
               </p>
               <p>Phase 0 success criteria — what needs to happen before Phase 1:</p>
             </div>
@@ -121,20 +121,20 @@ export default function OnboardingOverlay() {
           </div>
 
           <div className="ob-section">
-            <div className="ob-label">How the Founder Works — What You Need to Know</div>
+            <div className="ob-label">How Eli Works — What You Need to Know</div>
             <div className="ob-list">
               <div className="ob-li">Communicates in streams — ideas arrive in clusters. Blossom organizes them. Don&apos;t be confused by it.</div>
               <div className="ob-li">Is learning. Explicitly. &quot;I don&apos;t know, let me find out&quot; beats a confident wrong answer every time.</div>
               <div className="ob-li">Does not want managed feelings. If something is broken, say it&apos;s broken. They will respect that.</div>
               <div className="ob-li">COPPA is a genuine value, not a compliance checkbox. Never ship something that creates child data risk.</div>
-              <div className="ob-li">People decisions (hiring, equity) belong to the founder. Provide information, not recommendations.</div>
+              <div className="ob-li">People decisions (hiring, equity) belong to Eli and Ian. Provide information, not recommendations.</div>
             </div>
           </div>
 
           <div className="ob-section">
             <div className="ob-label">Answer These Before Your First Joint Session</div>
             <div className="ob-text">
-              <p>Tell Blossom your answers and she&apos;ll brief the founder before you meet:</p>
+              <p>Tell Blossom your answers and she&apos;ll brief Eli before you meet:</p>
             </div>
             <div className="ob-list" style={{ marginTop: 10 }}>
               <div className="ob-li">What have you built before? What stack do you live in? LLM/AI app experience?</div>

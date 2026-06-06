@@ -13,16 +13,17 @@ import Toaster from "@/components/toaster";
 import CommandPalette from "@/components/command-palette";
 import OnboardingOverlay from "@/components/onboarding-overlay";
 
-export type Role = "founder" | "cofounder";
+export type Role = "eli" | "ian";
 export interface User {
   name: string;
   avatar: string;
   role: Role;
 }
 
+// The two members of the Lumi team — equal partners, no hierarchy.
 export const USERS: Record<Role, User> = {
-  founder: { name: "Founder", avatar: "🌱", role: "founder" },
-  cofounder: { name: "Tech Co-Founder", avatar: "⚡", role: "cofounder" },
+  eli: { name: "Eli", avatar: "🌱", role: "eli" },
+  ian: { name: "Ian", avatar: "⚡", role: "ian" },
 };
 
 export interface ToastItem {
@@ -84,7 +85,7 @@ export function PlatformProvider({ children }: { children: React.ReactNode }) {
       localStorage.getItem("lumi_user")) as Role | null;
     if (role && USERS[role]) {
       setUser(USERS[role]);
-      if (role === "cofounder" && localStorage.getItem("lumi_onboarded") !== "1") {
+      if (role === "ian" && localStorage.getItem("lumi_onboarded") !== "1") {
         setTimeout(() => setOnboardingOpen(true), 500);
       }
     } else {
@@ -132,9 +133,9 @@ export function PlatformProvider({ children }: { children: React.ReactNode }) {
     router.replace("/login");
   }, [router]);
 
-  // Co-founder mode applies a sky-blue tint via `body.cf-mode`.
+  // Personal sky-blue theme for Ian (a preference, not a rank), via `body.cf-mode`.
   useEffect(() => {
-    if (user?.role === "cofounder") document.body.classList.add("cf-mode");
+    if (user?.role === "ian") document.body.classList.add("cf-mode");
     else document.body.classList.remove("cf-mode");
     return () => document.body.classList.remove("cf-mode");
   }, [user]);

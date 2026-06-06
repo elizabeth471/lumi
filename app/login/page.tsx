@@ -25,7 +25,7 @@ export default function Login() {
     }
   }, [router]);
 
-  const loginAs = (role: "founder" | "cofounder") => {
+  const loginAs = (role: "eli" | "ian") => {
     localStorage.setItem("lumi_user", role);
     router.push("/today");
   };
@@ -62,18 +62,16 @@ export default function Login() {
       </div>
 
       <div className="login-cards">
-        <div className="login-card" onClick={() => loginAs("founder")}>
+        <div className="login-card" onClick={() => loginAs("eli")}>
           <div className="login-card-avatar" style={{ background: "#3a2a18" }}>🌱</div>
-          <div className="login-card-name">Founder</div>
-          <div className="login-card-role">Lumi · Phase 0</div>
-          <div className="login-card-badge badge-founder">Owner</div>
+          <div className="login-card-name">Eli</div>
+          <div className="login-card-role">Lumi</div>
         </div>
 
-        <div className="login-card" onClick={() => loginAs("cofounder")}>
+        <div className="login-card" onClick={() => loginAs("ian")}>
           <div className="login-card-avatar" style={{ background: "#1a2830" }}>⚡</div>
-          <div className="login-card-name">Tech Co-Founder</div>
-          <div className="login-card-role">Technical Lead</div>
-          <div className="login-card-badge badge-new">First Login</div>
+          <div className="login-card-name">Ian</div>
+          <div className="login-card-role">Lumi</div>
         </div>
       </div>
 

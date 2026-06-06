@@ -49,7 +49,7 @@ export default function TodayPage() {
   const boxRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(100);
 
-  const isCofounder = user?.role === "cofounder";
+  const isCofounder = user?.role === "ian";
 
   const scroll = () => {
     requestAnimationFrame(() => {
