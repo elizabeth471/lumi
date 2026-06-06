@@ -2,9 +2,9 @@
 
 export default function RightPanel() {
   return (
-    <div className="right-panel">
+    <aside className="right-panel" aria-label="Phase progress, recent activity, and budget">
       <div className="rp-section">
-        <div className="rp-label">Phase 0 Progress</div>
+        <h2 className="rp-label">Phase 0 Progress</h2>
         <div className="progress-row">
           <div className="pr-item">
             <div className="pr-top">
@@ -38,7 +38,7 @@ export default function RightPanel() {
       </div>
 
       <div className="rp-section">
-        <div className="rp-label">Recent Activity</div>
+        <h2 className="rp-label">Recent Activity</h2>
         <div className="activity-list">
           {[
             { icon: "🌵", text: "Blossom delivered Jelex trademark check — clean in Classes 9 & 41", time: "9:14 am today" },
@@ -59,7 +59,7 @@ export default function RightPanel() {
       </div>
 
       <div className="rp-section" style={{ borderBottom: "none" }}>
-        <div className="rp-label">Monthly Agent Budget</div>
+        <h2 className="rp-label">Monthly Agent Budget</h2>
         <div className="progress-row">
           <div className="pr-item">
             <div className="pr-top">
@@ -75,6 +75,6 @@ export default function RightPanel() {
           Next reset: July 1
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

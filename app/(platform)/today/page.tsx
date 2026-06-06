@@ -138,7 +138,7 @@ export default function TodayPage() {
         {/* CHAT COL */}
         <div className="chat-col">
           <div className="brief-card">
-            <div className="card-label">Morning Brief — June 5</div>
+            <h2 className="card-label">Morning Brief — June 5</h2>
             <div className="card-body">
               {isCofounder
                 ? "First login detected. Full onboarding briefing is ready — it covers Lumi, your role, the agent team, and your first deliverable."
@@ -162,8 +162,8 @@ export default function TodayPage() {
             </div>
           </div>
 
-          <div className={`consulting-bar${consulting.visible ? " visible" : ""}`}>
-            <div className="consulting-dots">
+          <div className={`consulting-bar${consulting.visible ? " visible" : ""}`} role="status">
+            <div className="consulting-dots" aria-hidden="true">
               <span />
               <span />
               <span />
@@ -171,7 +171,7 @@ export default function TodayPage() {
             <span>{consulting.text || "Consulting…"}</span>
           </div>
 
-          <div className="chat-box" ref={boxRef}>
+          <div className="chat-box" ref={boxRef} role="log" aria-label="Conversation with Blossom" aria-live="polite">
             {messages.map((m) => (
               <div className={`msg${m.role === "user" ? " user" : ""}`} key={m.id}>
                 <div className="msg-av">{m.role === "user" ? "👤" : "🌵"}</div>
@@ -199,14 +199,15 @@ export default function TodayPage() {
           <div className="chat-input-row">
             <textarea
               className="chat-input"
+              aria-label="Message Blossom"
               placeholder="Talk to Blossom…"
               rows={1}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKey}
             />
-            <button className="send-btn" onClick={() => send()}>
-              <svg width="14" height="14" viewBox="0 0 24 24">
+            <button className="send-btn" onClick={() => send()} aria-label="Send message">
+              <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
               </svg>
             </button>
@@ -216,7 +217,7 @@ export default function TodayPage() {
         {/* SIDE COL */}
         <div className="side-col">
           <div className="widget">
-            <div className="widget-title">Open Decisions</div>
+            <h2 className="widget-title">Open Decisions</h2>
             <div className="open-item" onClick={() => router.push("/decisions")}>
               <div className="oi-label">
                 Brand name — Jelex <span className="oi-urgent">Waiting</span>
@@ -234,7 +235,7 @@ export default function TodayPage() {
           </div>
 
           <div className="widget">
-            <div className="widget-title">Formation Checklist</div>
+            <h2 className="widget-title">Formation Checklist</h2>
             <div className="checklist">
               {checklist.map((c, i) => (
                 <div className={`cl-item${c.done ? " done" : ""}`} key={i} onClick={() => toggleCheck(i)}>
@@ -246,7 +247,7 @@ export default function TodayPage() {
           </div>
 
           <div className="widget">
-            <div className="widget-title">Quick Asks</div>
+            <h2 className="widget-title">Quick Asks</h2>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {[
                 "What's the one thing I should do today?",

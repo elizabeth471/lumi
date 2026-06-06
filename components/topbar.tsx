@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { usePlatform } from "@/components/platform-provider";
 
@@ -17,10 +18,15 @@ export default function Topbar() {
   const meta = META[key] || META.today;
   const { openCmd, toast, user, logout } = usePlatform();
 
+  // Keep the browser tab title in sync with the current view.
+  useEffect(() => {
+    document.title = `${meta.title} — Blossom OS`;
+  }, [meta.title]);
+
   return (
-    <div className="topbar">
+    <header className="topbar">
       <div className="topbar-left">
-        <div className="view-title">{meta.title}</div>
+        <h1 className="view-title">{meta.title}</h1>
         <div className="breadcrumb">{meta.sub}</div>
       </div>
       <div className="topbar-right">
@@ -44,11 +50,11 @@ export default function Topbar() {
         >
           + New Task
         </div>
-        <div className="user-badge" onClick={logout}>
-          <div className="user-av">{user?.avatar}</div>
+        <button className="user-badge" onClick={logout} aria-label={`Signed in as ${user?.name}. Sign out.`}>
+          <div className="user-av" aria-hidden="true">{user?.avatar}</div>
           <div className="user-name">{user?.name}</div>
-        </div>
+        </button>
       </div>
-    </div>
+    </header>
   );
 }

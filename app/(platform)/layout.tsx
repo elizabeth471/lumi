@@ -8,12 +8,15 @@ import RightPanel from "@/components/right-panel";
 export default function PlatformLayout({ children }: { children: React.ReactNode }) {
   return (
     <PlatformProvider>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <div className="platform-shell">
         <Sidebar />
-        <div className="main-area">
+        <main className="main-area" id="main-content">
           <Topbar />
           <div className="view-container">{children}</div>
-        </div>
+        </main>
         <RightPanel />
       </div>
     </PlatformProvider>

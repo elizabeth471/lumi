@@ -101,6 +101,11 @@ export default function CommandPalette() {
             ref={inputRef}
             className="cmd-input"
             placeholder="Search views, agents, actions…"
+            aria-label="Search views, agents, and actions"
+            role="combobox"
+            aria-expanded={cmdOpen}
+            aria-controls="cmd-results"
+            aria-autocomplete="list"
             value={q}
             onChange={(e) => {
               setQ(e.target.value);
@@ -111,9 +116,9 @@ export default function CommandPalette() {
           />
           <span className="cmd-kbd">ESC</span>
         </div>
-        <div className="cmd-results">
+        <div className="cmd-results" id="cmd-results" role="listbox" aria-label="Command results">
           {filtered.length === 0 ? (
-            <div style={{ padding: 24, textAlign: "center", color: "var(--text-lt)", fontSize: 13 }}>
+            <div style={{ padding: 24, textAlign: "center", color: "var(--text-mid)", fontSize: 13 }}>
               No commands found
             </div>
           ) : (
@@ -123,6 +128,8 @@ export default function CommandPalette() {
                 <div
                   key={it.label}
                   className={`cmd-item${i === sel ? " selected" : ""}`}
+                  role="option"
+                  aria-selected={i === sel}
                   onClick={() => run(it)}
                   onMouseEnter={() => setSel(i)}
                 >

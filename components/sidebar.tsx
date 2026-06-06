@@ -6,8 +6,8 @@ import BlossomCharacter from "@/components/blossom-character";
 
 const NAV = [
   { id: "today", icon: "🌅", label: "Today" },
-  { id: "threads", icon: "🧵", label: "Threads", badge: "4" },
-  { id: "decisions", icon: "⚖️", label: "Decisions", badge: "3" },
+  { id: "threads", icon: "🧵", label: "Threads", badge: "4", badgeLabel: "4 active threads" },
+  { id: "decisions", icon: "⚖️", label: "Decisions", badge: "3", badgeLabel: "3 pending decisions" },
   { id: "agents", icon: "🌿", label: "Agents" },
   { id: "files", icon: "📁", label: "Files" },
 ];
@@ -15,7 +15,7 @@ const NAV = [
 export default function Sidebar() {
   const pathname = usePathname();
   return (
-    <div className="sidebar">
+    <aside className="sidebar">
       <div className="logo">Lumi</div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
@@ -29,14 +29,25 @@ export default function Sidebar() {
         Active · Phase 0
       </div>
 
-      <nav className="nav" style={{ width: "100%" }}>
+      <nav className="nav" style={{ width: "100%" }} aria-label="Main navigation">
         {NAV.map((n) => {
           const active = pathname === "/" + n.id;
           return (
-            <Link key={n.id} href={"/" + n.id} className={`nav-item${active ? " active" : ""}`}>
-              <div className="nav-icon">{n.icon}</div>
+            <Link
+              key={n.id}
+              href={"/" + n.id}
+              className={`nav-item${active ? " active" : ""}`}
+              aria-current={active ? "page" : undefined}
+            >
+              <div className="nav-icon" aria-hidden="true">
+                {n.icon}
+              </div>
               {n.label}
-              {n.badge ? <span className="nav-badge">{n.badge}</span> : null}
+              {n.badge ? (
+                <span className="nav-badge" aria-label={n.badgeLabel}>
+                  {n.badge}
+                </span>
+              ) : null}
             </Link>
           );
         })}
@@ -59,6 +70,6 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }
