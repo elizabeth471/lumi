@@ -1,0 +1,42 @@
+{
+  "currency": "USD",
+  "note": "Running investment tracker. Amounts that are null are PENDING — Eli to fill in from the source noted. Blossom never invents figures.",
+  "projects": [
+    {
+      "id": "blossom-os",
+      "name": "Blossom OS",
+      "expenses": [
+        {
+          "label": "MacBook Pro",
+          "category": "hardware",
+          "amount": null,
+          "note": "One-time. Enter the purchase price from the Apple receipt."
+        },
+        {
+          "label": "Claude — Blossom OS & agents",
+          "category": "tokens",
+          "amount": null,
+          "note": "Claude spend exclusively on building Blossom + the agents. Source: Anthropic Console → Usage/Billing."
+        }
+      ]
+    },
+    {
+      "id": "lumiworld",
+      "name": "Lumiworld",
+      "expenses": [
+        {
+          "label": "Claude — Beast Academy / MarvelFree World",
+          "category": "tokens",
+          "amount": null,
+          "note": "Earlier Claude work (pre-Lumi). Source: Anthropic Console usage history."
+        },
+        {
+          "label": "Claude — Lumi",
+          "category": "tokens",
+          "amount": null,
+          "note": "Claude spend working on Lumi. Source: Anthropic Console usage history."
+        }
+      ]
+    }
+  ]
+}

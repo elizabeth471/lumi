@@ -22,6 +22,30 @@ function getSystemPrompt(): string {
   return cachedSystem;
 }
 
+// Memory loop: pull the most recent day's end-of-day summary into the system
+// prompt so Blossom continues with continuity instead of starting cold.
+// (Not cached — re-read each request so the latest summary is always current.)
+function getCarryForward(): string {
+  try {
+    const opsDir = path.join(process.cwd(), "operations");
+    const days = fs
+      .readdirSync(opsDir)
+      .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d))
+      .sort();
+    if (days.length === 0) return "";
+    const latest = days[days.length - 1];
+    const eodPath = path.join(opsDir, latest, "eod.md");
+    if (!fs.existsSync(eodPath)) return "";
+    return (
+      `\n\n---\n# Carry-forward memory (most recent session, ${latest})\n` +
+      `You are not starting cold — continue with this context in mind.\n\n` +
+      fs.readFileSync(eodPath, "utf8")
+    );
+  } catch {
+    return "";
+  }
+}
+
 export async function POST(req: Request) {
   let messages: ChatMessage[];
   try {
@@ -42,7 +66,7 @@ export async function POST(req: Request) {
   let system: string;
   try {
     client = new Anthropic({ apiKey: getApiKey() });
-    system = getSystemPrompt();
+    system = getSystemPrompt() + getCarryForward();
   } catch {
     return new Response(
       "Blossom isn't connected yet — no API key found at ~/.anthropic/api_key.",
