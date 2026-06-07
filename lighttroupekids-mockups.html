@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lighttroupekids — Interactive Mockups (20 Screens)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Brand palette: warm, nature-inspired, trustworthy */
+            --primary: #2D5016;           /* forest green */
+            --secondary: #8B7355;         /* warm brown */
+            --accent: #D4A574;            /* golden sand */
+            --light-bg: #FAF8F3;          /* warm cream */
+            --dark-text: #1A1A1A;         /* near black */
+            --success: #5A9A5C;           /* growth green */
+            --info: #4A90C7;              /* sky blue */
+            --border: #E0D5C8;            /* soft border */
+            --shadow: rgba(45, 80, 22, 0.08);
+
+            /* Typography */
+            --font-family-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-family-display: "Georgia", "Garamond", serif;
+
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+        }
+
+        body {
+            font-family: var(--font-family-primary);
+            color: var(--dark-text);
+            background: var(--light-bg);
+            overflow: hidden;
+        }
+
+        .screen {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background: var(--light-bg);
+            position: relative;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Navigation bar */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 2px solid var(--border);
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-md);
+            z-index: 1000;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            flex: 0 0 auto;
+            background: white;
+            border: 2px solid var(--border);
+            color: var(--dark-text);
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .nav-item.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Layout utilities */
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: var(--spacing-xl);
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header h1 {
+            font-family: var(--font-family-display);
+            font-size: 32px;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 400;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+            letter-spacing: 0.5px;
+        }
+
+        .content {
+            padding: var(--spacing-xl);
+            padding-bottom: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Child screen dimensions (tablet/mobile focus) */
+        .child-screen {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .child-device {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px var(--shadow);
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .child-device-header {
+            background: var(--primary);
+            color: white;
+            padding: var(--spacing-md);
+            font-size: 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .child-device-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+            background: white;
+        }
+
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-family-primary);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1F3A0F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 80, 22, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #C99660;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+            margin: var(--spacing-md) 0;
+        }
+
+        .btn-lg {
+            padding: var(--spacing-lg) var(--spacing-xl);
+            font-size: 18px;
+        }
+
+        .btn-touch {
+            min-height: 48px;
+            min-width: 48px;
+        }
+
+        /* Form elements */
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--dark-text);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font-family-primary);
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);
+        }
+
+        /* Card layout */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .card-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .card-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .card-item-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .card-item-label {
+            padding: var(--spacing-md);
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--dark-text);
+        }
+
+        /* Progress and status */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: var(--spacing-md) 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .badge-success {
+            background: var(--success);
+        }
+
+        /* Parent-specific styles */
+        .parent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .parent-header-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        /* Child-specific styles */
+        .child-greeting {
+            font-family: var(--font-family-display);
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+            text-align: center;
+        }
+
+        .activity-preview {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+
+        .activity-icon {
+            font-size: 64px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .activity-title {
+            font-family: var(--font-family-display);
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .activity-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Video player mockup */
+        .video-player {
+            width: 100%;
+            background: #000;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: var(--spacing-lg) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-player-content {
+            font-size: 48px;
+            color: white;
+            text-align: center;
+        }
+
+        .video-controls {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: var(--success);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button:hover {
+            background: #4A8A4C;
+            transform: scale(1.05);
+        }
+
+        /* Child activity reflection */
+        .reflection-choice {
+            background: white;
+            border: 2px solid var(--border);
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            margin: var(--spacing-md) 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .reflection-choice:hover {
+            border-color: var(--primary);
+            background: rgba(45, 80, 22, 0.05);
+        }
+
+        .reflection-icon {
+            font-size: 40px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .reflection-text {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Game interface */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+
+        .game-tile {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 3px solid transparent;
+        }
+
+        .game-tile:hover {
+            transform: scale(1.05);
+            border-color: var(--success);
+        }
+
+        .game-tile.matched {
+            background: var(--success);
+            opacity: 0.5;
+        }
+
+        /* Parental controls */
+        .control-section {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border);
+        }
+
+        .control-section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .toggle-switch {
+            width: 48px;
+            height: 28px;
+            background: var(--border);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--success);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: left 0.2s ease;
+        }
+
+        .toggle-switch.active::after {
+            left: 22px;
+        }
+
+        .toggle-label {
+            flex: 1;
+            font-size: 14px;
+            color: var(--dark-text);
+        }
+
+        /* Settings grid */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .setting-item:hover {
+            background: rgba(45, 80, 22, 0.05);
+            border-color: var(--primary);
+        }
+
+        .setting-item-label {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .setting-item-arrow {
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        /* Celebration animation */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .celebration {
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+
+        .celebration-icon {
+            font-size: 80px;
+            animation: bounce 0.6s ease-in-out infinite;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .celebration-text {
+            font-family: var(--font-family-display);
+            font-size: 28px;
+            color: var(--success);
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
+
+        .celebration-subtext {
+            font-size: 16px;
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Accessibility helpers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Parent dashboard specific */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-descriptor {
+            font-size: 13px;
+            color: var(--dark-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content {
+                padding: var(--spacing-lg);
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+        /* Child-specific responsive */
+        @media (max-width: 480px) {
+            .child-device {
+                border-radius: 0;
+                aspect-ratio: auto;
+            }
+
+            .child-device-content {
+                padding: var(--spacing-md);
+            }
+        }
+
+        /* Learning activity interface */
+        .learning-question {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            border: 2px solid var(--border);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .learning-question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-text);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .learning-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .learning-option {
+            padding: var(--spacing-lg);
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .learning-option:hover {
+            border-color: var(--primary);
+            background: rgba(45, 80, 22, 0.05);
+        }
+
+        .learning-option.selected {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        /* Progress report */
+        .progress-section {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border);
+        }
+
+        .progress-section-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: var(--spacing-md);
+            font-size: 16px;
+        }
+
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-item-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .progress-item-stat {
+            font-size: 14px;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        /* Help section */
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(45, 80, 22, 0.02);
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--dark-text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .faq-answer {
+            margin-top: var(--spacing-md);
+            font-size: 14px;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Contact card */
+        .contact-card {
+            background: linear-gradient(135deg, var(--primary), #3D6B22);
+            color: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .contact-card-title {
+            font-family: var(--font-family-display);
+            font-size: 20px;
+            margin-bottom: var(--spacing-md);
+            font-weight: 400;
+        }
+
+        .contact-card-text {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .contact-card .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .contact-card .btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Login input focus state */
+        .login-input-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: var(--spacing-lg);
+            font-size: 18px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(45, 80, 22, 0.1);
+        }
+
+        /* Schedule modal */
+        .schedule-section {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid var(--border);
+        }
+
+        .schedule-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Accessibility: focus visible styles */
+        .btn:focus-visible,
+        .card-item:focus-visible,
+        .setting-item:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Loading and transitions */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .screen.active .content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Print styles */
+        @media print {
+            .nav-bar { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===================== PARENT SCREENS (10) ===================== -->
+
+<!-- Screen 1: Parent Onboarding Welcome -->
+<div class="screen active" id="screen-1">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Screen time that brings families closer</p>
+        </div>
+        <div class="content">
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 80px; margin-bottom: 30px;">🌱</div>
+                <h2 style="font-family: var(--font-family-display); font-size: 32px; color: var(--primary); margin-bottom: 20px; font-weight: 400;">Welcome, Parent</h2>
+                <p style="font-size: 16px; color: #666; margin-bottom: 30px; line-height: 1.6;">
+                    We're reimagining screen time for families. No apps. No endless scrolling. Just meaningful moments together.
+                </p>
+                <button class="btn btn-primary btn-lg" onclick="navigateTo('screen-2')">Get Started</button>
+                <button class="btn btn-outline btn-lg" style="margin-top: 15px;" onclick="navigateTo('screen-10')">Learn More</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 2: Parent Account Setup / Child Profile -->
+<div class="screen" id="screen-2">
+    <div class="container">
+        <div class="header">
+            <h1>Create Your Account</h1>
+            <p>Let's set up your family</p>
+        </div>
+        <div class="content">
+            <div class="card">
+                <h2 style="margin-bottom: 30px; color: var(--primary);">Parent Information</h2>
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input type="email" placeholder="parent@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="margin-bottom: 30px; color: var(--primary);">Add Your First Child</h2>
+                <div class="form-group">
+                    <label>Child's Name</label>
+                    <input type="text" placeholder="e.g., Sarah">
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <select>
+                        <option>Select age</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Interests (select at least 2)</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Science</label>
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Art</label>
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Nature</label>
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Music</label>
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Sports</label>
+                        <label style="margin: 0; font-weight: 500;"><input type="checkbox"> Reading</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block btn-lg" onclick="navigateTo('screen-3')">Create Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 3: Parent Dashboard Home -->
+<div class="screen" id="screen-3">
+    <div class="container">
+        <div class="header">
+            <div class="parent-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>This week's overview</p>
+                </div>
+                <div class="parent-header-icon">👤</div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Time This Week</div>
+                    <div class="stat-value">2h 45m</div>
+                    <div class="stat-descriptor">vs 3h 20m last week ↓</div>
+                    <div class="progress-bar" style="margin-top: 12px;">
+                        <div class="progress-fill" style="width: 55%;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Activities Completed</div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-descriptor">Across 3 children</div>
+                    <div style="margin-top: 12px; display: flex; gap: 6px;">
+                        <span class="badge badge-success">3 Video</span>
+                        <span class="badge">4 Game</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Family Engagement</div>
+                    <div class="stat-value">6/7</div>
+                    <div class="stat-descriptor">Days with reflection shared</div>
+                    <div class="progress-bar" style="margin-top: 12px;">
+                        <div class="progress-fill" style="width: 86%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Your Children</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+                    <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.2s ease;" onclick="navigateTo('screen-8')">
+                        <div style="font-size: 40px; margin-bottom: 12px;">👧</div>
+                        <h4 style="margin-bottom: 8px; color: var(--primary);">Sarah (9)</h4>
+                        <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Last active: 2 hours ago</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Weekly time: 1h 30m</p>
+                    </div>
+                    <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.2s ease;">
+                        <div style="font-size: 40px; margin-bottom: 12px;">👦</div>
+                        <h4 style="margin-bottom: 8px; color: var(--primary);">Marcus (7)</h4>
+                        <p style="font-size: 13px; color: #666; margin-bottom: 12px;">Last active: 1 day ago</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 42%;"></div>
+                        </div>
+                        <p style="font-size: 12px; color: #666; margin-top: 8px;">Weekly time: 1h 15m</p>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-block" style="margin-top: 20px;">+ Add Another Child</button>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Quick Actions</h3>
+                <button class="btn btn-secondary btn-block" onclick="navigateTo('screen-4')">Browse Activities</button>
+                <button class="btn btn-outline btn-block" onclick="navigateTo('screen-7')">Schedule New Activity</button>
+                <button class="btn btn-outline btn-block" onclick="navigateTo('screen-5')">Parental Controls</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 4: Parent Activity Library -->
+<div class="screen" id="screen-4">
+    <div class="container">
+        <div class="header">
+            <h1>Activity Library</h1>
+            <p>Curated for growth & engagement</p>
+        </div>
+        <div class="content">
+            <div style="margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-primary" style="padding: 10px 16px; font-size: 13px;">All Activities</button>
+                <button class="btn btn-outline" style="padding: 10px 16px; font-size: 13px;">Videos</button>
+                <button class="btn btn-outline" style="padding: 10px 16px; font-size: 13px;">Games</button>
+                <button class="btn btn-outline" style="padding: 10px 16px; font-size: 13px;">Learning</button>
+            </div>
+
+            <div class="card-grid">
+                <div class="card-item" onclick="navigateTo('screen-6')">
+                    <div class="card-item-image">🎬</div>
+                    <div class="card-item-label">Forest Secrets<br><span style="font-size: 12px; color: #999;">Video • 8 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🌊</div>
+                    <div class="card-item-label">Ocean Life<br><span style="font-size: 12px; color: #999;">Video • 12 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🧩</div>
+                    <div class="card-item-label">Pattern Match<br><span style="font-size: 12px; color: #999;">Game • 5 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🌻</div>
+                    <div class="card-item-label">Plant Growth<br><span style="font-size: 12px; color: #999;">Learning • 6 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🎨</div>
+                    <div class="card-item-label">Color Lab<br><span style="font-size: 12px; color: #999;">Game • 10 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🐝</div>
+                    <div class="card-item-label">Pollination<br><span style="font-size: 12px; color: #999;">Video • 7 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🌙</div>
+                    <div class="card-item-label">Night Sky<br><span style="font-size: 12px; color: #999;">Learning • 8 min</span></div>
+                </div>
+                <div class="card-item">
+                    <div class="card-item-image">🌿</div>
+                    <div class="card-item-label">Seed Scatter<br><span style="font-size: 12px; color: #999;">Game • 4 min</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 5: Parent Parental Controls -->
+<div class="screen" id="screen-5">
+    <div class="container">
+        <div class="header">
+            <h1>Parental Controls</h1>
+            <p>Your safety settings</p>
+        </div>
+        <div class="content">
+            <div class="control-section">
+                <div class="control-section-title">⏰ Time Limits</div>
+                <div class="form-group">
+                    <label>Daily Limit for Sarah</label>
+                    <select>
+                        <option>15 minutes</option>
+                        <option>30 minutes</option>
+                        <option>45 minutes</option>
+                        <option>1 hour</option>
+                        <option>Unlimited</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Allowed Hours</label>
+                    <p style="font-size: 13px; color: #666; margin-bottom: 10px;">Activities available between:</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <input type="time" value="08:00" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px;">
+                            <p style="font-size: 12px; color: #666; margin-top: 4px;">Start time</p>
+                        </div>
+                        <div>
+                            <input type="time" value="20:00" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px;">
+                            <p style="font-size: 12px; color: #666; margin-top: 4px;">End time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <div class="control-section-title">🎯 Content Filtering</div>
+                <div class="toggle">
+                    <span class="toggle-label">Restrict to age-appropriate content</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Include learning activities only</span>
+                    <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Require parental review of reflections</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <div class="control-section-title">📢 Notifications</div>
+                <div class="toggle">
+                    <span class="toggle-label">Email me weekly summaries</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Notify when daily limit reached</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Ask for permission before new activity</span>
+                    <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" style="margin-top: 30px;">Save Settings</button>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 6: Parent Activity Details / Preview -->
+<div class="screen" id="screen-6">
+    <div class="container">
+        <div class="header">
+            <h1>Forest Secrets</h1>
+            <p>Nature • Video • 8 minutes</p>
+        </div>
+        <div class="content">
+            <div class="video-player">
+                <div class="video-player-content">🎬</div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">About This Activity</h3>
+                <p style="font-size: 15px; line-height: 1.6; color: #666; margin-bottom: 20px;">
+                    A beautifully filmed exploration of forest ecosystems. Children discover the hidden relationships between plants, animals, and seasons while building scientific curiosity.
+                </p>
+                <div style="background: rgba(45, 80, 22, 0.05); padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 8px;">Learning Goals</p>
+                    <ul style="font-size: 14px; color: #666; padding-left: 20px;">
+                        <li>Understand forest layers and biodiversity</li>
+                        <li>Observe seasonal changes in nature</li>
+                        <li>Build scientific thinking skills</li>
+                    </ul>
+                </div>
+
+                <p style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 8px;">Best For</p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <span class="badge">Ages 6+</span>
+                    <span class="badge">Science</span>
+                    <span class="badge">Nature</span>
+                </div>
+
+                <p style="font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 8px;">What You'll See</p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                    Gorgeous cinematography of forests, animals, insects, and plants. No fast cuts. No scary moments. Narration is calm and clear.
+                </p>
+
+                <button class="btn btn-primary btn-block btn-lg" onclick="navigateTo('screen-7')">Assign to Sarah</button>
+                <button class="btn btn-outline btn-block" style="margin-top: 10px;">Preview on Child Device</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 7: Parent Schedule / Assign Activity -->
+<div class="screen" id="screen-7">
+    <div class="container">
+        <div class="header">
+            <h1>Schedule Activity</h1>
+            <p>Forest Secrets → Sarah</p>
+        </div>
+        <div class="content">
+            <div class="schedule-section">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">When Should This Be Available?</h3>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date">
+                </div>
+                <div class="form-group">
+                    <label>End Date (optional)</label>
+                    <input type="date">
+                </div>
+                <div class="form-group">
+                    <label>Available Days</label>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" checked>
+                            <label>Monday</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" checked>
+                            <label>Tuesday</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" checked>
+                            <label>Wednesday</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" checked>
+                            <label>Thursday</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" checked>
+                            <label>Friday</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox">
+                            <label>Saturday</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Schedule Preferences</h3>
+                <div class="toggle">
+                    <span class="toggle-label">Send reminder before activity</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Require parental approval to start</span>
+                    <button class="toggle-switch" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Special Instructions</label>
+                    <textarea placeholder="e.g., Only after homework is done" rows="3"></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-block btn-lg" onclick="navigateTo('screen-3')">Schedule Activity</button>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 8: Parent Child Progress / Reports -->
+<div class="screen" id="screen-8">
+    <div class="container">
+        <div class="header">
+            <h1>Sarah's Progress</h1>
+            <p>Age 9 • Last active 2 hours ago</p>
+        </div>
+        <div class="content">
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-label">This Week</div>
+                    <div class="stat-value">1h 30m</div>
+                    <div class="stat-descriptor">Total time engaged</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Activities Completed</div>
+                    <div class="stat-value">4</div>
+                    <div class="stat-descriptor">This week</div>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-section-title">Recent Activities</div>
+                <div class="progress-item">
+                    <span class="progress-item-name">🎬 Forest Secrets</span>
+                    <span class="progress-item-stat">Completed</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-item-name">🧩 Pattern Match</span>
+                    <span class="progress-item-stat">85% Done</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-item-name">🌻 Plant Growth</span>
+                    <span class="progress-item-stat">Completed</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-item-name">🌊 Ocean Life</span>
+                    <span class="progress-item-stat">Completed</span>
+                </div>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-section-title">Learning Insights</div>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                    Sarah is showing strong engagement with science and nature content. She asked thoughtful questions during the forest video reflection. Consider assigning more exploration-focused activities.
+                </p>
+            </div>
+
+            <div class="progress-section">
+                <div class="progress-section-title">Recent Reflections Shared</div>
+                <div class="card" style="border: 2px solid var(--accent); margin-top: 12px;">
+                    <p style="font-size: 13px; color: #999; margin-bottom: 8px;">After Forest Secrets</p>
+                    <p style="font-style: italic; color: var(--dark-text);">"I liked learning about how the forest changes. I want to know more about insects."</p>
+                </div>
+                <div class="card" style="border: 2px solid var(--accent); margin-top: 12px;">
+                    <p style="font-size: 13px; color: #999; margin-bottom: 8px;">After Plant Growth</p>
+                    <p style="font-style: italic; color: var(--dark-text);">"It was fun to see how plants drink water. Can we grow something at home?"</p>
+                </div>
+            </div>
+
+            <button class="btn btn-outline btn-block" style="margin-top: 20px;">View Full Report</button>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 9: Parent Settings -->
+<div class="screen" id="screen-9">
+    <div class="container">
+        <div class="header">
+            <h1>Settings</h1>
+            <p>Account & preferences</p>
+        </div>
+        <div class="content">
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Account</h3>
+                <div class="setting-item" onclick="alert('Edit email')">
+                    <div>
+                        <div class="setting-item-label">Email Address</div>
+                        <p style="font-size: 13px; color: #666; margin-top: 4px;">parent@example.com</p>
+                    </div>
+                    <div class="setting-item-arrow">›</div>
+                </div>
+                <div class="setting-item" onclick="alert('Change password')" style="margin-top: 10px;">
+                    <div>
+                        <div class="setting-item-label">Password</div>
+                        <p style="font-size: 13px; color: #666; margin-top: 4px;">Last changed 3 months ago</p>
+                    </div>
+                    <div class="setting-item-arrow">›</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Notifications</h3>
+                <div class="setting-item">
+                    <span class="toggle-label">Weekly digest emails</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+                <div class="setting-item" style="margin-top: 10px;">
+                    <span class="toggle-label">Activity reminders</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Privacy</h3>
+                <div class="setting-item">
+                    <span class="toggle-label">Share anonymized usage data</span>
+                    <button class="toggle-switch active" onclick="this.classList.toggle('active')"></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">About</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 12px;">
+                    <strong>Version:</strong> 1.0.0<br>
+                    <strong>Last Updated:</strong> June 5, 2026
+                </p>
+                <button class="btn btn-outline btn-block" style="margin-top: 15px;">Privacy Policy</button>
+                <button class="btn btn-outline btn-block" style="margin-top: 10px;">Terms of Service</button>
+                <button class="btn btn-outline btn-block" onclick="navigateTo('screen-1')" style="margin-top: 10px; color: #999; border-color: #ddd;">Sign Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 10: Parent Help / Support -->
+<div class="screen" id="screen-10">
+    <div class="container">
+        <div class="header">
+            <h1>Help & Support</h1>
+            <p>We're here to help</p>
+        </div>
+        <div class="content">
+            <div class="contact-card">
+                <div class="contact-card-title">Questions?</div>
+                <div class="contact-card-text">
+                    Email us any time. We reply within 24 hours.
+                </div>
+                <button class="btn btn-lg" onclick="alert('Email: hello@lighttroupekids.com')">Contact Support</button>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I create an activity schedule?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Go to the Activity Library, select an activity, and click "Assign to Child." You can set specific days and times when the activity will be available.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What happens when the daily limit is reached?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        The activity will pause and your child will see a friendly message. As a parent, you receive a notification and can adjust the limit from your dashboard.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is lighttroupekids safe for my child?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. Every activity is personally reviewed. We comply with COPPA, never track personal data, and parents control all settings. See our Safety page for details.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I see what my child is doing?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes. You get weekly summaries, reflections from your child, and detailed progress reports. You control all visibility and notification settings.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">Resources</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="#" style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--primary); font-weight: 600;">→ Privacy & COPPA Compliance</a>
+                    <a href="#" style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--primary); font-weight: 600;">→ Getting Started Guide</a>
+                    <a href="#" style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--primary); font-weight: 600;">→ Parental Control Tips</a>
+                    <a href="#" style="padding: 12px; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--primary); font-weight: 600;">→ Screen Time & Child Development</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== CHILD SCREENS (10) ===================== -->
+
+<!-- Screen 11: Child Login / Entry -->
+<div class="screen" id="screen-11">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Hi there! 👋</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Ready to explore?</div>
+                    <div class="child-device-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <div style="font-size: 60px; margin-bottom: 20px;">🌱</div>
+                        <h2 style="font-family: var(--font-family-display); font-size: 24px; color: var(--primary); margin-bottom: 10px; font-weight: 400;">Who are you?</h2>
+                        <div style="margin-top: 30px; width: 100%;">
+                            <button class="btn btn-primary btn-block btn-touch btn-lg" onclick="navigateTo('screen-12')">Sarah (9)</button>
+                            <button class="btn btn-primary btn-block btn-touch btn-lg" style="margin-top: 12px;">Marcus (7)</button>
+                            <p style="font-size: 12px; color: #999; margin-top: 20px;">Ask your parent if you don't see your name</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 12: Child Activity Library Home -->
+<div class="screen" id="screen-12">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Your activities await</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Sarah's Library</div>
+                    <div class="child-device-content">
+                        <div class="child-greeting">Hello, Sarah! 👋</div>
+                        <p style="text-align: center; font-size: 14px; color: #666; margin-bottom: 30px;">Pick something fun to explore</p>
+
+                        <div class="card-grid" style="grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="card-item" onclick="navigateTo('screen-13')">
+                                <div class="card-item-image">🎬</div>
+                                <div class="card-item-label" style="font-size: 12px;">Forest Secrets</div>
+                            </div>
+                            <div class="card-item">
+                                <div class="card-item-image">🌊</div>
+                                <div class="card-item-label" style="font-size: 12px;">Ocean Life</div>
+                            </div>
+                            <div class="card-item">
+                                <div class="card-item-image">🧩</div>
+                                <div class="card-item-label" style="font-size: 12px;">Pattern Match</div>
+                            </div>
+                            <div class="card-item">
+                                <div class="card-item-image">🌻</div>
+                                <div class="card-item-label" style="font-size: 12px;">Plant Growth</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 13: Child Video Activity Intro -->
+<div class="screen" id="screen-13">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Get ready</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Forest Secrets</div>
+                    <div class="child-device-content">
+                        <div class="activity-preview">
+                            <div class="activity-icon">🎬</div>
+                            <h2 class="activity-title">Forest Secrets</h2>
+                            <p class="activity-subtitle">Explore the hidden life of forests</p>
+                            <p style="font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 30px;">
+                                Watch beautiful videos of trees, animals, and plants. Then tell us what you learned!
+                            </p>
+                            <div style="background: rgba(45, 80, 22, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                <p style="font-size: 13px; color: var(--primary); font-weight: 600;">⏱️ About 8 minutes</p>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-touch btn-block" onclick="navigateTo('screen-14')">▶ Start Watching</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 14: Child Video Player Interface -->
+<div class="screen" id="screen-14">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Watch & Learn</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Forest Secrets — Playing</div>
+                    <div class="child-device-content">
+                        <div class="video-player" style="margin-top: 0;">
+                            <div class="video-player-content">🎬 Video Playing</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <p style="font-size: 12px; color: #999; text-align: center; margin-top: 8px;">3:35 / 8:00</p>
+
+                        <div class="video-controls">
+                            <button class="play-button" style="background: var(--primary);">⏸</button>
+                        </div>
+
+                        <p style="font-size: 13px; color: #666; text-align: center; margin-top: 20px;">
+                            💡 You're learning about forest ecosystems!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 15: Child Post-Video Reflection/Choice -->
+<div class="screen" id="screen-15">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>You Did It! 🎉</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Tell Us What You Think</div>
+                    <div class="child-device-content">
+                        <div class="activity-preview">
+                            <div style="font-size: 50px; margin-bottom: 20px;">✨</div>
+                            <h3 style="font-family: var(--font-family-display); font-size: 20px; color: var(--primary); margin-bottom: 20px; font-weight: 400;">Great job watching Forest Secrets!</h3>
+                            <p style="font-size: 14px; color: #666; margin-bottom: 30px;">What did you think?</p>
+
+                            <div class="reflection-choice" onclick="this.style.borderColor='var(--primary)'; this.style.background='rgba(45,80,22,0.1)';">
+                                <div class="reflection-icon">😍</div>
+                                <div class="reflection-text">I loved it!</div>
+                            </div>
+                            <div class="reflection-choice">
+                                <div class="reflection-icon">👍</div>
+                                <div class="reflection-text">It was good</div>
+                            </div>
+                            <div class="reflection-choice">
+                                <div class="reflection-icon">🤔</div>
+                                <div class="reflection-text">It was okay</div>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-touch btn-block" style="margin-top: 25px;" onclick="navigateTo('screen-12')">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 16: Child Interactive Game Intro -->
+<div class="screen" id="screen-16">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Let's Play</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Pattern Match</div>
+                    <div class="child-device-content">
+                        <div class="activity-preview">
+                            <div class="activity-icon">🧩</div>
+                            <h2 class="activity-title">Pattern Match</h2>
+                            <p class="activity-subtitle">Find matching pairs</p>
+                            <p style="font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 30px;">
+                                Flip tiles to find patterns. Quick thinking helps! No timer—go at your own pace.
+                            </p>
+                            <button class="btn btn-primary btn-lg btn-touch btn-block" onclick="navigateTo('screen-17')">▶ Play Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 17: Child Game Interface (Gameplay State) -->
+<div class="screen" id="screen-17">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Playing Pattern Match</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Pattern Match — Score: 3/8</div>
+                    <div class="child-device-content">
+                        <p style="text-align: center; font-size: 14px; color: #666; margin-bottom: 20px;">Matches found: <strong>3 of 8</strong></p>
+
+                        <div class="game-grid">
+                            <div class="game-tile matched">🌳</div>
+                            <div class="game-tile">❓</div>
+                            <div class="game-tile">❓</div>
+                            <div class="game-tile">❓</div>
+                            <div class="game-tile matched">🌳</div>
+                            <div class="game-tile">❓</div>
+                            <div class="game-tile matched">🌻</div>
+                            <div class="game-tile">❓</div>
+                            <div class="game-tile matched">🌻</div>
+                        </div>
+
+                        <p style="text-align: center; font-size: 12px; color: #999; margin-top: 20px;">Tap tiles to flip them</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 18: Child Game Completion/Celebration -->
+<div class="screen" id="screen-18">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>You Won! 🏆</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Celebration!</div>
+                    <div class="child-device-content">
+                        <div class="celebration">
+                            <div class="celebration-icon">🎉</div>
+                            <div class="celebration-text">Perfect Match!</div>
+                            <div class="celebration-subtext">You found all the pairs!<br><strong>Time: 4:23</strong></div>
+
+                            <div style="background: rgba(90, 154, 92, 0.1); padding: 15px; border-radius: 8px; margin: 25px 0;">
+                                <p style="font-size: 13px; color: var(--success); font-weight: 600;">⭐ Great pattern recognition!</p>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-touch btn-block" onclick="navigateTo('screen-12')">Play Again or Explore More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 19: Child Learning Activity Intro -->
+<div class="screen" id="screen-19">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Discover & Learn</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Plant Growth Quiz</div>
+                    <div class="child-device-content">
+                        <div class="activity-preview">
+                            <div class="activity-icon">🌻</div>
+                            <h2 class="activity-title">Plant Growth</h2>
+                            <p class="activity-subtitle">Learn how plants grow</p>
+                            <p style="font-size: 14px; color: #666; line-height: 1.5; margin-bottom: 30px;">
+                                Explore questions about how plants grow from seeds. There's no wrong answer—just learning!
+                            </p>
+                            <button class="btn btn-primary btn-lg btn-touch btn-block" onclick="navigateTo('screen-20')">▶ Start Learning</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Screen 20: Child Learning Activity Interface -->
+<div class="screen" id="screen-20">
+    <div class="container">
+        <div class="header">
+            <h1>lighttroupekids</h1>
+            <p>Learning Activity</p>
+        </div>
+        <div class="content">
+            <div class="child-screen">
+                <div class="child-device">
+                    <div class="child-device-header">Question 1 of 3</div>
+                    <div class="child-device-content">
+                        <div class="learning-question">
+                            <div class="learning-question-text">🌱 What does a seed need to grow?</div>
+                            <div class="learning-options">
+                                <button class="learning-option" onclick="this.classList.toggle('selected')">Water & Sunlight</button>
+                                <button class="learning-option" onclick="this.classList.toggle('selected')">Just Water</button>
+                                <button class="learning-option" onclick="this.classList.toggle('selected')">Just Sunlight</button>
+                                <button class="learning-option" onclick="this.classList.toggle('selected')">Soil & Music</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-lg btn-touch btn-block" onclick="navigateTo('screen-12')" style="margin-top: 20px;">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+    <button class="nav-item" onclick="navigateTo('screen-1')">P1: Welcome</button>
+    <button class="nav-item" onclick="navigateTo('screen-2')">P2: Setup</button>
+    <button class="nav-item" onclick="navigateTo('screen-3')">P3: Dashboard</button>
+    <button class="nav-item" onclick="navigateTo('screen-4')">P4: Library</button>
+    <button class="nav-item" onclick="navigateTo('screen-5')">P5: Controls</button>
+    <button class="nav-item" onclick="navigateTo('screen-6')">P6: Details</button>
+    <button class="nav-item" onclick="navigateTo('screen-7')">P7: Schedule</button>
+    <button class="nav-item" onclick="navigateTo('screen-8')">P8: Progress</button>
+    <button class="nav-item" onclick="navigateTo('screen-9')">P9: Settings</button>
+    <button class="nav-item" onclick="navigateTo('screen-10')">P10: Help</button>
+    <button class="nav-item" onclick="navigateTo('screen-11')">C1: Login</button>
+    <button class="nav-item" onclick="navigateTo('screen-12')">C2: Library</button>
+    <button class="nav-item" onclick="navigateTo('screen-13')">C3: Video Intro</button>
+    <button class="nav-item" onclick="navigateTo('screen-14')">C4: Video Play</button>
+    <button class="nav-item" onclick="navigateTo('screen-15')">C5: Reflection</button>
+    <button class="nav-item" onclick="navigateTo('screen-16')">C6: Game Intro</button>
+    <button class="nav-item" onclick="navigateTo('screen-17')">C7: Gameplay</button>
+    <button class="nav-item" onclick="navigateTo('screen-18')">C8: Celebration</button>
+    <button class="nav-item" onclick="navigateTo('screen-19')">C9: Learn Intro</button>
+    <button class="nav-item" onclick="navigateTo('screen-20')">C10: Learning</button>
+</div>
+
+<script>
+    function navigateTo(screenId) {
+        // Hide all screens
+        const screens = document.querySelectorAll('.screen');
+        screens.forEach(screen => {
+            screen.classList.remove('active');
+        });
+
+        // Show target screen
+        const targetScreen = document.getElementById(screenId);
+        if (targetScreen) {
+            targetScreen.classList.add('active');
+            targetScreen.scrollTop = 0;
+        }
+
+        // Update nav items
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.classList.remove('active');
+        });
+        event.target.classList.add('active');
+    }
+
+    // Initialize with first screen
+    document.addEventListener('DOMContentLoaded', function() {
+        navigateTo('screen-1');
+    });
+</script>
+
+</body>
+</html>
