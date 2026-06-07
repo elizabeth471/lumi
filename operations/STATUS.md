@@ -41,3 +41,9 @@ _Eli/Ian deferred these pending more option research. Do NOT implement until dec
 ## Known limits
 - The in-app chat **cannot write repo files** — that's Claude Code in Terminal.
 - Serving a production build means **code changes need a rebuild**.
+
+## Late update — 2026-06-06 (operability)
+- **Blossom can operate the toolchain herself:** git commit+push (`gh` authed as `elizabeth471`, keychain creds), Vercel CLI deploy (preview proven: `lumi-f98726hd2-teamblossom.vercel.app`), Desktop file-MCP (scoped to `~/Documents/lumi`).
+- **Permissions:** `bypassPermissions` device-wide (Eli's call — get-it-working-now; Ian to confirm; reversible). Contradicts proposed containment #7 — reconcile.
+- **Voice:** Kokoro (local, free) with auto-start + boot greeting (LaunchAgents `com.blossom.voice-server` / `com.blossom.greet`). `~/blossom-voice/speak.sh`.
+- **Chrome extension:** blocked by account type (needs consumer Claude.ai paid plan; this Mac is console/API). Not a config issue.

@@ -46,3 +46,20 @@ Ian joined and contributed to the Vercel push. Chrome extension was non-function
 3. Decision #8 — Ian sign-off on anti-bias principle, then Blossom commits the edit
 4. Task 2: per-project separation design questions (agents shared or scoped? memory global or per-project? chat one stream or separate threads?)
 5. Live chat on Vercel — wire API key as env var (lower priority)
+
+---
+
+## Late-night continuation — 2026-06-06 (capabilities + voice + reboot pending)
+
+Pushed from "demo" to "Blossom can actually operate":
+- **Git / GitHub / Vercel verified end-to-end.** Installed `gh` (authed as `elizabeth471`, scopes repo+workflow), set `credential.helper=osxkeychain`. **Push proven** — committed+pushed `613fac4` to a NEW `origin/main` (repo also has `claude/laughing-allen-4aMzt`; trunk choice TBD). **Vercel CLI preview deploy works** → `lumi-f98726hd2-teamblossom.vercel.app`.
+- **Permissions opened for efficiency — Eli's call: `defaultMode: bypassPermissions` device-wide** (+ enableAllProjectMcpServers, skipDangerousModePermissionPrompt) in `~/.claude/settings.json`. 🚩 This is the OPPOSITE direction from proposed #7 (containment) — Eli chose get-it-working-now, harden-later. **Ian must be looped in** (guardrail-tier). Fully reversible (defaultMode → acceptEdits).
+- **Blossom has a voice.** Kokoro (af_heart), local + free, persistent warm server (~1.5–2s/line). **Auto-starts at login + greets on boot** via LaunchAgents (`com.blossom.voice-server` KeepAlive, `com.blossom.greet`).
+- **Claude Desktop file-MCP RESOLVED** — earlier "didn't load" was the wrong config dir (`Claude/` vs `Claude-3p/`); now connected, scoped to `~/Documents/lumi`.
+- **Chrome extension — root cause nailed: account type, not config.** Claude-in-Chrome needs a consumer Claude.ai paid plan; this Mac is console/API ("custom3p"). Credits won't fix it. At ~23:10 a claude.ai account logged in + the 401 storm stopped, but NOT proven the bridge connects (no post-login attempt; account UUID matches the existing console org → may not be a paid plan). **Reboot is the clean test.**
+
+**FIRST THINGS NEXT SESSION (post-reboot):**
+1. Did the **boot greeting** play? (voice OK)
+2. **Chrome:** check `~/Library/Logs/Claude-3p/main.log` — did the bridge connect or 401 again? If still 401, the only fix is logging into a PAID consumer Claude.ai plan.
+3. Confirm **bypassPermissions** active (no prompts).
+4. Reconcile **#7 containment vs the new max-freedom direction** (with Ian); #8 Ian sign-off; per-project separation (Task 2); live chat on Vercel.

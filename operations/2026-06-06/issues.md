@@ -24,3 +24,8 @@ type: issues
 - **UI/UX audit — deferred polish** — SVG nav icons, markdown rendering in Files, skeleton/loading states, profile-switch dropdown, mobile/responsive pass, `/design` token route, status-colour system. *Scoped follow-ups, lower priority than Week 3.*
 - **Run Blossom fully locally with strong reasoning** — open models on this hardware aren't there yet. *Revisit as open-weight models improve; keep architecture model-agnostic.*
 - **Wire live Claude API (Week 2) + persistent memory (Week 3)** — sequenced after the static Week 1 build. *Revisit next build session.*
+
+## Update — late 2026-06-06
+- ✅ **Claude Desktop file-MCP "not loading"** — RESOLVED. Root cause: config was in `~/Library/Application Support/Claude/` but this build reads `Claude-3p/`. Moved it; now connected + scoped to `~/Documents/lumi`. (Not a build/sandbox limit — just the wrong file.)
+- ✅ **Blossom had no voice** — adopted Kokoro (local neural TTS), persistent warm server + boot greeting via LaunchAgents.
+- 🔶 **Chrome extension** — root cause is NOT a config bug: **account-type mismatch.** Claude-in-Chrome requires a consumer Claude.ai paid plan; this Mac is console/API ("custom3p"). Not fixable by reconfiguring or adding API credits — only by logging into a paid consumer plan. Re-test post-reboot whether the 23:10 claude.ai login changes anything (unlikely unless it's paid).
