@@ -1,0 +1,22 @@
+{
+  "name": "lighttroupekids-prototype",
+  "version": "1.0.0",
+  "description": "Next.js prototype for lighttroupekids — 20 screens, parent + child experience",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "^25.9.2",
+    "@types/react": "^19.2.17",
+    "autoprefixer": "^10.5.0",
+    "next": "^14.2.35",
+    "postcss": "^8.5.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  }
+}
