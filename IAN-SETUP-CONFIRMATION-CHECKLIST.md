@@ -181,7 +181,78 @@ You see final result (fully tested)
 
 ---
 
-## Sign-Off Checklist
+## Section 6: Memory, Learning, and Code Architecture Review
+
+**What this is**: Technical review of whether our approach is sustainable long-term and won't create architecture problems.
+
+**Files to review**:
+- `/LEARNING-LOG-FRAMEWORK.md` — How I capture and learn from interactions
+- `/blossom-companion/` — Code structure for Electron app
+- `/prototype/` — Next.js prototype structure
+- Project root structure — How we're organizing everything
+
+**What I'm doing**:
+- Every session, I log what we set out to do, how we did it, what you accept as final
+- Monthly synthesis of patterns to improve future work
+- All logs in version control (Git) as Markdown files
+- Documentation accumulates (could get unwieldy long-term)
+
+**Potential concerns** (help me spot if these are real):
+- Will logging every session create maintenance burden?
+- Will documentation bloat make the repo hard to navigate?
+- Will learning logs become outdated/stale/useless?
+- Should we archive old logs periodically?
+- Is Markdown the right format, or should we use a database?
+- Will this approach scale if we have a full team (not just me)?
+
+**Your technical questions to consider**:
+
+- [ ] **Sustainability of learning protocol**: Can we keep logging every session for 12 months without it becoming a chore or bloat?
+  - If yes: How should we organize logs (by date, by agent, by project)?
+  - If no: What's a better lightweight approach?
+
+- [ ] **Code directory structure**: As we build more (prototype, companion, other projects), will the current structure stay clean?
+  - Current structure:
+    ```
+    /lumi/
+    ├── blossom-companion/     (Electron app)
+    ├── prototype/             (Next.js app)
+    ├── agents/                (Agent profiles)
+    ├── docs/                  (Documentation)
+    └── [root markdown files]  (Protocols, guides)
+    ```
+  - Questions: Should we move more into `/docs/`? Create `/learning-logs/`? Separate `/protocols/` from `/guides/`?
+
+- [ ] **Documentation format**: Markdown in Git works for now, but as we scale:
+  - Should we migrate learning logs to a database (so we can query/analyze)?
+  - Should we keep only recent logs in Git, archive older ones?
+  - Should we auto-generate summaries (monthly synthesis) to keep humans from having to read everything?
+
+- [ ] **Agent training data**: As I learn from logs, should I:
+  - Store patterns somewhere agents can access them (agent briefs)?
+  - Create specialized knowledge bases per agent (vs. everything in one place)?
+  - Version control the learned patterns (so we can see how they evolve)?
+
+- [ ] **Long-term memory**: Will I be able to read back 6 months of logs quickly?
+  - Should we create an index or search system?
+  - Should we auto-summarize old sessions (keep detail for recent, summaries for old)?
+  - Should we tag logs so I can find patterns by type (budget decisions, testing choices, etc.)?
+
+- [ ] **Scalability to team**: If we hire people or add more agents:
+  - Will the learning log approach still work, or does it only work 1:1?
+  - Should we formalize it (template-enforced, mandatory fields) vs. keep it flexible?
+  - How do we prevent logs from becoming noisy/low-signal as team grows?
+
+- [ ] **Code review concerns**: Is there anything in how we're building (code structure, dependency management, testing) that will cause problems later?
+  - Electron app dependencies getting stale?
+  - Next.js prototype scalability?
+  - Agent code (if we create specialized agents) — where should that live?
+
+**My approach**: I'm treating all three systems (Memory Logs, Code Architecture, Learning Protocol) as placeholders. You have the technical expertise to spot long-term problems I might not see.
+
+One thing I want to be clear about: **This isn't about justifying what I've built.** It's about getting your technical assessment: "Does this architecture scale? Will these protocols become a burden? What would you change if you were building this from scratch?"
+
+---
 
 **Before we start building**, please confirm:
 
@@ -199,6 +270,15 @@ You see final result (fully tested)
   
 - [ ] I understand how the three systems work together
   - Questions: _________________
+  
+- [ ] I've reviewed the Learning Log Framework — sustainable and scalable
+  - Changes needed: _________________
+  
+- [ ] I've assessed the code directory structure — won't create long-term problems
+  - Concerns: _________________
+  
+- [ ] I'm confident the protocols as-is won't cause architecture issues down the line
+  - Red flags: _________________
   
 - [ ] I'm ready to start work on [DATE/TIMELINE]
 
@@ -235,9 +315,10 @@ All of these are documented and ready for your review:
 | TESTING-PROTOCOL-FOR-IAN.md | How I test everything | 10 min |
 | RESOURCE-MANAGEMENT-SYSTEM.md | Budget + agent allocation | 10 min |
 | BLOSSOM-COMPANION-DEMO.html | Visual demo of the app | 5 min |
+| LEARNING-LOG-FRAMEWORK.md | How I learn from interactions | 10 min |
 | This file | Your sign-off checklist | 5 min |
 
-**Total review time**: ~35 minutes (can split across conversations)
+**Total review time**: ~45 minutes (can split across conversations)
 
 ---
 
