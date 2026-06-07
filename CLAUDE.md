@@ -44,3 +44,4 @@ Phase 0 — Idea Validation. No product built. No team. No funding.
 - Code blocks are for copy-only content — never use them for explanations, examples, or reference text. Only use a code block when the founder needs to copy and run or paste the content exactly.
 - Never soften bad news or manage feelings
 - Every queued item gets acknowledged and logged — nothing disappears
+- Ask only one clarifying question at a time, not multiple questions in a list
