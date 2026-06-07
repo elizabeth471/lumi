@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blossom Companion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="blossom-container">
+    <!-- Header -->
+    <div class="blossom-header">
+      <div class="header-content">
+        <h1>Blossom</h1>
+        <span class="app-status" id="appStatus">Ready</span>
+      </div>
+      <div class="header-controls">
+        <button id="settingsBtn" class="control-btn" title="Settings">⚙️</button>
+        <button id="minimizeBtn" class="control-btn" title="Minimize">−</button>
+        <button id="closeBtn" class="control-btn" title="Close">×</button>
+      </div>
+    </div>
+
+    <!-- Blossom Character -->
+    <div class="blossom-character-container">
+      <svg
+        class="blossom-character"
+        id="blossomCharacter"
+        viewBox="0 0 200 280"
+        width="200"
+        height="280"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Pot -->
+        <path
+          class="pot"
+          d="M 60 200 Q 50 200 50 210 L 50 240 Q 50 250 60 250 L 140 250 Q 150 250 150 240 L 150 210 Q 150 200 140 200"
+          fill="#d4a574"
+          stroke="#9d7e54"
+          stroke-width="2"
+        />
+
+        <!-- Soil -->
+        <ellipse class="soil" cx="100" cy="205" rx="40" ry="8" fill="#8b7355" opacity="0.6" />
+
+        <!-- Main stem -->
+        <line class="stem" x1="100" y1="205" x2="100" y2="80" stroke="#5a8a50" stroke-width="4" stroke-linecap="round" />
+
+        <!-- Left leaf -->
+        <ellipse
+          class="leaf leaf-left"
+          cx="70"
+          cy="120"
+          rx="20"
+          ry="35"
+          fill="#6ba85e"
+          stroke="#5a8a50"
+          stroke-width="1"
+          transform="rotate(-35 70 120)"
+        />
+
+        <!-- Right leaf -->
+        <ellipse
+          class="leaf leaf-right"
+          cx="130"
+          cy="120"
+          rx="20"
+          ry="35"
+          fill="#7bc770"
+          stroke="#5a8a50"
+          stroke-width="1"
+          transform="rotate(35 130 120)"
+        />
+
+        <!-- Main bloom (cactus flower) -->
+        <g class="bloom-group" transform="translate(100, 60)">
+          <!-- Petals -->
+          <circle class="petal petal-1" cx="0" cy="-25" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+          <circle class="petal petal-2" cx="22" cy="-13" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+          <circle class="petal petal-3" cx="22" cy="13" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+          <circle class="petal petal-4" cx="0" cy="25" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+          <circle class="petal petal-5" cx="-22" cy="13" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+          <circle class="petal petal-6" cx="-22" cy="-13" r="15" fill="#f5c88f" stroke="#e8b76a" stroke-width="1" />
+
+          <!-- Center -->
+          <circle class="bloom-center" cx="0" cy="0" r="12" fill="#e8d4b8" stroke="#c9b89c" stroke-width="1" />
+
+          <!-- Spines -->
+          <g class="spines">
+            <line class="spine" x1="0" y1="0" x2="0" y2="-8" stroke="#5a8a50" stroke-width="1" />
+            <line class="spine" x1="0" y1="0" x2="6" y2="-4" stroke="#5a8a50" stroke-width="1" />
+            <line class="spine" x1="0" y1="0" x2="6" y2="4" stroke="#5a8a50" stroke-width="1" />
+            <line class="spine" x1="0" y1="0" x2="0" y2="8" stroke="#5a8a50" stroke-width="1" />
+            <line class="spine" x1="0" y1="0" x2="-6" y2="4" stroke="#5a8a50" stroke-width="1" />
+            <line class="spine" x1="0" y1="0" x2="-6" y2="-4" stroke="#5a8a50" stroke-width="1" />
+          </g>
+        </g>
+
+        <!-- Eyes (appears in certain states) -->
+        <g class="eyes" opacity="0">
+          <circle class="eye-left" cx="85" cy="70" r="4" fill="#2c3e2c" />
+          <circle class="eye-right" cx="115" cy="70" r="4" fill="#2c3e2c" />
+          <circle class="pupil-left" cx="85" cy="70" r="2" fill="#ffffff" />
+          <circle class="pupil-right" cx="115" cy="70" r="2" fill="#ffffff" />
+        </g>
+      </svg>
+
+      <!-- Thinking indicator -->
+      <div class="thinking-indicator" id="thinkingIndicator">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+
+    <!-- Status message -->
+    <div class="status-message" id="statusMessage">
+      Ready to help
+    </div>
+
+    <!-- Thinking process display -->
+    <div class="thinking-process" id="thinkingProcess" style="display: none;">
+      <div class="thinking-header">Thinking...</div>
+      <div class="thinking-steps" id="thinkingSteps"></div>
+    </div>
+
+    <!-- Main content area -->
+    <div class="content-area" id="contentArea">
+      <!-- Dynamic content loads here -->
+    </div>
+
+    <!-- Settings panel (hidden by default) -->
+    <div class="settings-panel" id="settingsPanel" style="display: none;">
+      <div class="settings-header">
+        <h2>Settings</h2>
+        <button class="close-settings" id="closeSettingsBtn">×</button>
+      </div>
+      <div class="settings-content">
+        <div class="setting-item">
+          <label for="themeToggle">Always on top</label>
+          <input type="checkbox" id="alwaysOnTopToggle" checked>
+        </div>
+        <div class="setting-item">
+          <label for="animationSpeed">Animation speed</label>
+          <input type="range" id="animationSpeed" min="0.5" max="2" step="0.1" value="1">
+        </div>
+        <div class="setting-item">
+          <label for="opacitySlider">Window opacity</label>
+          <input type="range" id="opacitySlider" min="0.5" max="1" step="0.05" value="0.95">
+        </div>
+        <div class="setting-item">
+          <label for="thinkingToggle">Show thinking process</label>
+          <input type="checkbox" id="thinkingToggle" checked>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

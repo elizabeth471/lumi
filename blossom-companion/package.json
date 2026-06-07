@@ -1,0 +1,37 @@
+{
+  "name": "blossom-companion",
+  "version": "1.0.0",
+  "description": "Tier 3 Blossom Desktop Companion - Always-visible AI assistant with animated states",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac",
+    "build:win": "electron-builder --win"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "electron-squirrel-startup": "^1.1.0"
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest",
+    "cross-env": "^7.0.3"
+  },
+  "build": {
+    "appId": "com.lumi.blossom-companion",
+    "productName": "Blossom Companion",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "target": ["nsis", "portable"]
+    }
+  }
+}

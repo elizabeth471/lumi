@@ -1,0 +1,93 @@
+{
+  "window": {
+    "width": 350,
+    "height": 500,
+    "x": null,
+    "y": null
+  },
+  "appearance": {
+    "theme": "light",
+    "scale": 1,
+    "position": "right",
+    "opacity": 0.95,
+    "alwaysOnTop": true,
+    "showOnStartup": true,
+    "hideOnBlur": false
+  },
+  "animation": {
+    "enabled": true,
+    "speed": 1,
+    "showThinkingProcess": true,
+    "thinkingIndicator": "pulse",
+    "states": {
+      "idle": {
+        "duration": 3000,
+        "loop": true,
+        "animation": "gentle-bob"
+      },
+      "thinking": {
+        "duration": null,
+        "loop": true,
+        "animation": "thinking-pulse",
+        "showThinkingText": true
+      },
+      "speaking": {
+        "duration": null,
+        "loop": true,
+        "animation": "speaking-bounce"
+      },
+      "processing": {
+        "duration": null,
+        "loop": true,
+        "animation": "processing-spin"
+      },
+      "celebrating": {
+        "duration": 2000,
+        "loop": false,
+        "animation": "celebration-jump"
+      }
+    }
+  },
+  "colors": {
+    "primary": "#5a8a50",
+    "accent": "#8fbc8f",
+    "background": "#f5f1e8",
+    "text": "#2c3e2c",
+    "thinking": "#e8d4b8",
+    "success": "#6ba85e",
+    "error": "#c85a54"
+  },
+  "typography": {
+    "fontFamily": "system-ui, -apple-system, sans-serif",
+    "fontSize": {
+      "body": 14,
+      "status": 12,
+      "thinking": 13
+    },
+    "lineHeight": 1.5
+  },
+  "integration": {
+    "blossomOsUrl": "file://./blossom-platform.html",
+    "autoConnect": true,
+    "syncInterval": 5000,
+    "maxSyncRetries": 3
+  },
+  "messages": {
+    "idle": [
+      "I'm here to help.",
+      "Ready when you are.",
+      "Let me know if you need anything."
+    ],
+    "thinking": "Thinking...",
+    "processing": "Working on that...",
+    "error": "Something went wrong. Let's try again.",
+    "thinkingProcessShown": true,
+    "showTokenCount": false
+  },
+  "accessibility": {
+    "highContrast": false,
+    "reduceMotion": false,
+    "screenReaderMode": false,
+    "keyboardNavigationOnly": false
+  }
+}
