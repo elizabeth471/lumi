@@ -1854,8 +1854,27 @@ What other projects do you have in mind? I can assess feasibility and scope for 
 • <strong>Technical Brief:</strong> Full architecture breakdown<br>
 • <strong>Agents:</strong> Sage (research), Reed (writing), Dev (code), Grove (design), Willow (compliance)<br><br>
 What would help you most right now? Review the prototype? Discuss the stack choice (Next.js vs Godot)? Something else?`;
+      } else if (textLower.includes('change') || textLower.includes('fix') || textLower.includes('add') || textLower.includes('modify') || textLower.includes('improve')) {
+        response = `Got it. You want to change/add/improve something on the platform. Here's how this works:<br><br>
+<strong>Option 1: Wishlist</strong> — I log it, schedule with the team for future work<br>
+<strong>Option 2: Schedule</strong> — Pick a timeline (next week, next month), I coordinate the build<br>
+<strong>Option 3: Do it now</strong> — I show you exactly what I'm changing, you confirm before I commit<br><br>
+What's your preference? And what specifically do you want to change?`;
+      } else if (textLower.includes('wishlist') || textLower.includes('future') || textLower.includes('queue')) {
+        response = `Perfect. I'm logging this to the Blossom OS Wishlist. Grove, Reed, Dev, and I will review it and schedule it for a future sprint.<br><br>
+What do you want added to the wishlist? (Be specific — what feature, what it does, why it matters)`;
+      } else if (textLower.includes('now') || textLower.includes('immediately') || textLower.includes('right now')) {
+        response = `<strong>Live editing mode activated.</strong> I'm going to:<br>
+1. Show you the file I'm editing (blossom-platform.html)<br>
+2. Show you the specific change I'm making<br>
+3. Make the change<br>
+4. Ask: "Does this look right?"<br>
+5. You confirm or ask me to adjust<br>
+6. I commit and push<br><br>
+What specifically should I change? (Include: what view/feature, what it looks like now, what you want instead)`;
       } else {
-        response = `I'm tracking that. Let me be direct: I'm here to move fast on lighttroupekids, but also to document how we work together so we improve at this process. Every conversation with you teaches the team something.<br><br>What's your priority right now?`;
+        response = `I'm tracking that. Let me be direct: I'm here to move fast on lighttroupekids, but also to document how we work together so we improve at this process. Every conversation with you teaches the team something.<br><br>
+Before you go — anything you want to change or add to the Blossom platform? (Wishlist, schedule a change, or do it right now?)`;
       }
     } else {
       // Original generic responses for founder
