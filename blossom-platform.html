@@ -1843,8 +1843,19 @@ function sendMsg() {
 What other projects do you have in mind? I can assess feasibility and scope for you.`;
       } else if (textLower.includes('what else') || textLower.includes('other things') || textLower.includes('capabilities')) {
         response = `I can help with any project that needs research, strategy, design, writing, or code prototypes. Market validation? I can run simulated user interviews. Business plan? I can model financials. Branding? Design system? Technical architecture? I have teams ready for all of it.<br><br>The constraint isn't what we can do — it's accuracy. I promise only what I can do reliably. What's on your mind?`;
+      } else if (textLower.includes('prefer') || textLower.includes('communicate') || textLower.includes('chat') || textLower.includes('voice') || textLower.includes('async') || textLower.includes('schedule') || textLower.includes('timezone')) {
+        // Ian is telling us his preferences
+        response = `Got it. So you prefer <strong>${text}</strong> — I'm logging that now. This is how we'll work going forward.<br><br>A few things I'm documenting: your communication preference, your schedule, your working style. This helps me and the team serve you better and learn from the process.<br><br>Now — ready to dive into the prototype, or is there something else you want to clarify first?`;
+      } else if (textLower.includes('yes') || textLower.includes('sounds good') || textLower.includes('confirmed') || textLower.includes('correct')) {
+        // Ian is confirming something I suggested
+        response = `Confirmed and logged. I'll reference this going forward.<br><br>Alright — here's what's ready for you:<br>
+• <strong>Mockups:</strong> 20 screens (parent + child experience)<br>
+• <strong>Prototype:</strong> Running Next.js app with all screens<br>
+• <strong>Technical Brief:</strong> Full architecture breakdown<br>
+• <strong>Agents:</strong> Sage (research), Reed (writing), Dev (code), Grove (design), Willow (compliance)<br><br>
+What would help you most right now? Review the prototype? Discuss the stack choice (Next.js vs Godot)? Something else?`;
       } else {
-        response = `Understood. I'm here to support your assessment of the prototype and the technical direction. I can activate agents based on what you need — research, code review, architecture advice, you name it. What's your next move?`;
+        response = `I'm tracking that. Let me be direct: I'm here to move fast on lighttroupekids, but also to document how we work together so we improve at this process. Every conversation with you teaches the team something.<br><br>What's your priority right now?`;
       }
     } else {
       // Original generic responses for founder
@@ -2016,12 +2027,12 @@ const users = {
     name: 'Ian',
     avatar: '🚀',
     role: 'ian',
-    greeting: 'Welcome, Ian. I\'m Blossom, the agent orchestrator for Lumi. Before you dive into the prototype, tell me: what do you need from me right now?',
-    briefIntro: 'I have your onboarding materials ready, the prototype is running, and I can activate agents on demand. What\'s your priority?',
+    greeting: 'Welcome, Ian. Before we dive in, I want to set up how we work together. A few quick things.',
+    briefIntro: 'This isn\'t just about building lighttroupekids — it\'s about learning how to build efficiently with AI agents. Every step, every decision, every inefficiency gets documented. We\'re building a platform that teaches us how to do this better.',
     briefQs: [
-      'Need technical architecture review? (Sage can research + brief)',
-      'Want to discuss the stack choice? (Design + Dev agents ready)',
-      'Ready to review code? (I can walk you through the prototype)',
+      'How do you prefer to interact? (Chat here, voice, async, real-time?)',
+      'What timezone/schedule works for you?',
+      'Anything I should know about how you like to work?',
     ],
   },
 };
@@ -2063,19 +2074,41 @@ function loginAs(role) {
     </div>`;
     chatBox.appendChild(materialLink);
 
-    // Add note about additional capabilities
+    // Add context about the learning mission
     setTimeout(() => {
-      const capabilitiesNote = document.createElement('div');
-      capabilitiesNote.className = 'msg';
-      capabilitiesNote.innerHTML = `<div class="msg-av">🌵</div><div>
+      const missionNote = document.createElement('div');
+      missionNote.className = 'msg';
+      missionNote.innerHTML = `<div class="msg-av">🌵</div><div>
         <div class="msg-bubble">
-          <strong>One more thing:</strong> I'm not limited to lighttroupekids. If you have other projects in mind — market research, business strategy, design, code prototypes, financial modeling — I coordinate agents for that too. I only promise what I can do reliably. Ask me about other projects if you're curious.
+          <strong>Here's what we've built in the last 24 hours:</strong><br>
+          • 20 interactive mockup screens (Grove — Visual Designer)<br>
+          • Complete copy & brand voice (Reed — Writer)<br>
+          • Next.js prototype with all screens as components (Dev Agent)<br>
+          • Technical architecture brief for you<br>
+          • This platform, with agent coordination system<br><br>
+          <strong>Why you're seeing this:</strong> Every step — every delay, every decision, every inefficiency — gets documented. We're learning how to build products efficiently with AI agents. You're joining a system that improves itself.
         </div>
-        <div class="msg-time">Blossom · Note</div>
+        <div class="msg-time">Blossom · Context</div>
       </div>`;
-      chatBox.appendChild(capabilitiesNote);
+      chatBox.appendChild(missionNote);
       chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
+    }, 1200);
+
+    // Ask about preferences
+    setTimeout(() => {
+      const prefsNote = document.createElement('div');
+      prefsNote.className = 'msg';
+      prefsNote.innerHTML = `<div class="msg-av">🌵</div><div>
+        <div class="msg-bubble">
+          <strong>Let's set up how we work together:</strong><br>
+          How do you prefer to communicate — chat here, voice calls, async (take your time), real-time, something else?<br><br>
+          And before I log your preferences: does this sound right — "Ian prefers [how you like to work]"? I want to confirm before I document it.
+        </div>
+        <div class="msg-time">Blossom · Setup</div>
+      </div>`;
+      chatBox.appendChild(prefsNote);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 2400);
 
     setTimeout(() => {
       toast('Welcome, Ian', 'Prototype ready. What\'s your priority?', '🚀', 6000);
