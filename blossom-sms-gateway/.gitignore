@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Secrets
+.env
+.env.local
+.env.*.local
+
+# Environment
+.DS_Store
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Testing
+test-results/
+coverage/
