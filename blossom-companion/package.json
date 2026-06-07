@@ -11,12 +11,11 @@
     "build:win": "electron-builder --win"
   },
   "dependencies": {
-    "electron-store": "^8.1.0",
-    "electron-squirrel-startup": "^1.1.0"
+    "electron-store": "^8.1.0"
   },
   "devDependencies": {
-    "electron": "^latest",
-    "electron-builder": "^latest",
+    "electron": "latest",
+    "electron-builder": "latest",
     "cross-env": "^7.0.3"
   },
   "build": {
