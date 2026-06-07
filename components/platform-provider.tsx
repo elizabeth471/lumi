@@ -20,7 +20,7 @@ export interface User {
   role: Role;
 }
 
-// The two members of the Lumi team — equal partners, no hierarchy.
+// The two members of the LightTroupeKids team — equal partners, no hierarchy.
 export const USERS: Record<Role, User> = {
   eli: { name: "Eli", avatar: "🌱", role: "eli" },
   ian: { name: "Ian", avatar: "⚡", role: "ian" },
@@ -81,6 +81,16 @@ export function PlatformProvider({ children }: { children: React.ReactNode }) {
 
   // Auth gate — read the selected profile, bounce to /login if missing.
   useEffect(() => {
+    // localhost-only preview mode for capturing screenshots (never on the public tunnel).
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname === "localhost" &&
+      new URLSearchParams(window.location.search).get("preview") === "1"
+    ) {
+      setUser(USERS.eli);
+      setReady(true);
+      return;
+    }
     const role = (typeof window !== "undefined" &&
       localStorage.getItem("lumi_user")) as Role | null;
     if (role && USERS[role]) {

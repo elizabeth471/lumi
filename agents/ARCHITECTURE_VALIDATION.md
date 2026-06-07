@@ -1,9 +1,9 @@
-# Lumi Agent Architecture — Research Validation
+# LightTroupeKids Agent Architecture — Research Validation
 
 **Date:** June 2026
 **Method:** Multi-source deep research (academic papers, primary engineering sources, regulatory bodies), adversarial cross-checking across five independent search angles.
 
-This document records why the Lumi agent system is structured the way it is. It exists so future decisions don't quietly re-introduce the failure modes the research warned against.
+This document records why the LightTroupeKids agent system is structured the way it is. It exists so future decisions don't quietly re-introduce the failure modes the research warned against.
 
 ---
 

@@ -1,4 +1,4 @@
-# Technical Co-Founder Onboarding — Lumi
+# Technical Co-Founder Onboarding — LightTroupeKids
 **Prepared by Blossom · Delivered on first login**
 **Confidential — Internal only**
 
@@ -10,17 +10,17 @@ Read this fully before your first session. It will save both of you time.
 
 ---
 
-## What Lumi Is
+## What LightTroupeKids Is
 
 A children's screen time product designed to give kids safe, enriching digital interaction — specifically structured around supervised video experiences, phone-free community support, and multilingual engagement.
 
 The core belief: the only screen time worth allowing is screen time that brings families closer.
 
-**The problem it solves:** Parents are caught between two bad options — give their child a smartphone (safety, content, and social risks) or hold the line (social exclusion, kids feel left out). Lumi is a third option: a device and platform designed specifically for children that satisfies the social and digital pressure kids face, without the risks of a smartphone.
+**The problem it solves:** Parents are caught between two bad options — give their child a smartphone (safety, content, and social risks) or hold the line (social exclusion, kids feel left out). LightTroupeKids is a third option: a device and platform designed specifically for children that satisfies the social and digital pressure kids face, without the risks of a smartphone.
 
 **Target market:** Parents of children aged 6–12, specifically families who are screen-time-conscious, multilingual, or neurodivergent-aware. Wave 1 focus: the phone-free movement community, which is organized, vocal, and actively looking for alternatives.
 
-**Why now:** The phone-free school movement is growing fast. Jonathan Haidt's research on smartphones and adolescent mental health has created mainstream parent anxiety. The market is asking for exactly what Lumi is proposing to build.
+**Why now:** The phone-free school movement is growing fast. Jonathan Haidt's research on smartphones and adolescent mental health has created mainstream parent anxiety. The market is asking for exactly what LightTroupeKids is proposing to build.
 
 ---
 
@@ -79,7 +79,7 @@ The founder runs the company through Blossom OS — the same platform you're loo
 
 ## The Agent Team — What It Is and How to Use It
 
-Lumi is run with an AI agent team. This is not a gimmick — it's how the company operates at Phase 0 with two people and no budget. You need to understand it to work effectively here.
+LightTroupeKids is run with an AI agent team. This is not a gimmick — it's how the company operates at Phase 0 with two people and no budget. You need to understand it to work effectively here.
 
 **Blossom** (you're talking to her now) — Admin orchestrator. She coordinates everything: threads, decisions, backlog, morning briefs, session wraps. She doesn't make consequential decisions — she prepares them for humans. Think of her as the most reliable EA you've ever had, except she never loses context and never softens bad news.
 
@@ -117,7 +117,7 @@ Read it before your first working session. The short version:
 
 1. It's small enough to finish quickly and show real output
 2. It's high enough value that finishing it matters (the founder uses it every day)
-3. The architecture you design here — multi-agent AI, persistent memory, real-time streaming — is the same architecture Lumi's product will use. You're building skills and infrastructure in parallel.
+3. The architecture you design here — multi-agent AI, persistent memory, real-time streaming — is the same architecture LightTroupeKids's product will use. You're building skills and infrastructure in parallel.
 4. It reveals your technical instincts. How you structure the codebase, what you abstract vs. hardcode, what you ask vs. decide alone — all of it is visible.
 
 **The test:** The founder will judge your fit for this role as much by how you work as by what you build. Clear communication, honest estimates, and early delivery of small things beats a perfect spec delivered late.
@@ -145,7 +145,7 @@ A few things worth knowing before you talk to them:
 
 **They communicate in streams.** Ideas arrive in clusters — a question about the name, then a thought about the kids, then something about a feature, all in the same message. Blossom's job is to organize this. Your job is to not be confused by it.
 
-**They are learning.** The founder has said explicitly: the investment in Lumi is partly about learning to build something complex with AI. They are not pretending to know things they don't. They expect the same from you. "I don't know, let me find out" is always the right answer over a confident wrong one.
+**They are learning.** The founder has said explicitly: the investment in LightTroupeKids is partly about learning to build something complex with AI. They are not pretending to know things they don't. They expect the same from you. "I don't know, let me find out" is always the right answer over a confident wrong one.
 
 **They don't want managed feelings.** No diplomatic softening, no leading with positives before delivering a problem. If something is broken, say it's broken. They will respect that.
 
@@ -233,7 +233,7 @@ Blossom is here when you have questions. She knows everything in this document a
 
 ---
 
-*Prepared by Blossom — Lumi Admin Orchestrator*
+*Prepared by Blossom — LightTroupeKids Admin Orchestrator*
 *Delivered on first login to: Tech Co-Founder*
 *Document version: 1.0 — June 2026*
 *Classification: Internal / Confidential*

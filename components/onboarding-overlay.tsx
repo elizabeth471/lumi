@@ -17,7 +17,7 @@ export default function OnboardingOverlay() {
         <div className="ob-header">
           <div style={{ fontSize: 22 }}>⚡</div>
           <div className="ob-header-info">
-            <div className="ob-title">Welcome to Lumi — Team Briefing</div>
+            <div className="ob-title">Welcome to LightTroupeKids — Team Briefing</div>
             <div className="ob-sub">Prepared by Blossom · Read before your first conversation</div>
           </div>
           <button className="ob-close" onClick={close}>
@@ -27,7 +27,7 @@ export default function OnboardingOverlay() {
 
         <div className="ob-body">
           <div className="ob-section">
-            <div className="ob-label">What Lumi Is</div>
+            <div className="ob-label">What LightTroupeKids Is</div>
             <div className="ob-text">
               <p>
                 A children&apos;s screen time product — safe, enriching digital interaction for kids aged 6–12.
@@ -92,7 +92,7 @@ export default function OnboardingOverlay() {
               <div className="ob-li">Stack: Next.js · Tailwind · Clerk · Supabase · Anthropic SDK · Vercel</div>
               <div className="ob-li">Week 1: static prototype deployed. Week 2: Claude API live. Week 3: persistent memory.</div>
               <div className="ob-li">First test: deploy the static app in under 4 hours. That&apos;s your signal to the founder.</div>
-              <div className="ob-li">This platform is also the architecture blueprint for the Lumi product itself — not throwaway code.</div>
+              <div className="ob-li">This platform is also the architecture blueprint for the LightTroupeKids product itself — not throwaway code.</div>
             </div>
           </div>
 

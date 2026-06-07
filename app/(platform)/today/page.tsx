@@ -178,7 +178,7 @@ export default function TodayPage() {
             <h2 className="card-label">Morning Brief — June 5</h2>
             <div className="card-body">
               {isCofounder
-                ? "First login detected. Full onboarding briefing is ready — it covers Lumi, your role, the agent team, and your first deliverable."
+                ? "First login detected. Full onboarding briefing is ready — it covers LightTroupeKids, your role, the agent team, and your first deliverable."
                 : "Four active threads. Naming search (Jelex is cleanest candidate), James & Alexander advisory structure, new Mac setup, and Blossom UI design. No time-sensitive deadlines today."}
             </div>
             <div className="brief-qs">

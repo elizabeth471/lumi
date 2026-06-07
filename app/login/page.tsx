@@ -32,7 +32,7 @@ export default function Login() {
 
   return (
     <div id="login-screen">
-      <div className="login-logo">Lumi</div>
+      <div className="login-logo">LightTroupeKids</div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
         <div style={{ width: 80, height: 96, position: "relative", animation: "bob 3s ease-in-out infinite" }}>
@@ -65,13 +65,13 @@ export default function Login() {
         <div className="login-card" onClick={() => loginAs("eli")}>
           <div className="login-card-avatar" style={{ background: "#3a2a18" }}>🌱</div>
           <div className="login-card-name">Eli</div>
-          <div className="login-card-role">Lumi</div>
+          <div className="login-card-role">LightTroupeKids</div>
         </div>
 
         <div className="login-card" onClick={() => loginAs("ian")}>
           <div className="login-card-avatar" style={{ background: "#1a2830" }}>⚡</div>
           <div className="login-card-name">Ian</div>
-          <div className="login-card-role">Lumi</div>
+          <div className="login-card-role">LightTroupeKids</div>
         </div>
       </div>
 

@@ -18,7 +18,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   return (
     <aside className="sidebar">
-      <div className="logo">Lumi</div>
+      <div className="logo">LightTroupeKids</div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
         <BlossomCharacter />

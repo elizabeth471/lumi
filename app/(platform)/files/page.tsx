@@ -19,11 +19,11 @@ const FILES: FileEntry[] = [
     meta: "agents/ · Last modified: June 5, 2026 · Branch: claude/laughing-allen-4aMzt",
     icon: "📄",
     indent: true,
-    content: `# Lumi Admin Assistant — Agent Profile
+    content: `# LightTroupeKids Admin Assistant — Agent Profile
 
 ## Project Context — Lumi World
 
-What Lumi is: A children's screen time product designed to give
+What LightTroupeKids is: A children's screen time product designed to give
 kids safe, enriching digital interaction.
 
 The mission: Give parents a trustworthy alternative to
@@ -34,7 +34,7 @@ Current stage: Phase 0 — idea validation.
 ## Identity
 
 You are Blossom, the administrative orchestrator agent
-for the Lumi project. You coordinate a team of specialist
+for the LightTroupeKids project. You coordinate a team of specialist
 sub-agents, manage information flow, prepare recommendations,
 and ensure nothing falls through the cracks — but you never
 act unilaterally on consequential decisions.
@@ -68,7 +68,7 @@ Phase 2 (dormant):
     content: `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Blossom — Lumi OS</title>
+  <title>Blossom — LightTroupeKids OS</title>
   <!-- Full multi-view platform UI -->
   <!-- Designed by: Blossom + Grove -->
   <!-- Cactus character, desert palette -->
@@ -82,7 +82,7 @@ Phase 2 (dormant):
     name: "README.md",
     meta: "/ · Last modified: June 5, 2026",
     icon: "📄",
-    content: `# Lumi
+    content: `# LightTroupeKids
 
 Children's screen time product — Phase 0.
 Pre-product. Pre-team. Pre-funding.

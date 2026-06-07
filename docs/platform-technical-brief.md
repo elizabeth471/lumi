@@ -1,4 +1,4 @@
-# Lumi Platform — Technical Brief
+# LightTroupeKids Platform — Technical Brief
 **Version 1.0 — June 2026**
 **Status: Pre-build. Awaiting entity formation and developer.**
 
@@ -6,11 +6,11 @@
 
 ## What You're Building
 
-A browser-based AI operating system for the Lumi company. It has two functions:
+A browser-based AI operating system for the LightTroupeKids company. It has two functions:
 
 1. **Blossom OS** — the founder's internal admin platform: persistent multi-agent chat, backlog, threads, decisions, and session memory. The founder's primary interface for running the company with AI assistance.
 
-2. **Lumi Ops Platform** — the same shell, extended for the full team in Phase 1 and 2. Co-founders, contractors, and advisors log in and use the same system. Agents activate as the team grows.
+2. **LightTroupeKids Ops Platform** — the same shell, extended for the full team in Phase 1 and 2. Co-founders, contractors, and advisors log in and use the same system. Agents activate as the team grows.
 
 These are not two separate projects. They are one platform built in two stages. Everything built for Blossom in Stage 1 is used and extended in Stage 2. No throwaway code.
 
@@ -313,7 +313,7 @@ lumi/
 - Slack integration: Blossom posts session wraps to a channel
 - GitHub integration: backlog items link to issues
 - Mobile-responsive: works on phone when away from Mac
-- Lumi product workspace: separate agent context for product/design work
+- LightTroupeKids product workspace: separate agent context for product/design work
 
 ---
 
@@ -371,13 +371,13 @@ The first thing they should do: convert the HTML mockup to a static Next.js app 
 
 ## What This Is Not
 
-- Not a consumer app (no user accounts for parents or kids — that's Lumi, Phase 2)
+- Not a consumer app (no user accounts for parents or kids — that's LightTroupeKids, Phase 2)
 - Not a public product (internal tool only, single-tenant for now)
 - Not a chat wrapper around Claude (it's a full operating system — the AI is one component)
 - Not something to build before entity formation (needs API billing)
 
 ---
 
-*Brief prepared by Blossom — Lumi Admin Orchestrator*
+*Brief prepared by Blossom — LightTroupeKids Admin Orchestrator*
 *Last updated: June 5, 2026*
 *Source of truth: `/agents/admin-assistant.md` + `/blossom-platform.html`*

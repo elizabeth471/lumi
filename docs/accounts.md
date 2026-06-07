@@ -13,7 +13,7 @@ Goal: every service runs on **dedicated company accounts**, never Eli's or Ian's
 | # | Account | For | Cost | Depends on | Status |
 |---|---------|-----|------|------------|--------|
 | 0 | **Password manager** (Bitwarden free / 1Password) | Hold every credential below | Free | — | ☐ |
-| 1 | **Dedicated email** (Gmail now, e.g. `lumiworld.ops@gmail.com`) | The address every other account registers under | Free | handle | ☐ |
+| 1 | **Dedicated email** `teamblossom.ops@gmail.com` (created 2026-06-06) | the account everything else registers under (Blossom OS ops, under the neutral `lumiworld` parent) | Free | handle | ✅ |
 | 2 | **GitHub organization** (e.g. `lumiworld`) + move the `lumi` repo into it | Code, off personal `elizabeth471` | Free | email | ☐ |
 | 3 | **Vercel** (sign in with the GitHub org) | Hosting / the shareable demo | Free | GitHub org | ☐ |
 

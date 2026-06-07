@@ -24,15 +24,15 @@
     },
     {
       "id": "lumi",
-      "name": "Lumi",
+      "name": "LightTroupeKids",
       "priority": false,
       "status": "active",
       "expenses": [
         {
-          "label": "Claude — Lumi",
+          "label": "Claude — LightTroupeKids",
           "category": "tokens",
           "amount": null,
-          "note": "Pending — subscription share or API usage for Lumi work."
+          "note": "Pending — subscription share or API usage for LightTroupeKids work."
         }
       ]
     },
