@@ -14,6 +14,9 @@ type: issues
 - **Meadow had no profile file** — created `agents/meadow.md` (Customer Voice), matching the sub-agent format; roster is now complete and consistent.
 - **UI/UX accessibility gaps** — applied a verified accessibility pass from an external audit: semantic landmarks + headings, ARIA labels, skip link, `aria-current`, `role="log"`/`status`, combobox roles, contrast tokens, 44px nav targets, `prefers-reduced-motion`, per-route titles.
 
+- **Vercel 404 on deployment** — build completed in 36ms with no output because Vercel wasn't detecting Next.js. Fixed by adding `vercel.json` with explicit framework + build command. Deployed via Vercel CLI (`vercel --prod`). **https://lumi-snowy.vercel.app** is now live.
+- **Chrome extension not connecting to Blossom** — intermittent all session; browser tools unavailable to Blossom the entire session. Restarting device to see if it resolves.
+
 ## Tabled (revisit later)
 - **Rotate the API key pasted into chat** — Ian is fine continuing for now. *Revisit when the Anthropic org/Business account is set up.*
 - **Admin API key + org key listing** (`~/anthropic-keys.sh`) — needs an org admin key Ian doesn't have yet. *Revisit after Business plan.*

@@ -10,7 +10,7 @@ _Updated 2026-06-06. This is the real state of the app/repo. Do NOT speculate ab
 - **Cost tracker** (`/costs`): MacBook $2,149.99 logged; Claude costs still pending figures.
 - **Operations log is initialized** at `operations/<date>/`; `playbooks/` exists (Naming Protocol, with Blossom OS + LightTroupeKids runs logged).
 - **Device-wide Blossom**: global `~/.claude/CLAUDE.md` + SessionStart/PreCompact hooks.
-- **Official shareable link deployed**: **https://lumi-snowy.vercel.app/** — stable, always-on. UI demo is fully functional. Live chat requires serverless API rebuild (separate task, not yet done).
+- **Official shareable link deployed and working**: **https://lumi-snowy.vercel.app/** — stable, always-on. All views functional. Live chat requires API key as Vercel env var (separate task, not yet done). Deployed via Vercel CLI (`vercel --prod`) with `vercel.json` explicitly setting Next.js framework.
 
 ## Open — waiting on Eli/Ian
 - Entity/registration + attorney trademark clearance ("Blossom" internal-only; public name TBD; LightTroupeKids is the proposed public brand for the kids product, pending pronunciation test + attorney clearance).

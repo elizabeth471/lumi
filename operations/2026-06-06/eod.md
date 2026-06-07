@@ -31,3 +31,18 @@ Big session. Key changes:
 - **#8 Anti-bias / fresh-research principle:** prefer fresh primary research over memory/assumptions; flag source bias; never fabricate confidence numbers; verify the goal before recommending. To formalize in `admin-assistant.md` — guardrail edit → needs Ian.
 
 **Circle-back list (in STATUS.md, deferred pending decisions):** folder/repo/GitHub rename; Phase A GitHub org + Vercel; official shareable link (lane A/B/C); per-project separation in the app; scheduled proactivity + MCP-server eval (wishlist); containment reversal (#7); anti-bias formalization (#8); LightTroupeKids clearance gates.
+
+---
+
+## Final session wrap — 2026-06-06 (device restart pending)
+
+**✅ Official shareable link is live: https://lumi-snowy.vercel.app** — all views working. Chat not wired on Vercel yet (separate task). Deployed via Vercel CLI + `vercel.json` after troubleshooting wrong GitHub account, empty builds, and Chrome extension connectivity issues (never resolved this session).
+
+Ian joined and contributed to the Vercel push. Chrome extension was non-functional the entire session — testing after device restart.
+
+**Open for next session (answer these first):**
+1. Did Chrome extension connect after restart? (test immediately)
+2. Decision #7 — containment reversal: yes or no?
+3. Decision #8 — Ian sign-off on anti-bias principle, then Blossom commits the edit
+4. Task 2: per-project separation design questions (agents shared or scoped? memory global or per-project? chat one stream or separate threads?)
+5. Live chat on Vercel — wire API key as env var (lower priority)
