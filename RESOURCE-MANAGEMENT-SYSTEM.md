@@ -2,15 +2,15 @@
 
 **Purpose**: Track Claude API budget allocation, agent resource usage, and autonomous decision-making for task assignment.
 
-**Current Status**: Phase 0 (active) — Budget 50% of monthly Claude max plan (~$10/month estimated)
+**Current Status**: Phase 0 (active) — Budget 50% of monthly Claude Max plan ($62.50/month)
 
 ---
 
 ## Budget Framework
 
 ### Monthly Allocation
-- **Total Claude API Budget**: $20/month (max plan)
-- **Lumi Project Allocation**: 50% = $10/month
+- **Total Claude API Budget**: $124.99/month (Claude Max 5x plan)
+- **Lumi Project Allocation**: 50% = $62.50/month
 - **Burn Rate Target**: Consistent usage across all weeks, never spike above budget
 - **Reset Cycle**: Calendar month (1st–30/31st)
 
@@ -18,10 +18,10 @@
 
 | Week | Allocation | Used | Remaining | Status |
 |------|-----------|------|-----------|--------|
-| W1 (1-7) | $2.50 | TBD | TBD | **ACTIVE** |
-| W2 (8-14) | $2.50 | — | — | Queued |
-| W3 (15-21) | $2.50 | — | — | Queued |
-| W4 (22-30) | $2.50 | — | — | Queued |
+| W1 (1-7) | $15.63 | TBD | TBD | **ACTIVE** |
+| W2 (8-14) | $15.63 | — | — | Queued |
+| W3 (15-21) | $15.63 | — | — | Queued |
+| W4 (22-30) | $15.61 | — | — | Queued |
 
 ---
 
@@ -33,14 +33,14 @@ Each agent has defined: specialization, primary model, estimated cost-per-task, 
 
 | Agent | Specialization | Primary Model | Est. Cost/Task | Monthly Budget | Status |
 |-------|----------------|-------------|------------|-----------------|--------|
-| **Blossom** | Admin, coordination, reasoning | claude-sonnet-4-6 | $0.15 | $4.50 | Active |
-| **Sage** | Research, competitive intelligence, market analysis | claude-haiku-4-5 | $0.08 | $1.60 | Active |
-| **Reed** | Writing, communication, brand voice | claude-sonnet-4-6 | $0.10 | $2.00 | On-demand |
-| **Moss** | Financial modeling, budget tracking | claude-sonnet-4-6 | $0.12 | $1.20 | On-demand |
-| **Willow** | COPPA compliance, child safety review | claude-sonnet-4-6 | $0.15 | $0.75 | Dormant |
-| **Grove** | Visual development, design briefs | claude-haiku-4-5 | $0.06 | $0.30 | Dormant |
+| **Blossom** | Admin, coordination, reasoning | claude-sonnet-4-6 | $0.15 | $28.00 | Active |
+| **Sage** | Research, competitive intelligence, market analysis | claude-haiku-4-5 | $0.08 | $10.00 | Active |
+| **Reed** | Writing, communication, brand voice | claude-sonnet-4-6 | $0.10 | $12.50 | On-demand |
+| **Moss** | Financial modeling, budget tracking | claude-sonnet-4-6 | $0.12 | $7.50 | On-demand |
+| **Willow** | COPPA compliance, child safety review | claude-sonnet-4-6 | $0.15 | $3.00 | Dormant |
+| **Grove** | Visual development, design briefs | claude-haiku-4-5 | $0.06 | $1.50 | Dormant |
 
-**Total Estimated Monthly**: ~$10.35 (slightly over budget for safety margin)
+**Total Estimated Monthly**: ~$62.50 (exact allocation)
 
 ### Dormant Agents (Activate Phase 1)
 
@@ -72,7 +72,7 @@ Each agent has defined: specialization, primary model, estimated cost-per-task, 
 
 ### Weekly Template (Week 1: June 1-7)
 
-**Status: ACTIVE — $2.50 budget for week**
+**Status: ACTIVE — $15.63 budget for week**
 
 | Date | Agent | Task | Estimate | Actual | Minutes | Notes |
 |------|-------|------|----------|--------|---------|-------|
@@ -82,7 +82,7 @@ Each agent has defined: specialization, primary model, estimated cost-per-task, 
 
 **Weekly Summary:**
 - **Total spent**: TBD
-- **Remaining**: $2.50
+- **Remaining**: $15.63
 - **Agents used**: 1/6 active
 - **Tasks completed**: 1
 - **Efficiency**: TBD
@@ -109,7 +109,7 @@ Each agent has defined: specialization, primary model, estimated cost-per-task, 
 - Never activate agents for sequential work in parallel.
 
 **Rule 4: Background learning budget is fixed**
-- Background research: max $10/month total across all agents
+- Background research: max $50/month total across all agents
 - Active session work: takes priority, no limit
 - If low on credits: pause background learning entirely
 
@@ -161,7 +161,7 @@ Each agent has defined: specialization, primary model, estimated cost-per-task, 
 
 - **Day 27 of month**: "Budget reset in 4 days"
 - **Day 30 of month**: "Budget reset tomorrow. Plan next week's work."
-- **Day 1 of new month**: "New monthly budget loaded. $10.00 available."
+- **Day 1 of new month**: "New monthly budget loaded. $62.50 available."
 
 ### Usage Spike Alert
 
@@ -267,7 +267,7 @@ Next session:
 ```
 MONTHLY RETROSPECTIVE — June 2026
 
-Budget: $10.00 allocated | $[X.XX] spent | [Y]% utilization
+Budget: $62.50 allocated | $[X.XX] spent | [Y]% utilization
 
 By agent:
 - Blossom: $[X] (tasks: [N], cost/task: $[Y])
@@ -295,7 +295,7 @@ Next month changes:
 
 ## Implementation Checklist
 
-- [x] Budget framework set ($10/month, 50% allocation)
+- [x] Budget framework set ($62.50/month, 50% allocation of Claude Max plan)
 - [x] Agent registry created with model assignments
 - [x] Weekly tracking template ready
 - [x] Autonomous decision rules documented

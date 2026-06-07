@@ -211,9 +211,9 @@ When Ian logs into Blossom OS next time, I'll explain:
 
 ## Budget Status (June 7, 2026)
 
-**Weekly budget**: $2.50 (W1 of June)  
+**Weekly budget**: $15.63 (W1 of June)  
 **Spent this session**: ~$0.30-0.50 (reading briefs, this work)  
-**Remaining**: ~$2.00-2.20  
+**Remaining**: ~$15.13-15.33  
 **Status**: 🟢 GREEN (well within budget)
 
 ---
