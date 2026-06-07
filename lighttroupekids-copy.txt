@@ -1,0 +1,953 @@
+================================================================================
+LIGHTTROUPEKIDS PRODUCT MOCKUP — COMPLETE COPY
+20 Screens: Parent (10) + Child (10)
+Brand Voice: Warm, trustworthy, slightly playful. Respects parent intelligence.
+Respects child maturity. Nature-inspired language where it makes sense.
+Quality Gate: Every sentence must pass—would this feel trustworthy to a parent
+skeptical about screen time?
+================================================================================
+
+PARENT-FACING SCREENS (10)
+================================================================================
+
+PARENT-01: Welcome Onboarding
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Welcome to Lighttroupekids
+
+MAIN TEXT
+You're giving your child something different. A digital space designed around
+family connection, not distraction.
+
+BODY COPY
+Here's what you'll set up in the next 5 minutes:
+
+— Your child's account and age tier (determines what they can access)
+— Screen time limits that actually stick
+— A dashboard to see what they're doing and how they're learning
+— Parent controls that work quietly in the background
+
+Nothing here is hidden from you. Nothing here hooks into anxiety or
+social comparison.
+
+BUTTON
+Continue
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-02: Child Setup — Basic Info
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Let's meet your child
+
+SUBHEADER
+This helps us match activities to where they actually are.
+
+FORM FIELDS
+Child's name: [text input]
+Age: [6–12, dropdown]
+Language preference: [English, Spanish, Portuguese, Tagalog, French]
+
+HELPER TEXT (under each field as needed)
+Name: We show this only to you. Your child sees their own username.
+Age: Activities adjust to what's developmentally appropriate.
+Language: Can be changed anytime in settings. Multiple languages at home? You can enable both.
+
+BUTTON
+Next
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-03: Screen Time Limits
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Set screen time that works for your family
+
+SUBHEADER
+These are soft boundaries, not prison sentences. When the limit hits, the app
+pauses — not locks. Your child can ask to finish an activity.
+
+CONTROL SECTION 1: Daily Limit
+How much screen time per day?
+[30 min / 60 min / 90 min / 2 hours / Custom] — radio buttons or slider
+
+CONTROL SECTION 2: Active Hours
+When should Lighttroupekids be available?
+From [time picker] to [time picker]
+
+HELPER TEXT
+Choose a window that matches your family's rhythm. School day? After homework?
+Weekends only? Your choice. You can override these anytime if something comes up.
+
+CONTROL SECTION 3: Downtime
+Which days are screen-free?
+[checkboxes for each day of week]
+
+EXAMPLE
+Many families pick weekdays limited (weekday evening only) + one tech-free day
+(Sunday, or whatever works). No judgment on what you choose.
+
+BUTTON
+Continue
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-04: Activity Approval
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Who approves what your child does?
+
+SUBHEADER
+You stay in control. Here's how:
+
+OPTION 1: OPEN (Default)
+Your child picks from all available activities. You watch the dashboard.
+
+TEXT
+Best if: You trust the Lighttroupekids curation, you have time to glance at
+the dashboard weekly, your child is 10+.
+
+OPTION 2: APPROVAL REQUIRED
+Your child suggests an activity. You approve or suggest an alternative.
+
+TEXT
+Best if: You want granular visibility, your child is younger (6–9), you're
+just getting started with screen time.
+
+OPTION 3: CURATED LIST
+You build a small list of pre-approved activities. Your child only sees those.
+
+TEXT
+Best if: You want maximum structure, your child does better with clear
+boundaries, you're managing multiple ages at home.
+
+BUTTON
+Choose This
+(appears below each option)
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-05: Dashboard — Home View
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Your Dashboard
+
+SUBTITLE
+Everything you need to know. Nothing you don't.
+
+SECTION 1: TODAY'S ACTIVITY
+[Visual: Card showing current status]
+
+CARD TITLE
+[Child's Name]'s Day
+
+STATUS (if active):
+Right now: [Activity Name] · [Duration so far]
+Time remaining today: [X min]
+
+CARD TITLE
+This Week
+
+SUMMARY TEXT
+[X] activities completed
+[X] minutes watched
+[X] new skills discovered
+
+CTA
+View detailed progress
+
+SECTION 2: QUICK ACCESS
+[Icons/buttons for common actions]
+
+— View Activities (to add or change available options)
+— Check Controls (to adjust limits)
+— Message Inbox (if child sends a question)
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-06: Progress View
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+How They're Growing
+
+SUBHEADER
+This is what we track. Everything else stays private.
+
+PROGRESS ITEM 1: VIEWING HABITS
+Last 7 days: [Visual bar chart]
+
+TEXT BELOW
+[X] activities started
+Average time per activity: [X] min
+Preferred category: [Category name]
+
+PROGRESS ITEM 2: SKILLS & CONCEPTS
+Topics explored:
+
+[Skill 1]: Beginner → Intermediate (based on activities)
+[Skill 2]: Beginner (just started)
+[Skill 3]: Advanced (mastered)
+
+HELPER TEXT
+These are rough guides based on the activities your child chose. Not grades.
+Not rankings. Just snapshots of what they're curious about.
+
+PROGRESS ITEM 3: MOOD & ENGAGEMENT
+Last activity feedback:
+
+[Child rated the activity / Completed without abandoning / Watched the whole
+thing]
+
+FOOTER
+We never track: watching patterns, time-of-day behavior, who sits next to them.
+Privacy is built in, not bolted on.
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-07: Activities Library
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Activities Your Child Can Access
+
+SUBHEADER
+Everything here is hand-picked. Nothing auto-plays. Nothing recommends itself.
+
+FILTER/SORT OPTIONS
+[By age tier / by category / by language / showing: all / pre-approved only]
+
+ACTIVITY CARD SAMPLE 1
+[Icon] Learn How Plants Grow
+Video series · 4 episodes · 8 min each
+Ages 6–9
+
+What they'll do: Watch how seeds become tomatoes. Try an experiment at home.
+Why it matters: Understanding growth cycles. Hands-on science.
+
+[Add to Approved] [Preview] [Remove]
+
+ACTIVITY CARD SAMPLE 2
+[Icon] Storytelling in Spanish
+Interactive narrative · Choose-your-own-path
+Ages 9–12
+
+What they'll do: Make choices that shape a story. Hear Spanish spoken naturally.
+Why it matters: Language immersion without pressure. Creative thinking.
+
+[Add to Approved] [Preview] [Remove]
+
+ACTIVITY CARD SAMPLE 3
+[Icon] Math Through Games
+Adaptive puzzle game · Difficulty adjusts to skill level
+Ages 6–12
+
+What they'll do: Solve increasingly complex puzzles. Beat their own high score.
+Why it matters: Problem-solving. Pattern recognition. Confidence with numbers.
+
+[Add to Approved] [Preview] [Remove]
+
+EMPTY STATE
+No activities added yet.
+[Browse All] [Recommendations for [Child's Age]]
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-08: Settings & Controls
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Settings
+
+SETTINGS SECTIONS
+
+SECTION 1: ACCOUNT
+Email: [editable field]
+Password: [Change] [link]
+Language for your dashboard: [Dropdown: English / Spanish / Portuguese / etc]
+
+SECTION 2: SCREEN TIME
+Daily limit: [Current setting] [Edit]
+Active hours: [Current setting] [Edit]
+Screen-free days: [Current setting] [Edit]
+
+SECTION 3: APPROVAL WORKFLOW
+Mode: [Current setting: Open / Approval Required / Curated List] [Edit]
+
+If set to "Approval Required":
+Pending approvals: [X]
+Show inbox [link]
+
+SECTION 4: CONTENT
+Language: [Current setting] [Edit]
+Age tier: [Current age] [Edit — causes activities to shift]
+
+SECTION 5: PRIVACY & DATA
+What data do we collect?
+[Link to: Data transparency page]
+
+Delete my account
+Warning: This deletes all data. No recovery.
+[Delete Account]
+
+SECTION 6: SUPPORT
+Help Center
+[Link]
+
+Contact Support
+[Email link or contact form]
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-09: Approval Inbox
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Activity Approvals
+
+SUBHEADER (if no pending requests)
+No pending requests. Your child has plenty to explore.
+
+PENDING REQUEST SAMPLE 1
+[Child's Name] asked to try: "Learn Watercolor Painting"
+Interactive tutorial · Ages 6–12
+Requested [X] minutes ago
+
+[Approve] [Suggest Alternative]
+
+PENDING REQUEST SAMPLE 2
+[Child's Name] asked to try: "Coding Basics"
+Interactive coding game · Ages 9–12
+Requested [X] hours ago
+
+[Approve] [Suggest Alternative]
+
+RECENTLY APPROVED
+✓ Learn How Plants Grow — Approved 2 days ago
+✓ Storytelling in Spanish — Approved 1 week ago
+
+───────────────────────────────────────────────────────────────────────────────
+
+PARENT-10: Onboarding Complete
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+You're all set.
+
+MAIN TEXT
+Your child's account is ready. They'll see their own welcome screen next.
+You can adjust anything anytime — nothing is locked in.
+
+SECTION 1: WHAT HAPPENS NEXT
+— Your child logs in and meets their home screen
+— They browse activities and pick something to try
+— You get a dashboard update (weekly, or check in anytime)
+— That's it. No emails. No notifications unless you turn them on.
+
+SECTION 2: QUICK TIPS
+✓ Check the dashboard once a week — you'll see what they're curious about
+✓ Adjust screen time limits if something's not working
+✓ Browse the Help Center if you have questions (takes 2 min)
+
+BUTTON
+Go to Dashboard
+
+SECONDARY BUTTON
+Read Help Center
+
+================================================================================
+
+CHILD-FACING SCREENS (10)
+================================================================================
+
+CHILD-01: Welcome — First Time
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Welcome to Lighttroupekids
+
+SUBHEADER
+This is a space built just for you.
+
+BODY TEXT
+Here you'll find things to watch, games to play, and skills to explore.
+Your parent picked activities they think you'll like.
+
+No ads. No surprises. No trying to keep you here longer than you want to be.
+
+SECTION: WHAT YOU CAN DO HERE
+[Icon 1] Watch things worth watching
+Video series about topics you're curious about
+
+[Icon 2] Play games that teach
+Games where you get better at something, not just rack up points
+
+[Icon 3] Explore at your pace
+Stop anytime. Pick up where you left off. No judgment.
+
+BOTTOM TEXT
+Your parent can see what you do here. Think of it like leaving a trail so
+they know you're okay.
+
+BUTTON
+Let's Go
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-02: Home Screen
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER (subtle, not loud)
+Hi, [Child's Name]
+
+SUBHEADER
+Time left today: [X min]
+
+MAIN CONTENT AREA
+
+SECTION 1: SUGGESTED FOR YOU
+[Visual grid of 3-4 activity tiles]
+
+[Tile 1 - with thumbnail]
+Activity Name
+Category: Science / Stories / Games / Art
+[Tap to see more]
+
+[Tile 2 - with thumbnail]
+Activity Name
+Category: ...
+
+[See All Activities] [link/button]
+
+SECTION 2: YOUR FAVORITES
+[If child has previous activity history]
+
+✓ [Recently completed activity]
+[Last watched 3 days ago. Start again?]
+
+✓ [Recently completed activity]
+[Last watched 5 days ago. Start again?]
+
+BOTTOM NAV
+[Home — selected]
+[Activities]
+[My Learning]
+[Help]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-03: Activities Browse
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Activities
+
+SUBHEADER
+Pick something to try
+
+FILTER/BROWSE OPTIONS
+[Category icons: Videos / Games / Stories / Art / Science / etc]
+
+ACTIVITY LISTING
+
+ACTIVITY CARD 1
+[Thumbnail image]
+Activity Title
+Category
+Est. time: [X] min
+[For ages 6–9 / For ages 9–12]
+
+START [button]
+
+ACTIVITY CARD 2
+[Thumbnail]
+Activity Title
+Category
+Est. time: [X] min
+[Age tier]
+
+START [button]
+
+[ACTIVITY CARD 3...]
+[ACTIVITY CARD 4...]
+
+EMPTY STATE (if approval required and no activities approved yet)
+Your parent is choosing what to show you.
+Check back soon, or ask them which activities you can try!
+
+BOTTOM NAV
+[Home]
+[Activities — selected]
+[My Learning]
+[Help]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-04: Activity Detail — Before Starting
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+[Activity Name]
+
+CONTENT AREA
+
+PREVIEW IMAGE / THUMBNAIL
+[Large image showing what the activity is about]
+
+ACTIVITY DESCRIPTION
+What you'll do:
+[Clear, kid-friendly description of the activity]
+
+Example: "Watch how a seed turns into a plant. Then try planting your own
+seed and watch it grow."
+
+WHY IT'S HERE
+Why you might like it:
+[1-2 sentences about what makes this interesting or fun]
+
+Example: "You love learning about nature. This shows the whole journey of
+a plant's life."
+
+DETAILS
+Time: [X] minutes
+Language: [Current language]
+
+BUTTON
+Start Activity
+
+SECONDARY OPTION (if approval required)
+Ask Parent [link/button — opens request interface]
+
+BACK BUTTON / NAV
+[< Activities]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-05: Activity in Progress — Video
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+[Activity Name]
+
+MAIN CONTENT
+[Large video player with standard controls]
+— Play / Pause
+— Progress bar (shows how far through the activity you are)
+— Sound on/off
+— Full screen
+
+HEADER AREA (during playback)
+[Activity Name]
+[Time remaining in this segment: X min]
+
+BOTTOM AREA (below video when paused or between segments)
+Progress: [Visual indicator — 3 of 4 segments complete]
+
+ONGOING CONTROLS
+Stop & Save [button/option] — exits the activity, saves progress
+
+NAVIGATION (at bottom)
+[Home] [Activities] [My Learning] [Help]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-06: Activity in Progress — Game
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+[Game Name]
+
+MAIN CONTENT AREA
+[Full game interface / canvas]
+
+Status bar (top):
+— Time played: [X min]
+— Current level / score (if applicable)
+— [Pause] button
+
+GAME ITSELF
+[Interactive game canvas — specific to game type]
+
+ON PAUSE
+Pause screen with:
+— Resume [button]
+— Exit Game [button — with "Your progress is saved" note]
+
+AFTER GAME ENDS (successful completion)
+Great job!
+[You finished in X minutes / You reached level X / You solved X puzzles]
+
+How did that feel?
+[👍 Awesome] [👌 Good] [😐 Okay] [👎 Meh] — quick mood buttons
+
+[Do Another Activity] [Go Home]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-07: My Learning
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+My Learning
+
+SUBHEADER
+Here's what you've explored
+
+SECTION 1: ACTIVITIES COMPLETED
+This week:
+— [Activity 1] · [X] min · 3 days ago
+— [Activity 2] · [X] min · 5 days ago
+— [Activity 3] · [X] min · 1 week ago
+
+[Show More]
+
+SECTION 2: SKILLS YOU'RE DISCOVERING
+[Skill/concept] — You're working on this
+Example: Creative Storytelling · You tried 2 story games this week
+
+[Skill/concept] — You're getting good at this
+Example: Spanish Language · You've done 5 activities in Spanish
+
+SECTION 3: TOPICS YOU'VE EXPLORED
+[Icon] Science — 3 activities
+[Icon] Art — 2 activities
+[Icon] Stories — 4 activities
+
+BOTTOM NAV
+[Home]
+[Activities]
+[My Learning — selected]
+[Help]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-08: Help & Support
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Help
+
+SECTION 1: HOW DO I...?
+[Expandable items]
+
+How do I start an activity?
+Go to Activities. Pick something. Tap Start.
+
+How do I save my progress?
+It saves automatically. No buttons. You're all set.
+
+How do I stop doing something?
+Just leave. Your progress stays saved for next time.
+
+Can I use this with my brother/sister?
+Nope. Each kid gets their own account. Your parent decides what each person
+can see.
+
+What happens if I finish an activity early?
+You can go back to home, pick something else, or do the same activity again.
+
+My parent set controls I don't like. Can I change them?
+Talk to your parent. They run the controls. We just do what they set.
+
+What data does this app collect about me?
+Only what your parent needs to know: what activities you do, how long you
+spent on them, and what you liked. Nothing creepy. No watching when you look.
+
+SECTION 2: I HAVE A BUG OR PROBLEM
+[Contact Support — opens simple contact form]
+
+Subject: [dropdown: Technical Issue / Feature Request / Other]
+Description: [text area]
+[Send]
+
+BOTTOM NAV
+[Home]
+[Activities]
+[My Learning]
+[Help — selected]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-09: Approval Request Sent (if applicable)
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+You asked about [Activity Name]
+
+CONTENT
+Your parent will look at your request and let you know soon.
+
+Check back here to see if they said yes.
+
+[Activity details card showing what you asked about]
+
+BUTTON
+Go Back to Activities
+
+───────────────────────────────────────────────────────────────────────────────
+
+CHILD-10: Time Limit Notice
+───────────────────────────────────────────────────────────────────────────────
+
+HEADER
+Time Check
+
+CONTENT
+You have [X] minutes of screen time left today.
+
+What would you like to do?
+
+OPTION 1
+[Start One More Quick Activity] — shows activities under [X] min
+
+OPTION 2
+[Stop Here for Today]
+Your progress is saved. See you tomorrow.
+
+BOTTOM NOTE
+You can ask your parent if you need more time.
+
+[Ask Parent] [link/button]
+
+───────────────────────────────────────────────────────────────────────────────
+
+================================================================================
+
+SHARED ELEMENTS & MICRO-COPY
+(Used across both parent and child interfaces)
+
+================================================================================
+
+BUTTON LABELS
+Primary (action buttons):
+— Continue
+— Start Activity
+— Save & Continue
+— Next
+— Go to Dashboard
+— Send Request
+
+Secondary (alternative options):
+— Cancel
+— Go Back
+— Skip
+— Learn More
+— Browse All
+
+Destructive (delete/remove):
+— Delete Account
+— Remove Activity
+— Stop Session
+
+Confirmatory (completion):
+— Done
+— Finish
+— Save
+
+───────────────────────────────────────────────────────────────────────────────
+
+ERROR MESSAGES & EMPTY STATES
+
+Connection Lost
+Your internet disconnected. Try again when you're back online.
+[Retry]
+
+No Activities Available Yet
+Your parent hasn't approved any activities yet. Ask them which ones you can try!
+[Back]
+
+No Time Left Today
+You've used your screen time. Come back tomorrow!
+[See When You Can Come Back]
+
+Session Expired
+Your session timed out for security. Log in again.
+[Log In]
+
+Something Went Wrong
+Something unexpected happened. Try again or contact support.
+[Try Again] [Contact Support]
+
+───────────────────────────────────────────────────────────────────────────────
+
+CONFIRMATION MESSAGES
+
+Progress Saved
+(Simple, matter-of-fact — no celebration)
+
+Activity Started
+(Appears briefly at start of activity)
+
+Approval Request Sent
+Your parent will review it soon.
+
+Settings Updated
+Your changes are saved.
+
+Time Limit Adjusted
+Updated: [new limit]
+
+───────────────────────────────────────────────────────────────────────────────
+
+NAVIGATION LABELS
+
+Parent Dashboard:
+— Dashboard (home)
+— Activities
+— Progress
+— Controls
+— Settings
+— Help
+
+Child Interface:
+— Home
+— Activities
+— My Learning
+— Help
+
+───────────────────────────────────────────────────────────────────────────────
+
+HELP / SUPPORT COPY (Detailed)
+
+For Parents:
+
+Screen time limits aren't punishments.
+They're boundaries that give your child safety and predictability. When the limit hits,
+the app pauses — not locks. Your child can ask to finish what they're doing. You can
+grant extra time if something matters. The rules are yours to set and adjust.
+
+Approval mode is for control, not distrust.
+If you set activities to require approval, you're not spying. You're staying involved
+in what your child picks. It takes 30 seconds to approve. Your child sees that you
+care about their choices.
+
+The dashboard isn't surveillance.
+You'll see what activities your child chose and how long they spent. That's it.
+We don't track when they watched, who was in the room, or whether they were bored.
+We just give you enough information to know they're okay.
+
+For Children:
+
+Your parent can see what you do here.
+Think of it like showing your parent what you're reading or what game you're playing.
+You're not being spied on. Your parent just wants to know you're okay.
+
+There's no judgment here.
+If you don't finish an activity, if you try something and it's boring, if you do
+the same thing twice — that's all fine. No grades. No points you're racing for.
+
+You can always ask your parent.
+If you want to try something new, if you want more time, if something feels wrong —
+ask. Your parent decides. That's how it works.
+
+───────────────────────────────────────────────────────────────────────────────
+
+FORM HELPER TEXT & DESCRIPTIONS
+
+Age Tier (when setting up child account):
+This changes which activities show up. Ages 6–9 activities are simpler and
+shorter. Ages 9–12 activities are more complex and can be longer. You can
+change this anytime as your child grows.
+
+Language Preference:
+Pick the main language for the interface. Your child will see activities in
+this language by default. You can show bilingual content too — just ask in
+settings.
+
+Daily Screen Time Limit:
+This is when the app pauses, not locks. Your child can ask you for more time.
+You decide whether to grant it. You can override this anytime in an emergency.
+
+Active Hours (when the app works):
+Lighttroupekids only opens during these hours. Outside these times, the login
+screen shows "Not available right now." This is a gentle boundary, not a jail.
+
+Downtime (screen-free days/times):
+Days or times when Lighttroupekids won't open at all. Many families do one
+tech-free day per week, or keep mornings/mealtimes screen-free.
+
+Approval Mode:
+— Open: Your child picks any available activity. You watch.
+— Approval Required: Your child suggests activities. You approve or suggest
+  an alternative.
+— Curated List: You build a list of pre-approved activities. Your child only
+  sees those.
+
+───────────────────────────────────────────────────────────────────────────────
+
+ONBOARDING COPY FLOW
+
+Step 1 (Welcome):
+Sets expectations, builds trust. Answers: "Is this safe?" and "Do I stay in control?"
+
+Step 2 (Child Info):
+Collects basics. Explains why age matters (not for judgment, for fit).
+
+Step 3 (Screen Time):
+The most important conversation. Explains that limits are boundaries, not
+punishments. Gives real options (30 min to 2 hours, custom times).
+
+Step 4 (Approval):
+Explains three ways to stay involved. No judgment on which the parent picks.
+
+Step 5 (Complete):
+Hands off to the parent dashboard. Offers next steps and support.
+
+Child Onboarding:
+Warm welcome. Sets expectations about what will happen and that parent has
+visibility. No shame. No tricks.
+
+───────────────────────────────────────────────────────────────────────────────
+
+QUALITY ASSURANCE CHECKLIST
+
+Every sentence passes this test:
+"Would this feel trustworthy to a parent skeptical about screen time?"
+
+✓ No hyperbole ("revolutionary," "life-changing," etc.)
+✓ No vague promises ("we'll make it better")
+✓ No corporate distance ("leveraging," "synergies," etc.)
+✓ No emotional manipulation ("Your child needs this")
+✓ No fake urgency ("Limited time!" "Act now!")
+✓ No dark patterns (hidden settings, auto-renewal, surprise costs)
+✓ Clear explanation of what data is collected and what isn't
+✓ Transparent about what the product does and doesn't do
+✓ Respects parent intelligence — explains the reasoning, not just the rule
+✓ Respects child maturity — doesn't talk down to kids, doesn't hide what's happening
+
+================================================================================
+
+NOTES FOR GROVE (HTML/CSS Integration)
+
+Format:
+Each screen should be labeled with its screen ID (e.g., PARENT-01, CHILD-05).
+Copy is organized by sections: HEADER, SUBHEADER, BODY TEXT, FORM FIELDS,
+BUTTONS, HELPER TEXT.
+
+Integration approach:
+— Headers: Use consistent typography for screen titles
+— Body copy: Keep line-height generous (1.5–1.7 for readability)
+— Buttons: Label exactly as written; use consistent styling
+— Helper text: Smaller font size, muted color, positioned near relevant field
+— Navigation: Keep labels exact as specified in NAVIGATION LABELS section
+
+Accessibility considerations:
+— All button labels are clear and action-oriented
+— Form helper text describes what each field does and why
+— Error messages are specific, not vague
+— Empty states explain what to do next
+— No information conveyed by color alone
+
+Mobile-first:
+— All screens sized for phone/tablet first (360–480px width)
+— Tap targets minimum 44×44px
+— Touch-friendly spacing between interactive elements
+
+================================================================================
+End of copy document
+================================================================================
