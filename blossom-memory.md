@@ -27,7 +27,17 @@
 - 6 additional Iris-recommended products (Meditation audio, Icebreaker games, Soundscapes, Gumroad bundles, App Store apps)
 - 13 additional contractor-based gigs (Voice-over, Design, Video editing, Research reports, etc.)
 
-### Track 3: AI Companion Sprints (Independent Project)
+### Track 3A: AI Companion Sprints (Independent Project)
+**Phase:** Week 1 — Product Development Complete, Execution Planning
+**Status:** Ready for Week 2 build-out and Week 3 soft launch
+**Next:** Build landing page, set up Stripe, create Alex + Casey system prompts
+
+### Track 3B: English Practice Companion (Spinoff Project)
+**Phase:** Week 1 — Product Development Complete, Execution Planning  
+**Status:** Ready for Week 2 build-out and Week 3 soft launch (50-100 customers)
+**Next:** Build English learner landing page, set up proficiency-level matching, create Coach system prompts
+
+### Track 3A: AI Companion Sprints (Independent Project)
 **Purpose:** Standalone subscription product for 4-week personalized AI companion experiences
 **Status:** Full product development complete, ready for execution planning
 
@@ -42,11 +52,31 @@
 
 **Product Details:**
 - Price: $9.99 per 4-week sprint
-- Three companions: Alex (flirting practice), Casey (daily motivation), Nova (language learning)
+- Two companions: Alex (flirting confidence), Casey (daily motivation)
 - Delivery: Email-based texting
 - AI model: Claude 3.5 Sonnet
 - Launch target: Week 3 (soft launch 20-50 customers)
-- Nova supports 20+ languages with beginner-to-intermediate learners
+- Focus: Emotional support, relationship practice, motivation/habits
+
+### Track 3B: English Practice Companion (Spinoff Project)
+**Purpose:** Standalone subscription for non-native English speakers to practice written English
+**Status:** Full product development complete, ready for execution planning
+
+**Completed:**
+- ✅ Project charter (scope, timeline, success criteria)
+- ✅ Full product specification (English Coach companion, 3 proficiency levels: A1-A2, B1-B2, B2-C1)
+- ✅ Market research (400M+ non-native English speakers, largest addressable market)
+- ✅ Distribution strategy (Reddit r/EnglishLearning, Facebook groups, Discord language servers)
+- ✅ Technical architecture (shared with AI Companion Sprints)
+
+**Product Details:**
+- Price: $9.99 per 4-week sprint
+- One companion: English Coach (proficiency-scaled feedback)
+- Delivery: Email-based texting with detailed corrections
+- AI model: Claude 3.5 Sonnet
+- Launch target: Week 3 (soft launch 50-100 customers, global targeting)
+- Focus: Career prep, travel, fluency, business English
+- TAM: 400M+ potential customers (largest of any product)
 
 **Financial Validation:**
 - Unit margin: 67.7% per sprint

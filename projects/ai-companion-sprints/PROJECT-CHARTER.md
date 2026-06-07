@@ -26,7 +26,7 @@ Build and launch a subscription service where customers purchase 4-week time-bou
 ## SUCCESS CRITERIA (Phase 1)
 
 - [ ] Product documented and fully specified
-- [ ] MVP launched (Alex + Casey + Nova companions, email delivery)
+- [ ] MVP launched (Alex + Casey companions, email delivery)
 - [ ] 50+ customers in first 2 weeks
 - [ ] Unit economics validated ($9.99 price, API costs, margin)
 - [ ] Customer feedback collected (retention, satisfaction)
@@ -39,7 +39,7 @@ Build and launch a subscription service where customers purchase 4-week time-bou
 ## PROJECT SCOPE (Phase 1)
 
 **In Scope:**
-- 3 initial companion types (Alex + Casey + Nova)
+- 2 initial companion types (Alex + Casey)
 - Email-based delivery
 - Stripe payment integration
 - Simple landing page
@@ -88,7 +88,7 @@ Build and launch a subscription service where customers purchase 4-week time-bou
 - Build landing page
 - Set up Stripe payments
 - Implement email delivery system
-- Create first 3 custom companions (Alex + Casey + Nova)
+- Create first 2 custom companions (Alex + Casey)
 - Finalize ToS + compliance documentation
 
 **Week 3:**
