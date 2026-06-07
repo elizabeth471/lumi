@@ -611,6 +611,14 @@ body.cf-mode .tb-chip.primary{background:#1a3848;border-color:#1a3848}
 body.cf-mode .phase-badge{background:#e0f0f8;color:#2a88b8;border-color:#a0d0e8}
 body.cf-mode .b-bloom .b-petal{background:var(--sky)}
 body.cf-mode .b-bloom-center{background:#a0d8f0}
+
+/* ── IAN MODE — fullscreen mockups ── */
+body.ian-mode .main-area{width:100%;flex-direction:row}
+body.ian-mode .view-container{flex:1;width:100%}
+body.ian-mode #view-ian{padding:0;background:var(--cream)}
+body.ian-mode .topbar{background:var(--cream);border-bottom:1px solid var(--border);padding:0 16px}
+body.ian-mode .view-title{font-size:14px;font-weight:600;color:var(--text)}
+body.ian-mode .breadcrumb{color:var(--text-lt)}
 </style>
 </head>
 <body>
@@ -669,6 +677,14 @@ body.cf-mode .b-bloom-center{background:#a0d8f0}
       <div class="login-card-name">Tech Co-Founder</div>
       <div class="login-card-role">Technical Lead</div>
       <div class="login-card-badge badge-new">First Login</div>
+    </div>
+
+    <!-- Ian (Co-Founder Candidate) -->
+    <div class="login-card" onclick="loginAs('ian')">
+      <div class="login-card-avatar" style="background:#1a2a3a">🚀</div>
+      <div class="login-card-name">Ian</div>
+      <div class="login-card-role">Co-Founder Candidate</div>
+      <div class="login-card-badge" style="background:#2a4a3a;color:#a0e8a8">Prototype</div>
     </div>
   </div>
 
@@ -1466,6 +1482,13 @@ Phase 2 (dormant):
       </div>
     </div>
 
+    <!-- ─── IAN PROTOTYPE VIEW ─── -->
+    <div class="view" id="view-ian">
+      <div style="flex:1;overflow:auto;padding:0;background:var(--white)">
+        <iframe id="ian-mockups" style="width:100%;height:100%;border:none" src="lighttroupekids-mockups.html"></iframe>
+      </div>
+    </div>
+
   </div><!-- /view-container -->
 </div><!-- /main-area -->
 
@@ -1947,6 +1970,17 @@ const users = {
       'Read docs/platform-technical-brief.md before your first working session.',
     ],
   },
+  ian: {
+    name: 'Ian',
+    avatar: '🚀',
+    role: 'ian',
+    greeting: 'Welcome, Ian. Here\'s the lighttroupekids prototype — 20 screens showing the complete parent and child experience.',
+    briefIntro: 'lighttroupekids prototype: 10 parent-facing screens + 10 child-facing screens. Interactive mockups with full copy and design.',
+    briefQs: [
+      'Parent flow: Onboarding → Dashboard → Activity library → Controls → Progress',
+      'Child flow: Entry → Activity library → Video / Game / Learning → Results',
+    ],
+  },
 };
 
 function loginAs(role) {
@@ -1956,6 +1990,18 @@ function loginAs(role) {
   // Set user badge
   document.getElementById('user-av').textContent   = currentUser.avatar;
   document.getElementById('user-name').textContent = currentUser.name;
+
+  // Ian's special view — hide everything except mockups
+  if (role === 'ian') {
+    document.body.classList.add('ian-mode');
+    document.querySelector('.sidebar').style.display = 'none';
+    document.querySelector('.right-panel').style.display = 'none';
+    switchView('ian');
+    setTimeout(() => {
+      toast('lighttroupekids prototype', 'Interactive mockups ready — 20 screens, parent + child flows', '🚀', 5000);
+    }, 500);
+    return;
+  }
 
   // Apply co-founder tint
   if (role === 'cofounder') {
