@@ -42,10 +42,11 @@
 
 **Product Details:**
 - Price: $9.99 per 4-week sprint
-- Two companions: Alex (flirting practice), Casey (daily motivation)
+- Three companions: Alex (flirting practice), Casey (daily motivation), Nova (language learning)
 - Delivery: Email-based texting
 - AI model: Claude 3.5 Sonnet
 - Launch target: Week 3 (soft launch 20-50 customers)
+- Nova supports 20+ languages with beginner-to-intermediate learners
 
 **Financial Validation:**
 - Unit margin: 67.7% per sprint
