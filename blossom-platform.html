@@ -1828,6 +1828,21 @@ function sendMsg() {
         response = `That's an important question for me to understand your path forward. Your tech background (game dev vs. web dev) and stack preference determine whether we go Next.js, Godot, or hybrid. <br><br>Is Godot something you'd prefer to work in? Do you have experience with it? That context will shape our whole technical strategy.`;
       } else if (textLower.includes('timeline') || textLower.includes('how long') || textLower.includes('weeks')) {
         response = `Timeline matters for prioritization. Aggressive (6 weeks, MVP only), comfortable (8–10 weeks, refined prototype), or thorough (12+ weeks with team). What feels right to you given your background and the stack choice? That determines our build sequence.`;
+      } else if (textLower.includes('other project') || textLower.includes('besides') || textLower.includes('also work on')) {
+        response = `<strong>Good question.</strong> I'm not limited to lighttroupekids. I coordinate agents that can do:<br><br>
+<strong>High Accuracy (proven):</strong><br>
+• Market research & competitive analysis<br>
+• Business planning & strategy docs<br>
+• Product design & mockups<br>
+• Writing & marketing copy<br>
+• Financial modeling & budgets<br>
+• Code prototypes (web apps, not production systems)<br>
+• Regulatory/COPPA compliance review<br>
+• User/parent/child feedback simulation<br><br>
+<strong>What I won't claim:</strong> Production-ready systems, DevOps, deep ML work, enterprise design systems.<br><br>
+What other projects do you have in mind? I can assess feasibility and scope for you.`;
+      } else if (textLower.includes('what else') || textLower.includes('other things') || textLower.includes('capabilities')) {
+        response = `I can help with any project that needs research, strategy, design, writing, or code prototypes. Market validation? I can run simulated user interviews. Business plan? I can model financials. Branding? Design system? Technical architecture? I have teams ready for all of it.<br><br>The constraint isn't what we can do — it's accuracy. I promise only what I can do reliably. What's on your mind?`;
       } else {
         response = `Understood. I'm here to support your assessment of the prototype and the technical direction. I can activate agents based on what you need — research, code review, architecture advice, you name it. What's your next move?`;
       }
@@ -2047,6 +2062,20 @@ function loginAs(role) {
       <div class="msg-time">Blossom · Ready</div>
     </div>`;
     chatBox.appendChild(materialLink);
+
+    // Add note about additional capabilities
+    setTimeout(() => {
+      const capabilitiesNote = document.createElement('div');
+      capabilitiesNote.className = 'msg';
+      capabilitiesNote.innerHTML = `<div class="msg-av">🌵</div><div>
+        <div class="msg-bubble">
+          <strong>One more thing:</strong> I'm not limited to lighttroupekids. If you have other projects in mind — market research, business strategy, design, code prototypes, financial modeling — I coordinate agents for that too. I only promise what I can do reliably. Ask me about other projects if you're curious.
+        </div>
+        <div class="msg-time">Blossom · Note</div>
+      </div>`;
+      chatBox.appendChild(capabilitiesNote);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }, 1000);
 
     setTimeout(() => {
       toast('Welcome, Ian', 'Prototype ready. What\'s your priority?', '🚀', 6000);
