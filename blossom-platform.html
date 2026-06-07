@@ -1809,18 +1809,45 @@ function sendMsg() {
     think.style.display = 'none';
     bar.classList.remove('visible');
     document.getElementById('blossom').classList.remove('thinking');
-    const replies = [
-      "Logged. I'll get to that — let me finish what's in front of me first.",
-      "On it. Give me a moment to think through the implications.",
-      "Captured. That's queued as a new thread. Anything else before I start?",
-      "Got it. That touches the formation sequence — I'll flag the dependencies.",
-      "Noted. I'd want Sage to weigh in on this before I give you a recommendation.",
-      "That's a good one to sit with. I've added it to the open questions log.",
-      "Understood. I'll surface this at the next decision point.",
-    ];
+
+    // Special handling for Ian (tech co-founder candidate)
+    let response = '';
+    if (currentUser && currentUser.role === 'ian') {
+      const textLower = text.toLowerCase();
+
+      // Map user intent to agent offers
+      if (textLower.includes('code') || textLower.includes('review') || textLower.includes('architecture')) {
+        response = `I can help with that. For a code review, I'll activate <strong>Sage</strong> (architecture research) + <strong>Dev Agent</strong> (code feedback). What's the priority — existing prototype review, or architectural decisions for the stack choice?`;
+      } else if (textLower.includes('godot') || textLower.includes('stack') || textLower.includes('tech')) {
+        response = `Good question. For tech stack evaluation, I'll activate <strong>Sage</strong> (competitive research) and <strong>Dev Agent</strong> (technical feasibility). I've already researched Godot vs. Next.js — want me to brief you on the trade-offs, or would you prefer to assess independently first?`;
+      } else if (textLower.includes('prototype') || textLower.includes('run') || textLower.includes('demo')) {
+        response = `The prototype is ready to run locally: <code style="background:var(--sand);padding:2px 6px">cd prototype && npm run dev</code> opens it at http://localhost:3000. All 20 screens are there. I can walk you through the architecture while you click around, or you can explore first. What's your preference?`;
+      } else if (textLower.includes('help') || textLower.includes('what can') || textLower.includes('capabilities')) {
+        response = `I can activate agents on demand:<br><strong>Sage</strong> (research, architecture)<br><strong>Reed</strong> (writing, messaging)<br><strong>Dev Agent</strong> (frontend code)<br><strong>Willow</strong> (COPPA compliance)<br>Tell me what you need — technical review? Stack advice? Code walkthrough? And I'll bring in whoever helps best.`;
+      } else if (textLower.includes('background') || textLower.includes('godot experience') || textLower.includes('preference')) {
+        response = `That's an important question for me to understand your path forward. Your tech background (game dev vs. web dev) and stack preference determine whether we go Next.js, Godot, or hybrid. <br><br>Is Godot something you'd prefer to work in? Do you have experience with it? That context will shape our whole technical strategy.`;
+      } else if (textLower.includes('timeline') || textLower.includes('how long') || textLower.includes('weeks')) {
+        response = `Timeline matters for prioritization. Aggressive (6 weeks, MVP only), comfortable (8–10 weeks, refined prototype), or thorough (12+ weeks with team). What feels right to you given your background and the stack choice? That determines our build sequence.`;
+      } else {
+        response = `Understood. I'm here to support your assessment of the prototype and the technical direction. I can activate agents based on what you need — research, code review, architecture advice, you name it. What's your next move?`;
+      }
+    } else {
+      // Original generic responses for founder
+      const replies = [
+        "Logged. I'll get to that — let me finish what's in front of me first.",
+        "On it. Give me a moment to think through the implications.",
+        "Captured. That's queued as a new thread. Anything else before I start?",
+        "Got it. That touches the formation sequence — I'll flag the dependencies.",
+        "Noted. I'd want Sage to weigh in on this before I give you a recommendation.",
+        "That's a good one to sit with. I've added it to the open questions log.",
+        "Understood. I'll surface this at the next decision point.",
+      ];
+      response = replies[Math.floor(Math.random()*replies.length)];
+    }
+
     const rm = document.createElement('div');
     rm.className = 'msg';
-    rm.innerHTML = `<div class="msg-av">🌵</div><div><div class="msg-bubble">${replies[Math.floor(Math.random()*replies.length)]}</div><div class="msg-time">Blossom · Just now</div></div>`;
+    rm.innerHTML = `<div class="msg-av">🌵</div><div><div class="msg-bubble">${response}</div><div class="msg-time">Blossom · Just now</div></div>`;
     box.appendChild(rm);
     box.scrollTop = box.scrollHeight;
   }, 1800);
@@ -1974,11 +2001,12 @@ const users = {
     name: 'Ian',
     avatar: '🚀',
     role: 'ian',
-    greeting: 'Welcome, Ian. Here\'s the lighttroupekids prototype — 20 screens showing the complete parent and child experience.',
-    briefIntro: 'lighttroupekids prototype: 10 parent-facing screens + 10 child-facing screens. Interactive mockups with full copy and design.',
+    greeting: 'Welcome, Ian. I\'m Blossom, the agent orchestrator for Lumi. Before you dive into the prototype, tell me: what do you need from me right now?',
+    briefIntro: 'I have your onboarding materials ready, the prototype is running, and I can activate agents on demand. What\'s your priority?',
     briefQs: [
-      'Parent flow: Onboarding → Dashboard → Activity library → Controls → Progress',
-      'Child flow: Entry → Activity library → Video / Game / Learning → Results',
+      'Need technical architecture review? (Sage can research + brief)',
+      'Want to discuss the stack choice? (Design + Dev agents ready)',
+      'Ready to review code? (I can walk you through the prototype)',
     ],
   },
 };
@@ -1991,14 +2019,37 @@ function loginAs(role) {
   document.getElementById('user-av').textContent   = currentUser.avatar;
   document.getElementById('user-name').textContent = currentUser.name;
 
-  // Ian's special view — hide everything except mockups
+  // Ian's special view — chat-first with access to prototype
   if (role === 'ian') {
     document.body.classList.add('ian-mode');
-    document.querySelector('.sidebar').style.display = 'none';
-    document.querySelector('.right-panel').style.display = 'none';
-    switchView('ian');
+    document.querySelector('.sidebar').style.display = 'flex'; // Keep sidebar for navigation
+    document.querySelector('.right-panel').style.display = 'flex'; // Keep right panel for agents
+    switchView('today'); // Show chat interface
+
+    // Update the morning brief for Ian
+    document.querySelector('.brief-card .card-body').textContent = currentUser.briefIntro;
+    const qs = document.querySelector('.brief-qs');
+    qs.innerHTML = currentUser.briefQs.map(q=>`<div class="brief-q">${q}</div>`).join('');
+
+    // Add quick access links to Ian's materials
+    const chatBox = document.getElementById('chat-box');
+    const materialLink = document.createElement('div');
+    materialLink.className = 'msg';
+    materialLink.innerHTML = `<div class="msg-av">🌵</div><div>
+      <div class="msg-bubble">
+        <strong>Your materials are ready:</strong><br>
+        • Prototype: <code style="background:var(--sand);padding:1px 5px">cd prototype && npm run dev</code><br>
+        • Technical Brief: <code style="background:var(--sand);padding:1px 5px">IAN-TECHNICAL-BRIEF.md</code><br>
+        • Onboarding: <code style="background:var(--sand);padding:1px 5px">IAN-ONBOARDING-BRIEF.md</code><br>
+        • Mockups: View 2 (Tab key or press ⌘K)<br><br>
+        <strong>What do you need from me?</strong> I can activate agents based on your priority.
+      </div>
+      <div class="msg-time">Blossom · Ready</div>
+    </div>`;
+    chatBox.appendChild(materialLink);
+
     setTimeout(() => {
-      toast('lighttroupekids prototype', 'Interactive mockups ready — 20 screens, parent + child flows', '🚀', 5000);
+      toast('Welcome, Ian', 'Prototype ready. What\'s your priority?', '🚀', 6000);
     }, 500);
     return;
   }
