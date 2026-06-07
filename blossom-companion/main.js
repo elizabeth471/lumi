@@ -69,7 +69,7 @@ function createWindow() {
       contextIsolation: true,
       enableRemoteModule: false
     },
-    icon: path.join(__dirname, 'assets', 'icon.png'),
+    icon: fs.existsSync(path.join(__dirname, 'assets', 'icon.png')) ? path.join(__dirname, 'assets', 'icon.png') : undefined,
     alwaysOnTop: config.appearance.alwaysOnTop,
     transparent: false,
     hasShadow: true
@@ -78,7 +78,7 @@ function createWindow() {
   mainWindow = new BrowserWindow(windowConfig);
 
   // Load the renderer
-  mainWindow.loadFile('renderer/index.html');
+  mainWindow.loadFile(path.join(__dirname, 'renderer', 'index.html'));
 
   // Store window position on close
   mainWindow.on('close', () => {
